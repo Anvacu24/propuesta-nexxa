@@ -341,6 +341,13 @@
 
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
+        
+        .anno-item { position: absolute; display: flex; align-items: center; }
+        .glass-card-text { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 1rem; max-width: 300px; }
+        .indicator-svg { overflow: visible; width: 150px; height: 50px; }
+        .indicator-dot { fill: white; }
+        .indicator-ring { fill: none; stroke: white; stroke-width: 2; }
+        .indicator-line { stroke: white; stroke-width: 2; stroke-dasharray: 200; stroke-dashoffset: 200; }
     </style>
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
@@ -453,80 +460,29 @@
             </div>
         </section>
 
-        <section id="proceso" class="h-[400vh] relative">
-            <div class="sticky top-0 w-full h-screen flex items-center justify-center pointer-events-none">
-                <div id="text-container" class="relative w-full h-full max-w-7xl mx-auto px-6">
-                    
-                    <div class="anno-text absolute top-[20%] left-[5%] opacity-0 flex items-start gap-4 pointer-events-auto">
-                        <div class="glass-card-subtle p-6 max-w-[300px]">
-                            <h3 class="text-white text-xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
-                            <p class="text-white/90 text-sm font-light">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía.</p>
-                        </div>
-                    </div>
-
-                    <div class="anno-text absolute top-[40%] right-[5%] opacity-0 flex flex-row-reverse items-start gap-4 pointer-events-auto">
-                        <div class="glass-card-subtle p-6 max-w-[300px]">
-                            <h3 class="text-white text-xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
-                            <p class="text-white/90 text-sm font-light">Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
-                        </div>
-                    </div>
-
-                    <div class="anno-text absolute bottom-[30%] left-[10%] opacity-0 flex items-start gap-4 pointer-events-auto">
-                        <div class="glass-card-subtle p-6 max-w-[300px]">
-                            <h3 class="text-white text-xl font-clash font-bold mb-2">Implementación Activa</h3>
-                            <p class="text-white/90 text-sm font-light">Pasamos del papel a la ejecución táctica. Reestructuramos procesos y redefinimos roles con rigor técnico.</p>
-                        </div>
-                    </div>
-
-                    <div class="anno-text absolute bottom-[15%] right-[10%] opacity-0 flex flex-row-reverse items-start gap-4 pointer-events-auto">
-                        <div class="glass-card-subtle p-6 max-w-[300px]">
-                            <h3 class="text-white text-xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
-                            <p class="text-white/90 text-sm font-light">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
-                        </div>
-                    </div>
+      <section id="proceso" class="relative h-[400vh] bg-transparent">
+    <div class="sticky top-0 w-full h-screen overflow-hidden">
+        <div id="text-container" class="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center">
+            
+            <div class="anno-item absolute top-[20%] left-[10%] opacity-0">
+                <div class="glass-card-text">
+                    <h3 class="text-white text-xl font-bold mb-2">Consultoría & Indagación</h3>
+                    <p class="text-white/90 text-sm font-light">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos.</p>
                 </div>
+                <svg class="indicator-svg ml-4"><circle class="indicator-dot" cx="10" cy="25" r="5"/><circle class="indicator-ring" cx="10" cy="25" r="10"/><line class="indicator-line" x1="20" y1="25" x2="140" y2="25"/></svg>
             </div>
-        </section>
-    </div>
-</div>
 
-    <section id="soluciones" class="relative min-h-screen flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
-        <div class="absolute top-0 left-0 w-full h-[250px] bg-gradient-to-b from-[#0a071d] to-[#070314] pointer-events-none z-0"></div>
-
-        <div class="w-full lg:w-[50%] h-[50vh] lg:h-full relative overflow-visible z-10 flex-shrink-0">
-            <div class="wheel-hub max-lg:-translate-y-1/4" id="wheel-hub">
-                <svg class="blob-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="w-full lg:w-[50%] h-full flex flex-col justify-center px-6 lg:pl-20 lg:pr-24 z-20 py-10 lg:py-0">
-            <div class="flex flex-col max-w-2xl relative z-30">
-                <div class="mb-4">
-                    <span class="text-sm uppercase tracking-widest font-bold text-amber-500 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
+            <div class="anno-item absolute top-[40%] right-[10%] opacity-0 flex flex-row-reverse">
+                <div class="glass-card-text text-right">
+                    <h3 class="text-white text-xl font-bold mb-2">Modelado de Estrategia</h3>
+                    <p class="text-white/90 text-sm font-light">Usamos modelado físico y visual para que toda la mesa directiva comparta la misma visión.</p>
                 </div>
-                <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
-                <div class="space-y-6">
-                    <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
-                    <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
-                    <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
-                </div>
+                <svg class="indicator-svg mr-4" viewBox="0 0 150 50"><circle class="indicator-dot" cx="140" cy="25" r="5"/><circle class="indicator-ring" cx="140" cy="25" r="10"/><line class="indicator-line" x1="130" y1="25" x2="10" y2="25"/></svg>
             </div>
             
-            <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
-                <div class="flex gap-4 pb-4 w-max" id="service-menu">
-                    <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
-                </div>
             </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
         <div class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-br from-violet-600/10 to-transparent rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
@@ -1114,8 +1070,6 @@
     const narrativeVideo = document.getElementById('nexxa-narrative-video');
     if(!narrativeVideo) return;
     
-    // Configuramos el video para que avance mientras el usuario hace scroll
-    // sobre todo el contenedor "narrative-wrapper"
     gsap.fromTo(narrativeVideo, 
         { currentTime: 0 },
         {
@@ -1125,10 +1079,34 @@
                 trigger: "#narrative-wrapper",
                 start: "top top", 
                 end: "bottom bottom", 
-                scrub: 0.1 // Esto hace que el video se mueva con el scroll
+                scrub: 0.1
+                // ¡IMPORTANTE! He quitado el "pin: true" de aquí para no conflictuar
             }
         }
     );
+}
+
+// LUEGO, BUSCA TU FUNCIÓN setupAnnotations Y ASEGÚRATE DE QUE SE VEA ASÍ:
+function setupAnnotations() {
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#proceso",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            pin: true // Aquí sí queremos el pin para que el texto aparezca mientras el video corre
+        }
+    });
+
+    const items = gsap.utils.toArray('.anno-item');
+    
+    items.forEach((item, i) => {
+        const line = item.querySelector('.indicator-line');
+        tl.to(item, { opacity: 1, duration: 1 }, i * 1) // Aparece uno tras otro
+          .fromTo(line, { strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, "<")
+          .to(item, { opacity: 1, duration: 2 }, "+=1")
+          .to(item, { opacity: 0, duration: 1 }, "+=0.5");
+    });
 }
 
         function setupAnnotations() {
