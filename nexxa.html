@@ -373,9 +373,29 @@
 		    opacity: 0.5; /* Hace la flechita del dropdown un poco más visible */
 		    cursor: pointer;
 		}
-    </style>
-</head>
-<body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
+		/* Sección Soluciones Estilizada */
+		#soluciones { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: #070314; overflow: hidden; }
+		
+		/* El contenedor del polígono que ocupa el 75% del área izquierda */
+		.shape-holder { 
+		    position: absolute; left: -100px; top: 50%; transform: translateY(-50%); 
+		    z-index: 0; 
+		}
+		.shape-element { 
+		    width: 700px; height: 700px; /* Tamaño grande */
+		    animation: spin 30s linear infinite; 
+		}
+		
+		/* El texto grande que se superpone */
+		.text-overlay { 
+		    position: absolute; left: 150px; top: 50%; transform: translateY(-50%); 
+		    font-size: 15vw; font-weight: 800; color: rgba(255, 255, 255, 0.05); pointer-events: none; 
+		}
+		
+		@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+		    </style>
+		</head>
+		<body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
 
     <nav class="fixed w-full z-50 glass-header" id="navbar">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -539,39 +559,40 @@
         </div>
     </div>
 
-	<section id="soluciones" class="relative min-h-[600px] flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
-    
-		    <div class="w-full lg:w-[45%] h-[400px] lg:h-[600px] relative z-10 flex items-center justify-center p-6">
-		        <div id="wheel-hub" class="animate-spin-slow w-full h-full flex items-center justify-center">
-		            <svg class="blob-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-		                <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
+	<section id="soluciones">
+		    <!-- Capa del Polígono (Ocupa el espacio de la izquierda) -->
+		    <div class="shape-holder">
+		        <div class="shape-element animate-spin-slow">
+		            <svg viewBox="0 0 200 200" width="100%" height="100%">
+		                <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--color-0)" />
 		            </svg>
 		        </div>
+		        <!-- Palabra grande de fondo (puedes cambiar 'gia' por lo que prefieras) -->
+		        <div class="text-overlay font-clash">gia</div>
 		    </div>
 		
-		    <div class="w-full lg:w-[55%] h-full flex flex-col justify-center px-6 lg:pl-12 lg:pr-24 z-20">
-		        <div class="flex flex-col max-w-2xl relative z-30">
+		    <!-- Contenido a la derecha -->
+		    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 flex justify-end">
+		        <div class="w-full lg:w-[50%] pt-20">
 		            <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
-		                <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade">SERVICIOS QUE TRANSFORMAN</span>
+		                <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400">SERVICIOS QUE TRANSFORMAN</span>
 		            </div>
 		            
-		            <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-6 leading-[1.1] anim-text">Cargando...</h2>
+		            <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1]">Cargando...</h2>
 		            
-		            <div class="space-y-4">
-		                <p id="service-desc" class="text-slate-300 text-base md:text-lg font-light leading-[1.6] anim-text">Cargando...</p>
-		                <div class="font-semibold text-lg text-white mt-4 anim-text" id="solutions-heading">Soluciones incluidas:</div>
-		                <ul id="service-solutions" class="space-y-2 anim-text text-slate-300 font-light list-none pl-0"></ul>
+		            <div class="glass-card-subtle p-8">
+		                <p id="service-desc" class="text-slate-300 text-lg font-light leading-relaxed mb-6"></p>
+		                <div class="font-semibold text-white mb-2" id="solutions-heading">Soluciones incluidas:</div>
+		                <ul id="service-solutions" class="space-y-3 text-slate-300 list-none pl-0"></ul>
 		            </div>
-		        </div>
-		        
-		        <div class="mt-8 overflow-x-auto no-scrollbar w-full" id="service-menu-wrapper">
-		            <div class="flex gap-4 pb-4 w-max" id="service-menu">
-		                <button class="service-menu-button active i18n" data-id="0">Estrategia</button>
-		                <button class="service-menu-button i18n" data-id="1">Procesos</button>
-		                <button class="service-menu-button i18n" data-id="2">Transformación</button>
-		                <button class="service-menu-button i18n" data-id="3">Diseño Org.</button>
-		                <button class="service-menu-button i18n" data-id="4">Compensación</button>
-		                <button class="service-menu-button i18n" data-id="5">Formación LSP</button>
+		
+		            <!-- Navegación de servicios -->
+		            <div class="mt-8 flex gap-4 overflow-x-auto no-scrollbar" id="service-menu">
+		                <button class="service-menu-button active" data-id="0">Estrategia</button>
+		                <button class="service-menu-button" data-id="1">Procesos</button>
+		                <button class="service-menu-button" data-id="2">Transformación</button>
+		                <button class="service-menu-button" data-id="3">Diseño Org.</button>
+		                <button class="service-menu-button" data-id="4">Compensación</button>
 		            </div>
 		        </div>
 		    </div>
