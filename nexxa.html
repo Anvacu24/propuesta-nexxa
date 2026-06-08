@@ -17,7 +17,7 @@
             --color-primary: #8B5CF6;
             --color-accent: #F59E0B; /* Ámbar corporativo */
             
-            /* Paleta Boutique Cálida y Elegante para el pentágono */
+            /* Paleta Boutique Cálida y Elegante */
             --color-0: #6D28D9; /* Estrategia - Violeta Profundo */
             --color-1: #D97706; /* Procesos - Ámbar/Dorado Oscuro */
             --color-2: #1E3A8A; /* Transformación - Azul Marino Elegante */
@@ -180,9 +180,6 @@
         .glass-input::placeholder { color: rgba(255, 255, 255, 0.3); }
         details > summary::-webkit-details-marker { display: none; }
 
-        /* =======================================================
-           ANIMACIONES Y ESTILOS PARA LA SECCIÓN DE ANOTACIONES 
-           ======================================================= */
         @keyframes pulse-dot { 
             0%, 100% { transform: scale(0.8); opacity: 1; } 
             50% { transform: scale(1.5); opacity: 0.5; } 
@@ -197,16 +194,7 @@
             stroke-dasharray: 200; 
             stroke-dashoffset: 200; 
         }
-/* --- NUEVAS CLASES PARA EL VIDEO INTERACTIVO (GSAP + SUTILES) --- */
-        .glass-card-subtle {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 1.5rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
+        
         .glass-card-subtle:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(139, 92, 246, 0.3);
@@ -214,13 +202,10 @@
             box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
         }
 
-        /* Clases base invisibles para que GSAP haga la magia */
         .gsap-fade-up { opacity: 0; transform: translateY(40px); }
         .gsap-fade-left { opacity: 0; transform: translateX(-40px); }
         .gsap-fade-right { opacity: 0; transform: translateX(40px); }
 
-
-        /* TEXTURAS LEGO (Conservadas de tu diseño) */
         .lego-studs-violet {
             background-color: #6d28d9;
             background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='v' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='30%25' stop-color='%236d28d9'/%3E%3Cstop offset='100%25' stop-color='%234c1d95'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23v)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%238b5cf6'%3ELEGO%3C/text%3E%3C/svg%3E");
@@ -261,84 +246,8 @@
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
 
         /* =========================================
-           ESTILOS SECCIÓN SERVICIOS ORBITAL
+           NUEVOS ESTILOS SECCIÓN SERVICIOS (HEXÁGONO)
            ========================================= */
-        .wheel-hub {
-            position: absolute;
-            top: 50%;
-            left: 20%; 
-            width: 0;
-            height: 0;
-            transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1);
-            z-index: 2;
-        }
-
-        @media (max-width: 1024px) {
-            .wheel-hub { left: 50%; top: 30%; } 
-        }
-
-        .blob-shape {
-		    width: 100%;
-		    max-width: 500px; /* Esto hará que se vea grande pero controlado */
-		    height: auto;
-		    transition: fill 0.8s ease;
-		    opacity: 0.95;
-		    z-index: 0;
-		    pointer-events: none;
-		}
-		#wheel-hub { 
-		    display: flex; 
-		    align-items: center; 
-		    justify-content: center; 
-		    width: 100%; 
-		    height: 100%; 
-		}
-
-        @media (max-width: 1024px) {
-            .blob-shape { width: 600px; height: 600px; top: 50%; left: 50%; }
-        }
-
-        .orbit-item {
-            position: absolute;
-            transition: transform 0.9s cubic-bezier(0.25, 1, 0.35, 1), opacity 0.6s ease, filter 0.6s ease;
-            width: 160px; 
-            height: 160px;
-            z-index: 5;
-        }
-
-        @media (max-width: 1024px) {
-            .orbit-item { width: 140px; height: 140px; }
-        }
-
-        .orbit-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
-            transition: all 0.6s ease;
-        }
-
-        .orbit-label-large {
-            position: absolute;
-            top: 50%;
-            left: -20px; 
-            transform: translate(-100%, -50%);
-            font-family: 'Clash Display', sans-serif;
-            font-weight: 700;
-            color: rgba(255, 255, 255, 0.95);
-            font-size: clamp(3rem, 6vw, 7rem);
-            line-height: 1;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.35, 1);
-            text-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            z-index: -1; 
-        }
-        @media (max-width: 1024px) {
-            .orbit-label-large { left: 50%; top: 120%; transform: translate(-50%, 0); font-size: 3rem; z-index: 10; }
-        }
-
         .service-menu-button {
             color: #94a3b8; 
             font-size: 0.95rem;
@@ -369,44 +278,13 @@
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
 
-		input[list]::-webkit-calendar-picker-indicator {
-		    opacity: 0.5; /* Hace la flechita del dropdown un poco más visible */
-		    cursor: pointer;
-		}
-		/* Hexagono protagonista */
-		.hexagon-container { 
-		    position: relative; 
-		    display: flex; 
-		    align-items: center; 
-		    justify-content: center; 
-		    width: 100%; 
-		    height: 100%; 
-		}
-		
-		.hex-spin { 
-		    width: 100%; 
-		    max-width: 800px; 
-		    aspect-ratio: 1/1; 
-		    animation: spin 60s linear infinite; 
-		    display: flex; 
-		    align-items: center; 
-		    justify-content: center;
-		}
-		
-		.text-inside-hex {
-		    /* Texto fluido: se ajusta al tamaño del hexágono */
-		    font-size: clamp(2rem, 8vw, 6rem); 
-		    line-height: 0.9;
-		    text-align: center;
-		    word-break: break-all;
-		    max-width: 70%;
-		    pointer-events: none;
-		}
-		
-		@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-		    </style>
-		</head>
-		<body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
+        input[list]::-webkit-calendar-picker-indicator {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
 
     <nav class="fixed w-full z-50 glass-header" id="navbar">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -497,7 +375,8 @@
             </div>
         </div>
     </main>
-	<div id="narrative-wrapper" class="relative w-full">
+
+    <div id="narrative-wrapper" class="relative w-full">
         
         <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
             <div class="sticky top-0 w-full h-screen overflow-hidden">
@@ -514,114 +393,137 @@
         <div class="relative z-10 w-full">
 
             <section id="diagnostico" class="min-h-[70vh] flex flex-col justify-center py-20 px-6 lg:px-8 bg-transparent">
-    <div class="max-w-4xl mx-auto w-full">
-        <!-- Contenedor con efecto glass para legibilidad sobre el video -->
-        <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
-            <div class="diag-title">
-                <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
-                    data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
-                    data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
-                    El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
+                <div class="max-w-4xl mx-auto w-full">
+                    <!-- Contenedor con efecto glass para legibilidad sobre el video -->
+                    <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
+                        <div class="diag-title">
+                            <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
+                                data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
+                                data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
+                                El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
+                            </h2>
+                            <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
+                               data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
+                               data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
+                               El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="proceso" class="relative h-[400vh] bg-transparent">
+                <!-- Contenedor que "pincha" el video mientras scrolles -->
+                <div class="sticky top-0 w-full h-screen overflow-hidden">
+                    
+                    <!-- Contenedor de Textos (Capa superior sobre el video) -->
+                    <div id="text-container" class="relative w-full h-full">
+                        
+                        <!-- Texto 1 -->
+                        <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80">
+                            <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
+                            <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
+                        </div>
+
+                        <!-- Texto 2 -->
+                        <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80">
+                            <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
+                            <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
+                        </div>
+
+                        <!-- Texto 3 -->
+                        <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80">
+                            <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
+                            <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
+                        </div>
+
+                        <!-- Texto 4 -->
+                        <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80">
+                            <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
+                            <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECCIÓN SERVICIOS (NUEVA VERSIÓN HEXÁGONO)
+         ========================================== -->
+    <section id="soluciones" class="relative min-h-screen flex items-center justify-center py-20 bg-[#070314] overflow-hidden">
+        
+        <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <!-- Hexágono Base con parte superior perfectamente plana y tamaño ampliado -->
+            <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[35%] lg:-translate-x-[35%] w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] z-0 flex items-center justify-center">
+                <div id="shape-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
+                    <!-- Geometría perfecta para mantener forma girando de a 60 grados -->
+                    <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
+                        <polygon points="200,100 150,186.6 50,186.6 0,100 50,13.4 150,13.4" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="8" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Texto colosal adaptativo, enlazado sutilmente. Detecta cortes para dos lineas. -->
+            <div class="absolute top-1/2 left-[5%] lg:left-[8%] -translate-y-1/2 z-0 w-[50vw] lg:w-[40vw] flex items-center justify-start overflow-visible pointer-events-none">
+                <h2 id="giant-bg-text" class="text-white/90 font-clash font-extrabold text-[3.5rem] md:text-[5.5rem] lg:text-[7.5rem] leading-[0.9] tracking-tight drop-shadow-2xl anim-text">
+                    Estrategia
                 </h2>
-                <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
-                   data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
-                   data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
-                   El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-            
-<section id="proceso" class="relative h-[400vh] bg-transparent">
-    <!-- Contenedor que "pincha" el video mientras scrolles -->
-    <div class="sticky top-0 w-full h-screen overflow-hidden">
-        
-        <!-- Contenedor de Textos (Capa superior sobre el video) -->
-        <div id="text-container" class="relative w-full h-full">
-            
-            <!-- Texto 1 -->
-            <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
-            </div>
-
-            <!-- Texto 2 -->
-            <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
-            </div>
-
-            <!-- Texto 3 -->
-            <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
-            </div>
-
-            <!-- Texto 4 -->
-            <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-        </div>
-    </div>
-
-	<section id="soluciones" class="relative min-h-screen flex items-center justify-center pt-20 pb-20 bg-[#070314] overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div id="shape-rotator" class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[40%] w-[800px] h-[800px] lg:w-[1400px] lg:h-[1400px] transition-transform duration-1000 ease-in-out">
-            <svg viewBox="0 0 200 200" class="w-full h-full" style="filter: drop-shadow(0 0 40px rgba(0,0,0,0.4));">
-                <polygon points="90,15 180,45 190,140 120,185 25,150 15,60" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="12" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
-            </svg>
-        </div>
-        
-        <div class="absolute top-1/2 left-0 -translate-y-1/2 pl-6 lg:pl-20 z-0 max-w-[50vw] overflow-hidden">
-            <h2 id="giant-bg-text" class="text-white font-clash font-extrabold text-[5rem] md:text-[8rem] lg:text-[13rem] tracking-tighter leading-none anim-text" style="text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                Estrategia
-            </h2>
-        </div>
-    </div>
-
-    <div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center relative z-10 px-6 lg:px-8">
-        
-        <div class="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-12 mb-12 lg:mb-0">
-            <div class="w-[90%] md:w-[400px] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative bg-white/5 backdrop-blur-sm z-20">
-                <img id="active-service-image" src="" alt="Servicio" class="w-full h-full object-cover anim-text">
             </div>
         </div>
 
-        <div class="w-full lg:w-[55%] flex flex-col justify-center pl-0 lg:pl-8">
+        <!-- CAPA FRONTAL: Imagen Principal ÚNICA y Textos -->
+        <div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center relative z-10 px-6 lg:px-8 mt-12 lg:mt-0">
             
-            <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
-                <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
+            <!-- Lado Izquierdo: Imagen con Animación 360 grados tipo ruleta sobre su eje -->
+            <div class="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-12 mb-12 lg:mb-0">
+                <div id="active-service-container" class="w-[90%] md:w-[450px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative bg-white/5 backdrop-blur-sm z-20 transition-transform duration-1000 ease-in-out origin-center">
+                    <img id="active-service-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop" alt="Servicio" class="w-full h-full object-cover anim-text transition-opacity duration-500">
+                </div>
             </div>
-            
-            <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
-            
-            <div class="space-y-6">
-                <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
-                <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
-                <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
-            </div>
-            
-            <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
-                <div class="flex gap-4 pb-4 w-max" id="service-menu">
-                    <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
+
+            <!-- Lado Derecho: Textos y Menú -->
+            <div class="w-full lg:w-[55%] flex flex-col justify-center pl-0 lg:pl-12">
+                
+                <!-- Etiqueta Pastilla Ámbar -->
+                <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max shadow-[0_0_15px_rgba(245,158,11,0.15)]">
+                    <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
+                </div>
+                
+                <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
+                
+                <div class="space-y-6">
+                    <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
+                    <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
+                    <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
+                </div>
+                
+                <!-- Menú de Botones y Swipe Indicator (ORDEN MODIFICADO) -->
+                <div class="mt-12 pt-6 border-t border-white/10 relative w-full z-30">
+                    <div class="overflow-x-auto no-scrollbar w-full" id="service-menu-wrapper">
+                        <!-- El orden modificado según tu solicitud (Estrategia, Formación, Diseño, Transformación...) -->
+                        <div class="flex gap-4 pb-4 pr-12 w-max" id="service-menu">
+                            <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
+                            <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
+                        </div>
+                    </div>
+                    <!-- Swipe / Scroll Indicator Visual con iconito -->
+                    <div class="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-[#070314] to-transparent pointer-events-none flex items-center justify-end">
+                        <i data-lucide="chevron-right" class="w-6 h-6 text-amber-500 animate-pulse"></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- SECCIÓN AUTORIDAD -->
     <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
         <div class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-br from-violet-600/10 to-transparent rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
         <div class="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-gradient-to-tl from-amber-600/10 to-transparent rounded-full blur-[80px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
@@ -629,8 +531,9 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch mb-16 md:mb-20">
                 <div class="flex flex-col w-full h-full justify-between pb-5">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 w-max">
-                        <span class="text-[10px] md:text-xs uppercase tracking-wider text-violet-300 font-bold i18n i18n-fade" data-es="¿Por qué Nexxa?" data-en="Why Nexxa?">¿Por qué Nexxa?</span>
+                    
+                    <div class="inline-flex items-center px-6 py-2 rounded-full border border-violet-500/30 bg-violet-950/30 w-max mb-6 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                        <span class="text-[10px] md:text-xs font-bold tracking-widest text-white/90 i18n i18n-fade" data-es="¿POR QUÉ NEXXA?" data-en="WHY NEXXA?">¿POR QUÉ NEXXA?</span>
                     </div>
 
                     <div class="relative w-full max-w-[440px] mx-auto lg:max-w-none lg:mx-0 mt-12 lg:mt-0 mb-10 md:mb-12">
@@ -669,12 +572,11 @@
 
                 <div class="flex flex-col justify-between h-full pt-1 pb-5">
                     <div class="flex flex-col gap-5">
-                        <!-- REEMPLAZA ESTE H2 -->
-						<h2 class="font-clash text-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] i18n i18n-fade"
-						    data-es="No somos teóricos,<br>somos tu <span class='text-violet-400'>socio estratégico.</span>"
-						    data-en="We are not theorists,<br>we are your <span class='text-violet-400'>strategic partner.</span>">
-						    No somos teóricos,<br>somos tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400">socio estratégico.</span>
-						</h2>
+                        <h2 class="font-clash text-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] i18n i18n-fade"
+                            data-es="No somos teóricos,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400'>socio estratégico.</span>"
+                            data-en="We are not theorists,<br>we are your <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400'>strategic partner.</span>">
+                            No somos teóricos,<br>somos tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400">socio estratégico.</span>
+                        </h2>
                         <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed i18n i18n-fade"
                            data-es="El mercado está lleno de consultoras que entregan reportes y se van. Nosotros nos involucramos directamente en la ejecución para asegurarnos de que el cambio se implemente y perdure."
                            data-en="The market is full of consultants who deliver reports and leave. We actively engage in the execution to ensure that change is implemented and lasts.">
@@ -698,60 +600,61 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-6 md:mt-10 items-start">
-                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5 text-violet-300"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Enfoque Boutique" data-en="Boutique Approach">Enfoque Boutique</h4>
                         </div>
                         <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
-                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0">
-                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece." data-en="Close, confidential, and tailored attention. Your company receives the focus it deserves.">Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece.</p>
+                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
+                        <p class="i18n i18n-fade" data-es="Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece." data-en="Close, confidential, and tailored attention. Your company receives the focus it deserves.">Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece.</p>
                     </div>
                 </details>
                 
-                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-violet-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="shield-check" class="w-5 h-5 text-violet-500"></i>
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-violet-300"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Rigor Técnico" data-en="Technical Rigor">Rigor Técnico</h4>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
-                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-500"></i>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0">
-                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional." data-en="Experience transforming operational processes and aligning strategies at a national and international level.">Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional.</p>
+                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
+                        <p class="i18n i18n-fade" data-es="Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional." data-en="Experience transforming operational processes and aligning strategies at a national and international level.">Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional.</p>
                     </div>
                 </details>
 
-                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400"></i>
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-violet-300"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Innovación Práctica" data-en="Practical Innovation">Innovación Práctica</h4>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
-                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0">
-                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados." data-en="We combine hard technical consulting with experiential disruptive methodologies to achieve results.">Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados.</p>
+                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
+                        <p class="i18n i18n-fade" data-es="Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados." data-en="We combine hard technical consulting with experiential disruptive methodologies to achieve results.">Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados.</p>
                     </div>
                 </details>
             </div>
         </div>
     </section>
 
+    <!-- CONTACTO -->
     <section id="contacto" class="relative min-h-screen flex flex-col justify-center py-20 z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center z-[-2] opacity-40 mix-blend-screen pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'); transform: rotate(180deg); filter: contrast(1.2);"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-[#080415] via-[#070314]/80 to-transparent z-[-1] pointer-events-none"></div>
@@ -804,17 +707,17 @@
                                     <input type="email" class="glass-input" placeholder="juan@empresa.com">
                                 </div>
                                 <div class="space-y-2">
-							    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="País" data-en="Country">País</label>
-							    <input list="countries" class="glass-input" placeholder="Selecciona o escribe tu país...">
-							    <datalist id="countries">
-							        <option value="Colombia">
-							        <option value="Argentina">
-							        <option value="México">
-							        <option value="España">
-							        <option value="USA">
-							        <option value="Costa Rica">
-							    </datalist>
-							</div>
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="País" data-en="Country">País</label>
+                                    <input list="countries" class="glass-input" placeholder="Selecciona o escribe tu país...">
+                                    <datalist id="countries">
+                                        <option value="Colombia">
+                                        <option value="Argentina">
+                                        <option value="México">
+                                        <option value="España">
+                                        <option value="USA">
+                                        <option value="Costa Rica">
+                                    </datalist>
+                                </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -823,14 +726,14 @@
                                     <input type="text" class="glass-input" placeholder="Nombre de la empresa">
                                 </div>
                                 <div class="space-y-2">
-								    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="¿En qué podemos ayudarte?" data-en="How can we help you?">¿En qué podemos ayudarte?</label>
-								    <input list="services" class="glass-input" placeholder="Escribe el servicio o selecciónalo...">
-								    <datalist id="services">
-								        <option value="Estrategia y Procesos">
-								        <option value="Talleres LEGO® Serious Play®">
-								        <option value="Diseño Organizacional / Talento">
-								    </datalist>
-								</div>
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="¿En qué podemos ayudarte?" data-en="How can we help you?">¿En qué podemos ayudarte?</label>
+                                    <input list="services" class="glass-input" placeholder="Escribe el servicio o selecciónalo...">
+                                    <datalist id="services">
+                                        <option value="Estrategia y Procesos">
+                                        <option value="Talleres LEGO® Serious Play®">
+                                        <option value="Diseño Organizacional / Talento">
+                                    </datalist>
+                                </div>
                             </div>
 
                             <div class="flex items-start gap-3 mt-4">
@@ -854,6 +757,7 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="bg-black/40 backdrop-blur-sm border-t border-white/5 py-12 relative z-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
@@ -891,9 +795,6 @@
 
         let currentLang = 'es';
 
-        // =====================================================================
-        // DATOS SERVICIOS (RUEDA)
-        // =====================================================================
         const servicesData = [
             {
                 id: 0,
@@ -962,7 +863,7 @@
             },
             {
                 id: 5,
-                short_es: "Formación", short_en: "Training",
+                short_es: "Formación LSP", short_en: "LSP Training",
                 title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®, facilitamos conversaciones profundas que resuelven problemas complejos y fortalecen el liderazgo.",
@@ -988,12 +889,7 @@
             }
         ];
 
-        // =====================================================================
-        // LÓGICA DE LA RUEDA DE SERVICIOS
-        // =====================================================================
-        const wheelHub = document.getElementById('wheel-hub');
         const rootVars = document.documentElement;
-        
         const serviceTitleElem = document.getElementById('service-title');
         const serviceDescElem = document.getElementById('service-desc');
         const solutionsHeadingElem = document.getElementById('solutions-heading');
@@ -1003,86 +899,105 @@
         const menuContainer = document.getElementById('service-menu-wrapper');
 
         const totalItems = servicesData.length;
-        const angleStep = 360 / totalItems;
+        const angleStep = 60; 
         let currentIndex = 0;
         let currentHubRotation = 0;
+        let currentImageRotation = 0;
 
-        // Localizamos los nuevos elementos
-const shapeRotator = document.getElementById('shape-rotator');
-const giantBgText = document.getElementById('giant-bg-text');
-const activeImage = document.getElementById('active-service-image');
+        const hexRotator = document.getElementById('shape-rotator');
+        const giantBgText = document.getElementById('giant-bg-text');
+        const activeImage = document.getElementById('active-service-image');
+        const activeImageContainer = document.getElementById('active-service-container');
 
-function initWheel() {
-    // Ya no generamos elementos HTML aquí. 
-    // Todo vive limpio en la estructura principal.
-}
-
-function updateContent(targetIndex, skipRotation = false) {
-    if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
-
-    let diff = targetIndex - currentIndex;
-    if (diff > totalItems / 2) diff -= totalItems;
-    else if (diff < -totalItems / 2) diff += totalItems;
-
-    if(!skipRotation) {
-        currentHubRotation -= diff * angleStep; 
-        currentIndex = targetIndex;
-    }
-
-    const data = servicesData[currentIndex];
-
-    // Rotamos el hexágono por clic
-    if(shapeRotator) {
-        shapeRotator.style.transform = `translateY(-50%) translateX(-40%) rotate(${currentHubRotation}deg)`;
-    }
-    
-    rootVars.style.setProperty('--current-blob-color', data.color);
-
-    animatableElements.forEach(el => {
-        el.classList.remove('fade-in');
-        el.classList.add('fade-out');
-    });
-
-    setTimeout(() => {
-        // Textos del servicio derecho
-        serviceTitleElem.innerHTML = data[`title_${currentLang}`];
-        serviceDescElem.innerHTML = data[`desc_${currentLang}`];
-        solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
-        
-        // Actualizamos la IMAGEN principal y el TEXTO GIGANTE
-        if(activeImage) activeImage.src = data.imageSrc;
-        if(giantBgText) giantBgText.textContent = data[`short_${currentLang}`];
-
-        serviceSolutionsListElem.innerHTML = '';
-        data[`solutions_${currentLang}`].forEach(solution => {
-            const li = document.createElement('li');
-            li.className = 'solution-list-item';
-            li.textContent = solution;
-            serviceSolutionsListElem.appendChild(li);
-        });
-
-        animatableElements.forEach(el => {
-            el.classList.remove('fade-out');
-            setTimeout(() => el.classList.add('fade-in'), 50);
-        });
-    }, 350);
-
-    menuButtons.forEach((btn, i) => {
-        if (i === currentIndex) {
-            btn.classList.add('active');
-            const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
-            menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        } else {
-            btn.classList.remove('active');
+        function initWheel() {
+            // Se elimina la generación de miniaturas
         }
-    });
-}
+
+        function updateContent(targetIndex, skipRotation = false) {
+            if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
+
+            let diff = targetIndex - currentIndex;
+            if (diff > totalItems / 2) diff -= totalItems;
+            else if (diff < -totalItems / 2) diff += totalItems;
+
+            if(!skipRotation) {
+                currentHubRotation -= diff * angleStep; 
+                currentImageRotation += 360; // Gira 360 grados exactos como ruleta
+                currentIndex = targetIndex;
+            }
+
+            const data = servicesData[currentIndex];
+
+            // 1. Rota el hexágono
+            if (hexRotator) {
+                hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
+            }
+
+            // 2. Rota el contenedor de la imagen como ruleta
+            if (activeImageContainer && !skipRotation) {
+                activeImageContainer.style.transform = `rotate(${currentImageRotation}deg)`;
+            }
+            
+            rootVars.style.setProperty('--current-blob-color', data.color);
+
+            animatableElements.forEach(el => {
+                el.classList.remove('fade-in');
+                el.classList.add('fade-out');
+            });
+
+            setTimeout(() => {
+                serviceTitleElem.innerHTML = data[`title_${currentLang}`];
+                serviceDescElem.innerHTML = data[`desc_${currentLang}`];
+                solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
+                
+                // Actualizamos imagen principal
+                if (activeImage) activeImage.src = data.imageSrc;
+                
+                // Actualizamos el texto gigante y lo forzamos a dos líneas si tiene espacios
+                if (giantBgText) {
+                    let shortTxt = data[`short_${currentLang}`];
+                    if(shortTxt.includes(' ')) {
+                        shortTxt = shortTxt.replace(' ', '<br>');
+                    }
+                    giantBgText.innerHTML = shortTxt;
+                }
+                
+                serviceSolutionsListElem.innerHTML = '';
+                data[`solutions_${currentLang}`].forEach(solution => {
+                    const li = document.createElement('li');
+                    li.className = 'solution-list-item';
+                    li.textContent = solution;
+                    serviceSolutionsListElem.appendChild(li);
+                });
+
+                animatableElements.forEach(el => {
+                    el.classList.remove('fade-out');
+                    setTimeout(() => el.classList.add('fade-in'), 50);
+                });
+            }, 350);
+
+            menuButtons.forEach((btn, i) => {
+                const btnId = parseInt(btn.getAttribute('data-id'));
+                if (btnId === currentIndex) {
+                    btn.classList.add('active');
+                    const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
+                    menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        menuButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = parseInt(button.getAttribute('data-id'));
+                updateContent(id);
+            });
+        });
 
         window.addEventListener('resize', () => {
             clearTimeout(window.resizeTimer);
             window.resizeTimer = setTimeout(() => {
-                const oldItems = document.querySelectorAll('.orbit-item');
-                oldItems.forEach(item => item.remove());
                 initWheel();
                 updateContent(currentIndex, true); 
             }, 250);
@@ -1162,9 +1077,6 @@ function updateContent(targetIndex, skipRotation = false) {
             }, 300); 
         }
 
-        // =====================================================================
-        // GSAP: MOTOR INTERACTIVO DEL VIDEO NARRATIVO Y ANOTACIONES
-        // =====================================================================
         const narrativeVideo = document.getElementById('nexxa-narrative-video');
         if (narrativeVideo) narrativeVideo.pause();
 
@@ -1181,7 +1093,6 @@ function updateContent(targetIndex, skipRotation = false) {
                         start: "top top", 
                         end: "bottom bottom", 
                         scrub: 0.1
-                        // ELIMINADO: pin: true (Esto era lo que congelaba la pantalla)
                     }
                 }
             );
@@ -1192,47 +1103,28 @@ function updateContent(targetIndex, skipRotation = false) {
                 scrollTrigger: {
                     trigger: "#proceso",
                     start: "top top",
-                    end: "bottom bottom", // Ajusta esta altura si quieres que dure más o menos
+                    end: "bottom bottom", 
                     scrub: 1,
-                    pin: true // PIN EXACTO DEL CÓDIGO 2 PARA DETENER EL TEXTO SOBRE EL VIDEO
+                    pin: true 
                 }
             });
 
-            // Asegúrate de que tus elementos en el HTML tengan la clase .anno-text
             const texts = gsap.utils.toArray('.anno-text');
             
             texts.forEach((text, i) => {
                 const line = text.querySelector('.draw-line');
                 
-                // Si la anotación tiene un SVG de línea, animamos también la línea (ESTILO DEL CÓDIGO 1)
                 if (line) {
                     tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
                       .fromTo(line, { strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, "<")
                       .to(text, { opacity: 1, duration: 2 }, "+=1")
                       .to(text, { opacity: 0, duration: 1 }, "+=0.5");
                 } else {
-                    // Fallback por si alguna anotación no tiene SVG
                     tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
                       .to(text, { opacity: 1, duration: 2 }, "+=1")
                       .to(text, { opacity: 0, duration: 1 }, "+=0.5");
                 }
             });
-        }
-
-        function setupWheelAnimation() {
-            gsap.fromTo("#wheel-hub", 
-                { scale: 0.8, opacity: 0 }, 
-                { 
-                    scale: 1, opacity: 1, 
-                    duration: 1.5, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: "#soluciones",
-                        start: "top 75%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
         }
 
         // INICIALIZACIÓN
@@ -1243,15 +1135,12 @@ function updateContent(targetIndex, skipRotation = false) {
             
             setupVideoScrubbing();
             setupAnnotations();
-            setupWheelAnimation();
             
             initWheel();
-            wheelHub.style.transform = `translate(-50%, -50%) rotate(0deg)`;
             updateContent(0, true);
         }
 
         if (narrativeVideo) {
-            // Usando loadeddata como en tu código 2, asegura mejor la carga para móviles
             if (narrativeVideo.readyState >= 2) {
                 initGSAP();
             } else {
