@@ -197,6 +197,28 @@
             stroke-dasharray: 200; 
             stroke-dashoffset: 200; 
         }
+/* --- NUEVAS CLASES PARA EL VIDEO INTERACTIVO (GSAP + SUTILES) --- */
+        .glass-card-subtle {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 1.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        .glass-card-subtle:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Clases base invisibles para que GSAP haga la magia */
+        .gsap-fade-up { opacity: 0; transform: translateY(40px); }
+        .gsap-fade-left { opacity: 0; transform: translateX(-40px); }
+        .gsap-fade-right { opacity: 0; transform: translateX(40px); }
+
 
         /* TEXTURAS LEGO (Conservadas de tu diseño) */
         .lego-studs-violet {
@@ -343,23 +365,6 @@
 
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
-
-      
-        #narrative-wrapper {
-            position: relative;
-            /* La altura del contenedor debe ser mayor a la pantalla para poder hacer scroll */
-            min-height: 400vh; 
-        }
-        
-        #nexxa-narrative-video {
-            position: absolute; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1; /* Envía el video al fondo */
-        }
     </style>
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
@@ -373,7 +378,7 @@
                 <div class="hidden lg:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#inicio" class="nav-link text-violet-400 font-semibold scale-105 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Inicio" data-en="Home">Inicio</a>
-                        <a href="#proceso" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Nuestro Proceso" data-en="The Challenge">Nuestro Proceso</a>
+                        <a href="#proceso" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="El Desafío" data-en="The Challenge">El Desafío</a>
                         <a href="#soluciones" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Servicios" data-en="Services">Servicios</a>
                         <a href="#autoridad" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Por qué Nexxa" data-en="Why Us">Por qué Nexxa</a>
                     </div>
@@ -453,99 +458,81 @@
             </div>
         </div>
     </main>
-
-    <div id="narrative-wrapper" class="relative w-full bg-[#070314]">
+	<div id="narrative-wrapper" class="relative w-full">
         
-        <div class="sticky top-0 w-full h-screen overflow-hidden z-0 pointer-events-none">
-            <video id="nexxa-narrative-video" muted autoplay loop playsinline preload="auto" class="w-full h-full object-cover">
-            <source src="videosolucion.mp4" type="video/mp4">
-            </video>
-            <div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#070314] to-transparent z-10"></div>
-            <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#070314] to-transparent z-10"></div>
-            <div class="absolute inset-0 bg-[#070314]/30 z-10"></div>
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <div class="sticky top-0 w-full h-screen overflow-hidden">
+                <video id="nexxa-narrative-video" muted playsinline preload="auto" class="w-full h-full object-cover">
+                    <source src="videosolucion.mp4" type="video/mp4">
+                </video>
+                
+                <div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#070314] to-transparent z-10"></div>
+                <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#070314] to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-[#070314]/30 z-10"></div>
+            </div>
         </div>
 
         <div class="relative z-10 w-full">
 
             <section id="diagnostico" class="min-h-[70vh] flex flex-col justify-center py-20 px-6 lg:px-8 bg-transparent">
-                <div class="max-w-4xl mx-auto w-full">
-                    <div class="glass-card-subtle p-10 md:p-16 text-center relative z-20 diag-title">
-                        <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
-                            data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
-                            data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
-                            El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
-                        </h2>
-                        <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
-                           data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
-                           data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
-                           El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
-                        </p>
-                    </div>
-                </div>
-            </section>
+    <div class="max-w-4xl mx-auto w-full">
+        <!-- Contenedor con efecto glass para legibilidad sobre el video -->
+        <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
+            <div class="diag-title">
+                <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
+                    data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
+                    data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
+                    El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
+                </h2>
+                <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
+                   data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
+                   data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
+                   El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+            
+<section id="proceso" class="relative h-[400vh] bg-transparent">
+    <!-- Contenedor que "pincha" el video mientras scrolles -->
+    <div class="sticky top-0 w-full h-screen overflow-hidden">
+        
+        <!-- Contenedor de Textos (Capa superior sobre el video) -->
+        <div id="text-container" class="relative w-full h-full">
+            
+            <!-- Texto 1 -->
+            <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
+            </div>
 
-            <section id="proceso" class="relative h-[400vh] bg-transparent">
-                <div class="sticky top-0 w-full h-screen overflow-hidden">
-                    <div id="text-container" class="relative w-full h-full max-w-7xl mx-auto px-6">
-                        
-                        <div class="anno-text absolute top-[20%] left-[5%] opacity-0 flex items-start gap-4">
-                            <div class="glass-card-subtle p-6 max-w-[300px]">
-                                <h3 class="text-white text-xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
-                                <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
-                            </div>
-                            <div class="relative mt-4">
-                                <svg class="absolute -left-20 top-3 w-20 h-20 overflow-visible" viewBox="0 0 100 100">
-                                    <path class="draw-line" d="M 0 0 L 60 40" />
-                                </svg>
-                                <div class="w-4 h-4 rounded-full bg-violet-400 pulse-circle relative top-[40px] left-[60px]"></div>
-                            </div>
-                        </div>
+            <!-- Texto 2 -->
+            <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
+            </div>
 
-                        <div class="anno-text absolute top-[40%] right-[5%] opacity-0 flex flex-row-reverse items-start gap-4">
-                            <div class="glass-card-subtle p-6 max-w-[300px]">
-                                <h3 class="text-white text-xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
-                                <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
-                            </div>
-                            <div class="relative mt-4">
-                                <svg class="absolute right-0 top-3 w-20 h-20 overflow-visible" viewBox="0 0 100 100">
-                                    <path class="draw-line" d="M 100 0 L 40 40" />
-                                </svg>
-                                <div class="w-4 h-4 rounded-full bg-cyan-400 pulse-circle relative top-[40px] left-[35px]"></div>
-                            </div>
-                        </div>
+            <!-- Texto 3 -->
+            <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
+            </div>
 
-                        <div class="anno-text absolute bottom-[30%] left-[10%] opacity-0 flex items-start gap-4">
-                            <div class="glass-card-subtle p-6 max-w-[300px]">
-                                <h3 class="text-white text-xl font-clash font-bold mb-2">Implementación Activa</h3>
-                                <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
-                            </div>
-                            <div class="relative mt-4">
-                                <svg class="absolute -left-20 top-3 w-20 h-20 overflow-visible" viewBox="0 0 100 100">
-                                    <path class="draw-line" d="M 0 0 L 60 -40" />
-                                </svg>
-                                <div class="w-4 h-4 rounded-full bg-blue-400 pulse-circle relative top-[-40px] left-[60px]"></div>
-                            </div>
-                        </div>
+            <!-- Texto 4 -->
+            <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
+            </div>
 
-                        <div class="anno-text absolute bottom-[15%] right-[10%] opacity-0 flex flex-row-reverse items-start gap-4">
-                            <div class="glass-card-subtle p-6 max-w-[300px]">
-                                <h3 class="text-white text-xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
-                                <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
-                            </div>
-                            <div class="relative mt-4">
-                                <svg class="absolute right-0 top-3 w-20 h-20 overflow-visible" viewBox="0 0 100 100">
-                                    <path class="draw-line" d="M 100 0 L 40 -40" />
-                                </svg>
-                                <div class="w-4 h-4 rounded-full bg-pink-400 pulse-circle relative top-[-40px] left-[35px]"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
+        </div>
+    </div>
+</section>
         </div>
     </div>
 
+
+    
     <section id="soluciones" class="relative min-h-screen flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
         <div class="absolute top-0 left-0 w-full h-[250px] bg-gradient-to-b from-[#0a071d] to-[#070314] pointer-events-none z-0"></div>
 
@@ -1163,61 +1150,105 @@
             }, 300); 
         }
 
-        // --- MOTOR INTERACTIVO DEL VIDEO NARRATIVO ---
-            const narrativeVideo = document.getElementById('nexxa-narrative-video');
-        
-            function setupVideoScrubbing() {
-                if (!narrativeVideo) return;
-                
-                // Usamos ScrollTrigger para controlar el tiempo del video
-                ScrollTrigger.create({
-                    trigger: "#narrative-wrapper",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 0.1,
-                    onUpdate: self => {
-                        if (narrativeVideo.duration) {
-                            narrativeVideo.currentTime = self.progress * narrativeVideo.duration;
-                        }
-                    }
-                });
-            }
-        
-            // --- ANOTACIONES ---
-            function setupAnnotations() {
-                const tl = gsap.timeline({
+        // =====================================================================
+        // GSAP: MOTOR INTERACTIVO DEL VIDEO NARRATIVO Y ANOTACIONES
+        // =====================================================================
+        const narrativeVideo = document.getElementById('nexxa-narrative-video');
+        if (narrativeVideo) narrativeVideo.pause();
+
+        function setupVideoScrubbing() {
+            if (!narrativeVideo) return;
+            const duration = narrativeVideo.duration || 5; 
+            gsap.fromTo(narrativeVideo, 
+                { currentTime: 0 },
+                {
+                    currentTime: duration, 
+                    ease: "none",
                     scrollTrigger: {
-                        trigger: "#proceso",
-                        start: "top top",
+                        trigger: "#narrative-wrapper",
+                        start: "top top", 
                         end: "bottom bottom", 
-                        scrub: 1,
-                        pin: true 
+                        scrub: 0.1
+                        // ELIMINADO: pin: true (Esto era lo que congelaba la pantalla)
                     }
-                });
-        
-                const texts = gsap.utils.toArray('.anno-text');
+                }
+            );
+        }
+
+        function setupAnnotations() {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#proceso",
+                    start: "top top",
+                    end: "bottom bottom", // Ajusta esta altura si quieres que dure más o menos
+                    scrub: 1,
+                    pin: true // PIN EXACTO DEL CÓDIGO 2 PARA DETENER EL TEXTO SOBRE EL VIDEO
+                }
+            });
+
+            // Asegúrate de que tus elementos en el HTML tengan la clase .anno-text
+            const texts = gsap.utils.toArray('.anno-text');
+            
+            texts.forEach((text, i) => {
+                const line = text.querySelector('.draw-line');
                 
-                texts.forEach((text, i) => {
+                // Si la anotación tiene un SVG de línea, animamos también la línea (ESTILO DEL CÓDIGO 1)
+                if (line) {
+                    tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
+                      .fromTo(line, { strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, "<")
+                      .to(text, { opacity: 1, duration: 2 }, "+=1")
+                      .to(text, { opacity: 0, duration: 1 }, "+=0.5");
+                } else {
+                    // Fallback por si alguna anotación no tiene SVG
                     tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
                       .to(text, { opacity: 1, duration: 2 }, "+=1")
                       .to(text, { opacity: 0, duration: 1 }, "+=0.5");
-                });
-            }
-        
-            // --- INICIALIZACIÓN SEGURA ---
-            function initGSAP() {
-                setupVideoScrubbing();
-                setupAnnotations();
-                setupWheelAnimation();
-            }
-        
-            // Esperamos a que los datos del video estén listos para inicializar
-            if (narrativeVideo.readyState >= 1) {
+                }
+            });
+        }
+
+        function setupWheelAnimation() {
+            gsap.fromTo("#wheel-hub", 
+                { scale: 0.8, opacity: 0 }, 
+                { 
+                    scale: 1, opacity: 1, 
+                    duration: 1.5, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: "#soluciones",
+                        start: "top 75%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        }
+
+        // INICIALIZACIÓN
+        let initialized = false;
+        function initGSAP() {
+            if (initialized) return;
+            initialized = true;
+            
+            setupVideoScrubbing();
+            setupAnnotations();
+            setupWheelAnimation();
+            
+            initWheel();
+            wheelHub.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+            updateContent(0, true);
+        }
+
+        if (narrativeVideo) {
+            // Usando loadeddata como en tu código 2, asegura mejor la carga para móviles
+            if (narrativeVideo.readyState >= 2) {
                 initGSAP();
             } else {
-                narrativeVideo.addEventListener('loadedmetadata', initGSAP, { once: true });
+                narrativeVideo.addEventListener('loadeddata', initGSAP);
                 narrativeVideo.load();
             }
+        } else {
+            initGSAP();
+        }
     </script>
 </body>
 </html>
