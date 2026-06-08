@@ -753,15 +753,17 @@
                                     <input type="email" class="glass-input" placeholder="juan@empresa.com">
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="País" data-en="Country">País</label>
-                                    <select class="glass-input text-slate-300 appearance-none bg-[#0a0518]">
-                                        <option value="co">Colombia</option>
-                                        <option value="ar">Argentina</option>
-                                        <option value="mx">México</option>
-                                        <option value="es">España</option>
-                                        <option value="us">USA</option>
-                                    </select>
-                                </div>
+							    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="País" data-en="Country">País</label>
+							    <input list="countries" class="glass-input" placeholder="Selecciona o escribe tu país...">
+							    <datalist id="countries">
+							        <option value="Colombia">
+							        <option value="Argentina">
+							        <option value="México">
+							        <option value="España">
+							        <option value="USA">
+							        <option value="Costa Rica">
+							    </datalist>
+							</div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -770,13 +772,14 @@
                                     <input type="text" class="glass-input" placeholder="Nombre de la empresa">
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="¿En qué podemos ayudarte?" data-en="How can we help you?">¿En qué podemos ayudarte?</label>
-                                    <select class="glass-input text-slate-300 appearance-none bg-[#0a0518]">
-                                        <option class="i18n i18n-fade" data-es="Estrategia y Procesos" data-en="Strategy & Processes">Estrategia y Procesos</option>
-                                        <option class="i18n i18n-fade" data-es="Talleres LEGO® Serious Play®" data-en="LEGO® Serious Play® Workshops">Talleres LEGO® Serious Play®</option>
-                                        <option class="i18n i18n-fade" data-es="Diseño Organizacional / Talento" data-en="Organizational Design / Talent">Diseño Organizacional / Talento</option>
-                                    </select>
-                                </div>
+								    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="¿En qué podemos ayudarte?" data-en="How can we help you?">¿En qué podemos ayudarte?</label>
+								    <input list="services" class="glass-input" placeholder="Escribe el servicio o selecciónalo...">
+								    <datalist id="services">
+								        <option value="Estrategia y Procesos">
+								        <option value="Talleres LEGO® Serious Play®">
+								        <option value="Diseño Organizacional / Talento">
+								    </datalist>
+								</div>
                             </div>
 
                             <div class="flex items-start gap-3 mt-4">
