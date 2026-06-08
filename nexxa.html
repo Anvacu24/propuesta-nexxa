@@ -286,9 +286,8 @@
         
         <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-            <!-- Hexágono Base: Lo rotamos internamente en CSS y aplicamos JS al contenedor padre -->
-            <div class="absolute -bottom-20 -left-20 w-[650px] h-[650px] lg:w-[1200px] lg:h-[1200px] z-0 flex items-center justify-center pointer-events-none">
-                <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
+    <div class="absolute top-0 -left-64 w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] z-0 flex items-center justify-center pointer-events-none rotate-90">
+        <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
                     <!-- SVG ajustado matemáticamente para tener la punta superior totalmente horizontal (plana) y los bordes redondeados. -->
                     <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
                         <polygon points="55,22 145,22 190,100 145,178 55,178 10,100" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="10" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
@@ -297,8 +296,8 @@
             </div>
 
             <!-- Texto colosal adaptativo que vive de forma orgánica y no se desborda -->
-            <div class="absolute top-0 left-0 z-0 w-full h-full flex items-center justify-center overflow-hidden pointer-events-none">
-                <h2 id="giant-bg-text" class="text-white/20 font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-center">
+            <div class="absolute top-0 left-0 z-0 w-[400px] h-full flex items-center justify-start pl-20 overflow-hidden pointer-events-none">
+                <h2 id="giant-bg-text" class="text-white/10 font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-left">
                     Estrategia
                 </h2>
             </div>
