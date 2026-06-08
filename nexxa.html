@@ -926,11 +926,11 @@
 
         function setupVideoScrubbing() {
             if (!narrativeVideo) return;
-            const duration = narrativeVideo.duration || 5; 
+            // No necesitas cambiar nada más, solo esta línea de abajo:
             gsap.fromTo(narrativeVideo, 
                 { currentTime: 0 },
                 {
-                    currentTime: duration, 
+                    currentTime: 9, // <--- CAMBIA ESTO (Antes decía: currentTime: duration,)
                     ease: "none",
                     scrollTrigger: {
                         trigger: "#narrative-wrapper",
