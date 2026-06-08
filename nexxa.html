@@ -373,23 +373,34 @@
 		    opacity: 0.5; /* Hace la flechita del dropdown un poco más visible */
 		    cursor: pointer;
 		}
-		/* Sección Soluciones Estilizada */
-		#soluciones { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: #070314; overflow: hidden; }
-		
-		/* El contenedor del polígono que ocupa el 75% del área izquierda */
-		.shape-holder { 
-		    position: absolute; left: -100px; top: 50%; transform: translateY(-50%); 
-		    z-index: 0; 
-		}
-		.shape-element { 
-		    width: 700px; height: 700px; /* Tamaño grande */
-		    animation: spin 30s linear infinite; 
+		/* Hexagono protagonista */
+		.hexagon-container { 
+		    position: relative; 
+		    display: flex; 
+		    align-items: center; 
+		    justify-content: center; 
+		    width: 100%; 
+		    height: 100%; 
 		}
 		
-		/* El texto grande que se superpone */
-		.text-overlay { 
-		    position: absolute; left: 150px; top: 50%; transform: translateY(-50%); 
-		    font-size: 15vw; font-weight: 800; color: rgba(255, 255, 255, 0.05); pointer-events: none; 
+		.hex-spin { 
+		    width: 100%; 
+		    max-width: 800px; 
+		    aspect-ratio: 1/1; 
+		    animation: spin 60s linear infinite; 
+		    display: flex; 
+		    align-items: center; 
+		    justify-content: center;
+		}
+		
+		.text-inside-hex {
+		    /* Texto fluido: se ajusta al tamaño del hexágono */
+		    font-size: clamp(2rem, 8vw, 6rem); 
+		    line-height: 0.9;
+		    text-align: center;
+		    word-break: break-all;
+		    max-width: 70%;
+		    pointer-events: none;
 		}
 		
 		@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -559,42 +570,38 @@
         </div>
     </div>
 
-	<section id="soluciones">
-		    <!-- Capa del Polígono (Ocupa el espacio de la izquierda) -->
-		    <div class="shape-holder">
-		        <div class="shape-element animate-spin-slow">
-		            <svg viewBox="0 0 200 200" width="100%" height="100%">
-		                <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--color-0)" />
+	<section id="soluciones" class="relative min-h-screen bg-[#070314] overflow-hidden flex flex-col lg:flex-row items-center">
+    
+		    <!-- Lado Izquierdo: Hexágono Grande -->
+		    <div class="w-full lg:w-[60%] h-[50vh] lg:h-screen flex items-center justify-start -ml-20 lg:-ml-32">
+		        <div class="hex-spin">
+		            <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-2xl">
+		                <!-- Hexágono -->
+		                <polygon points="100,0 200,50 200,150 100,200 0,150 0,50" fill="var(--color-0)" />
+		                
+		                <!-- Texto que vive dentro del Hexágono -->
+		                <foreignObject x="0" y="0" width="200" height="200">
+		                    <div class="flex items-center justify-center w-full h-full p-4">
+		                        <h2 id="hex-text" class="text-white font-clash font-bold text-inside-hex">
+		                            <!-- El JS actualizará esto -->
+		                        </h2>
+		                    </div>
+		                </foreignObject>
 		            </svg>
 		        </div>
-		        <!-- Palabra grande de fondo (puedes cambiar 'gia' por lo que prefieras) -->
-		        <div class="text-overlay font-clash">gia</div>
 		    </div>
 		
-		    <!-- Contenido a la derecha -->
-		    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 flex justify-end">
-		        <div class="w-full lg:w-[50%] pt-20">
-		            <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
-		                <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400">SERVICIOS QUE TRANSFORMAN</span>
-		            </div>
-		            
-		            <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1]">Cargando...</h2>
-		            
-		            <div class="glass-card-subtle p-8">
-		                <p id="service-desc" class="text-slate-300 text-lg font-light leading-relaxed mb-6"></p>
-		                <div class="font-semibold text-white mb-2" id="solutions-heading">Soluciones incluidas:</div>
-		                <ul id="service-solutions" class="space-y-3 text-slate-300 list-none pl-0"></ul>
-		            </div>
-		
-		            <!-- Navegación de servicios -->
-		            <div class="mt-8 flex gap-4 overflow-x-auto no-scrollbar" id="service-menu">
-		                <button class="service-menu-button active" data-id="0">Estrategia</button>
-		                <button class="service-menu-button" data-id="1">Procesos</button>
-		                <button class="service-menu-button" data-id="2">Transformación</button>
-		                <button class="service-menu-button" data-id="3">Diseño Org.</button>
-		                <button class="service-menu-button" data-id="4">Compensación</button>
-		            </div>
+		    <!-- Lado Derecho: Contenido de Servicios -->
+		    <div class="w-full lg:w-[40%] px-8 lg:pr-20 z-10">
+		        <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
+		            <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400">SERVICIOS QUE TRANSFORMAN</span>
 		        </div>
+		        
+		        <h2 id="service-title" class="font-clash text-4xl lg:text-5xl font-bold text-white mb-6">Cargando...</h2>
+		        <p id="service-desc" class="text-slate-300 text-lg mb-8 leading-relaxed"></p>
+		        
+		        <div class="font-semibold text-white mb-4">Soluciones incluidas:</div>
+		        <ul id="service-solutions" class="space-y-3 text-slate-400"></ul>
 		    </div>
 		</section>
 
