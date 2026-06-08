@@ -278,18 +278,21 @@
         }
 
         .blob-shape {
-            position: absolute;
-            top: 40%;
-            left: 45%;
-            transform: translate(-50%, -50%);
-            width: 750px; 
-            height: 750px;
-            transition: fill 0.8s ease;
-            opacity: 0.95;
-            z-index: 0;
-            pointer-events: none;
-            overflow: visible !important;
-        }
+		    width: 100%;
+		    max-width: 500px; /* Esto hará que se vea grande pero controlado */
+		    height: auto;
+		    transition: fill 0.8s ease;
+		    opacity: 0.95;
+		    z-index: 0;
+		    pointer-events: none;
+		}
+		#wheel-hub { 
+		    display: flex; 
+		    align-items: center; 
+		    justify-content: center; 
+		    width: 100%; 
+		    height: 100%; 
+		}
 
         @media (max-width: 1024px) {
             .blob-shape { width: 600px; height: 600px; top: 50%; left: 50%; }
@@ -536,46 +539,43 @@
         </div>
     </div>
 
-
+	<section id="soluciones" class="relative min-h-[600px] flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
     
-    <section id="soluciones" class="relative min-h-screen flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
-        <div class="absolute top-0 left-0 w-full h-[250px] bg-gradient-to-b from-[#0a071d] to-[#070314] pointer-events-none z-0"></div>
-
-        <div class="w-full lg:w-[50%] h-[50vh] lg:h-full relative overflow-visible z-10 flex-shrink-0">
-            <div class="wheel-hub max-lg:-translate-y-1/4" id="wheel-hub">
-                <svg class="blob-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="w-full lg:w-[50%] h-full flex flex-col justify-center px-6 lg:pl-20 lg:pr-24 z-20 py-10 lg:py-0">
-            <div class="flex flex-col max-w-2xl relative z-30">
-                <!-- Reemplaza el bloque de Servicios por este -->
-				<div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
-				    <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
-				</div>
-                <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
-                <div class="space-y-6">
-                    <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
-                    <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
-                    <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
-                </div>
-            </div>
-            
-            <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
-                <div class="flex gap-4 pb-4 w-max" id="service-menu">
-                    <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
-                    <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
-                </div>
-            </div>
-        </div>
-    </section>
+		    <div class="w-full lg:w-[45%] h-[400px] lg:h-[600px] relative z-10 flex items-center justify-center p-6">
+		        <div id="wheel-hub" class="animate-spin-slow w-full h-full flex items-center justify-center">
+		            <svg class="blob-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+		                <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
+		            </svg>
+		        </div>
+		    </div>
+		
+		    <div class="w-full lg:w-[55%] h-full flex flex-col justify-center px-6 lg:pl-12 lg:pr-24 z-20">
+		        <div class="flex flex-col max-w-2xl relative z-30">
+		            <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max">
+		                <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade">SERVICIOS QUE TRANSFORMAN</span>
+		            </div>
+		            
+		            <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-6 leading-[1.1] anim-text">Cargando...</h2>
+		            
+		            <div class="space-y-4">
+		                <p id="service-desc" class="text-slate-300 text-base md:text-lg font-light leading-[1.6] anim-text">Cargando...</p>
+		                <div class="font-semibold text-lg text-white mt-4 anim-text" id="solutions-heading">Soluciones incluidas:</div>
+		                <ul id="service-solutions" class="space-y-2 anim-text text-slate-300 font-light list-none pl-0"></ul>
+		            </div>
+		        </div>
+		        
+		        <div class="mt-8 overflow-x-auto no-scrollbar w-full" id="service-menu-wrapper">
+		            <div class="flex gap-4 pb-4 w-max" id="service-menu">
+		                <button class="service-menu-button active i18n" data-id="0">Estrategia</button>
+		                <button class="service-menu-button i18n" data-id="1">Procesos</button>
+		                <button class="service-menu-button i18n" data-id="2">Transformación</button>
+		                <button class="service-menu-button i18n" data-id="3">Diseño Org.</button>
+		                <button class="service-menu-button i18n" data-id="4">Compensación</button>
+		                <button class="service-menu-button i18n" data-id="5">Formación LSP</button>
+		            </div>
+		        </div>
+		    </div>
+		</section>
 
     <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
         <div class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-br from-violet-600/10 to-transparent rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
