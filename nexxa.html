@@ -15,227 +15,68 @@
         :root {
             --color-bg-dark: #070314;
             --color-primary: #8B5CF6;
-            --color-accent: #F59E0B; /* Ámbar corporativo */
+            --color-accent: #F59E0B;
             
-            /* Paleta Boutique Cálida y Elegante */
-            --color-0: #6D28D9; /* Estrategia - Violeta Profundo */
-            --color-1: #D97706; /* Procesos - Ámbar/Dorado Oscuro */
-            --color-2: #1E3A8A; /* Transformación - Azul Marino Elegante */
-            --color-3: #9F1239; /* Diseño Org - Rose/Burgundy Profundo */
-            --color-4: #115E59; /* Compensación - Esmeralda Oscuro */
-            --color-5: #B45309; /* Formación - Bronce/Naranja Cálido */
-            --color-6: #4C1D95; /* Premium - Púrpura Real */
+            --color-0: #6D28D9;
+            --color-1: #D97706;
+            --color-2: #1E3A8A;
+            --color-3: #9F1239;
+            --color-4: #115E59;
+            --color-5: #B45309;
+            --color-6: #4C1D95;
             --current-blob-color: var(--color-0);
-            
-            /* Radio del círculo orbital */
-            --wheel-radius: 460px; 
         }
 
-        @media (max-width: 1024px) {
-            :root { --wheel-radius: 280px; }
-        }
-        @media (max-width: 640px) {
-            :root { --wheel-radius: 180px; }
-        }
-
-        html, body {
-            overflow-x: hidden;
-        }
-
-        html { scroll-padding-top: 80px; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-bg-dark);
-            color: #F8FAFC;
-        }
+        html, body { overflow-x: hidden; scroll-padding-top: 80px; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--color-bg-dark); color: #F8FAFC; }
 
         h1, h2, h3, .font-clash { font-family: 'Clash Display', sans-serif; }
         .font-signature { font-family: 'Dancing Script', cursive; }
 
-        /* Glassmorphism Header */
-        .glass-header {
-            background: rgba(7, 3, 20, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-        .glass-header.scrolled {
-            background: rgba(7, 3, 20, 0.9);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        .glass-header { background: rgba(7, 3, 20, 0.4); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .glass-header.scrolled { background: rgba(7, 3, 20, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 
-        /* 3D Parallax Background Layer */
-        .parallax-bg {
-            position: absolute;
-            top: -5%; left: -5%; right: -5%; bottom: -5%;
-            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-            will-change: transform;
-            filter: brightness(0.6) contrast(1.2);
-        }
+        .parallax-bg { position: absolute; top: -5%; left: -5%; right: -5%; bottom: -5%; background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'); background-size: cover; background-position: center; z-index: -2; filter: brightness(0.6) contrast(1.2); }
+        .gradient-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(7,3,20,0.2) 0%, rgba(7,3,20,0.8) 40%, rgba(7,3,20,1) 100%); z-index: -1; }
 
-        .gradient-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, rgba(7,3,20,0.2) 0%, rgba(7,3,20,0.8) 40%, rgba(7,3,20,1) 100%);
-            z-index: -1;
-        }
+        @keyframes flowGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .text-gradient-flow { background-size: 200% auto; animation: flowGradient 5s ease infinite; }
 
-        /* --- ANIMACIÓN FLUIDA DE TEXTOS Y BOTONES --- */
-        @keyframes flowGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .text-gradient-flow {
-            background-size: 200% auto;
-            animation: flowGradient 5s ease infinite;
-        }
+        .btn-fluid { position: relative; background: linear-gradient(90deg, #8B5CF6, #F59E0B, #8B5CF6); background-size: 200% auto; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-fluid:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); }
 
-        .btn-fluid {
-            position: relative;
-            background: linear-gradient(90deg, #8B5CF6, #F59E0B, #8B5CF6); /* Ámbar */
-            background-size: 200% auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-fluid:hover {
-            background-position: right center;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
-        }
-
-        @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(40px); filter: blur(10px); }
-            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); filter: blur(10px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
         .animate-fade-up { opacity: 0; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-700 { animation-delay: 0.7s; }
+        .delay-100 { animation-delay: 0.1s; } .delay-300 { animation-delay: 0.3s; } .delay-500 { animation-delay: 0.5s; } .delay-700 { animation-delay: 0.7s; }
 
-        .btn-liquid-glow {
-            position: relative;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(245, 158, 11, 0.8));
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        .btn-liquid-glow::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
-            opacity: 0; transform: scale(0.5); transition: all 0.6s ease;
-        }
+        .btn-liquid-glow { position: relative; background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(245, 158, 11, 0.8)); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; transition: all 0.4s ease; }
+        .btn-liquid-glow::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%); opacity: 0; transform: scale(0.5); transition: all 0.6s ease; }
         .btn-liquid-glow:hover::before { opacity: 1; transform: scale(1); }
-        .btn-liquid-glow:hover {
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
-            transform: translateY(-2px);
-        }
+        .btn-liquid-glow:hover { box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 40px rgba(245, 158, 11, 0.3); transform: translateY(-2px); }
 
-        .btn-glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        .btn-glass:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
+        .btn-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
 
-        .glass-card-subtle {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 1.5rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
+        .glass-card-subtle { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border-radius: 1.5rem; transition: all 0.4s ease; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+        .glass-card-subtle:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(139, 92, 246, 0.3); transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2); }
 
-        .glass-input {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            transition: all 0.3s ease;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            outline: none;
-        }
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(139, 92, 246, 0.5);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
-        }
+        .glass-input { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; transition: all 0.3s ease; width: 100%; padding: 0.75rem 1rem; border-radius: 0.75rem; outline: none; }
+        .glass-input:focus { background: rgba(255, 255, 255, 0.06); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
         .glass-input::placeholder { color: rgba(255, 255, 255, 0.3); }
         details > summary::-webkit-details-marker { display: none; }
 
-        @keyframes pulse-dot { 
-            0%, 100% { transform: scale(0.8); opacity: 1; } 
-            50% { transform: scale(1.5); opacity: 0.5; } 
-        }
+        @keyframes pulse-dot { 0%, 100% { transform: scale(0.8); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } }
         .pulse-circle { animation: pulse-dot 1.5s infinite; }
-        
-        .draw-line { 
-            fill: none; 
-            stroke: #ffffff; 
-            stroke-width: 2; 
-            stroke-linecap: round; 
-            stroke-dasharray: 200; 
-            stroke-dashoffset: 200; 
-        }
-        
-        .glass-card-subtle:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
-        }
+        .draw-line { fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 200; stroke-dashoffset: 200; }
 
-        .gsap-fade-up { opacity: 0; transform: translateY(40px); }
-        .gsap-fade-left { opacity: 0; transform: translateX(-40px); }
-        .gsap-fade-right { opacity: 0; transform: translateX(40px); }
+        .lego-studs-violet { background-color: #6d28d9; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='v' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='30%25' stop-color='%236d28d9'/%3E%3Cstop offset='100%25' stop-color='%234c1d95'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23v)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%238b5cf6'%3ELEGO%3C/text%3E%3C/svg%3E"); background-size: 40px 40px; box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7); }
+        .lego-studs-blue { background-color: #1d4ed8; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='30%25' stop-color='%231d4ed8'/%3E%3Cstop offset='100%25' stop-color='%231e3a8a'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23b)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%233b82f6'%3ELEGO%3C/text%3E%3C/svg%3E"); background-size: 40px 40px; box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7); }
 
-        .lego-studs-violet {
-            background-color: #6d28d9;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='v' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='30%25' stop-color='%236d28d9'/%3E%3Cstop offset='100%25' stop-color='%234c1d95'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23v)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%238b5cf6'%3ELEGO%3C/text%3E%3C/svg%3E");
-            background-size: 40px 40px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7);
-        }
-        .lego-studs-blue {
-            background-color: #1d4ed8;
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='30%25' stop-color='%231d4ed8'/%3E%3Cstop offset='100%25' stop-color='%231e3a8a'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23b)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%233b82f6'%3ELEGO%3C/text%3E%3C/svg%3E");
-            background-size: 40px 40px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7);
-        }
-
-        @keyframes sealEntrance {
-            0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); opacity: 0; }
-            60% { transform: translate(-50%, -50%) scale(1.1) rotate(15deg); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
-        }
+        @keyframes sealEntrance { 0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); opacity: 0; } 60% { transform: translate(-50%, -50%) scale(1.1) rotate(15deg); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; } }
         .animate-seal-entrance { animation: sealEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-
-        @keyframes textBeat {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); }
-            50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); }
-        }
+        @keyframes textBeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); } 50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); } }
         .animate-text-beat { animation: textBeat 3s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-        @keyframes twinkleSparkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.85) rotate(0deg); filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.3)); }
-            50% { opacity: 1; transform: scale(1.08) rotate(10deg); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8)); }
-        }
+        @keyframes twinkleSparkle { 0%, 100% { opacity: 0.3; transform: scale(0.85) rotate(0deg); filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.3)); } 50% { opacity: 1; transform: scale(1.08) rotate(10deg); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8)); } }
         .animate-twinkle { animation: twinkleSparkle 3s ease-in-out infinite; }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -244,32 +85,14 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #070314; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        input[list]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }
 
         /* =========================================
            NUEVOS ESTILOS SECCIÓN SERVICIOS (HEXÁGONO)
            ========================================= */
-        .service-menu-button {
-            color: #94a3b8; 
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 30px;
-            background-color: transparent;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .service-menu-button:hover {
-            color: #fff;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .service-menu-button.active {
-            color: #fff;
-            background-color: var(--current-blob-color);
-            font-weight: 600;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
+        .service-menu-button { color: #94a3b8; font-size: 0.95rem; font-weight: 500; padding: 10px 20px; border-radius: 30px; background-color: transparent; transition: all 0.3s ease; white-space: nowrap; }
+        .service-menu-button:hover { color: #fff; background-color: rgba(255, 255, 255, 0.05); }
+        .service-menu-button.active { color: #fff; background-color: var(--current-blob-color); font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 
         .fade-out { opacity: 0 !important; transform: translateY(15px); transition: opacity 0.3s ease, transform 0.3s ease; }
         .fade-in { opacity: 1 !important; transform: translateY(0); transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s; }
@@ -277,16 +100,9 @@
 
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
-
-        input[list]::-webkit-calendar-picker-indicator {
-            opacity: 0.5;
-            cursor: pointer;
-        }
-        #active-service-container {
-            /* Mantenemos tus propiedades actuales */
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-            transform-origin: 50% var(--wheel-radius); /* <--- ESTO ES LA CLAVE */
-            will-change: transform;
+        .draw-line {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
         }
     </style>
 </head>
@@ -383,13 +199,11 @@
     </main>
 
     <div id="narrative-wrapper" class="relative w-full">
-        
         <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
             <div class="sticky top-0 w-full h-screen overflow-hidden">
                 <video id="nexxa-narrative-video" muted playsinline preload="auto" class="w-full h-full object-cover">
                     <source src="videosolucion.mp4" type="video/mp4">
                 </video>
-                
                 <div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#070314] to-transparent z-10"></div>
                 <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#070314] to-transparent z-10"></div>
                 <div class="absolute inset-0 bg-[#070314]/30 z-10"></div>
@@ -397,10 +211,8 @@
         </div>
 
         <div class="relative z-10 w-full">
-
             <section id="diagnostico" class="min-h-[70vh] flex flex-col justify-center py-20 px-6 lg:px-8 bg-transparent">
                 <div class="max-w-4xl mx-auto w-full">
-                    <!-- Contenedor con efecto glass para legibilidad sobre el video -->
                     <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
                         <div class="diag-title">
                             <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
@@ -419,36 +231,51 @@
             </section>
             
             <section id="proceso" class="relative h-[400vh] bg-transparent">
-                <!-- Contenedor que "pincha" el video mientras scrolles -->
+                <svg class="absolute inset-0 w-full h-full z-10 pointer-events-none" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+    
+    <g class="process-step" style="opacity: 0;">
+        <circle cx="100" cy="200" r="15" fill="none" stroke="#8B5CF6" stroke-width="2" />
+        <circle cx="100" cy="200" r="5" fill="#8B5CF6" />
+        <line x1="120" y1="200" x2="220" y2="200" stroke="#8B5CF6" stroke-width="2" class="draw-line" />
+    </g>
+
+    <g class="process-step" style="opacity: 0;">
+        <circle cx="900" cy="400" r="15" fill="none" stroke="#F59E0B" stroke-width="2" />
+        <circle cx="900" cy="400" r="5" fill="#F59E0B" />
+        <line x1="880" y1="400" x2="780" y2="400" stroke="#F59E0B" stroke-width="2" class="draw-line" />
+    </g>
+
+    <g class="process-step" style="opacity: 0;">
+        <circle cx="150" cy="700" r="15" fill="none" stroke="#10B981" stroke-width="2" />
+        <circle cx="150" cy="700" r="5" fill="#10B981" />
+        <line x1="170" y1="700" x2="270" y2="700" stroke="#10B981" stroke-width="2" class="draw-line" />
+    </g>
+
+    <g class="process-step" style="opacity: 0;">
+        <circle cx="850" cy="850" r="15" fill="none" stroke="#3B82F6" stroke-width="2" />
+        <circle cx="850" cy="850" r="5" fill="#3B82F6" />
+        <line x1="830" y1="850" x2="730" y2="850" stroke="#3B82F6" stroke-width="2" class="draw-line" />
+    </g>
+</svg>
+            
                 <div class="sticky top-0 w-full h-screen overflow-hidden">
-                    
-                    <!-- Contenedor de Textos (Capa superior sobre el video) -->
                     <div id="text-container" class="relative w-full h-full">
-                        
-                        <!-- Texto 1 -->
                         <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80">
                             <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
                             <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
                         </div>
-
-                        <!-- Texto 2 -->
                         <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80">
                             <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
                             <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
                         </div>
-
-                        <!-- Texto 3 -->
                         <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80">
                             <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
                             <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
                         </div>
-
-                        <!-- Texto 4 -->
                         <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80">
                             <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
                             <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -462,31 +289,32 @@
         
         <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-            <!-- Hexágono Base con parte superior perfectamente plana y tamaño ampliado -->
-            <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[40%] lg:-translate-x-[35%] w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] z-0 flex items-center justify-center">
-                <div id="shape-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
-                    <!-- Geometría perfecta para mantener forma girando de a 60 grados -->
+            <!-- Hexágono Base: Lo rotamos internamente en CSS y aplicamos JS al contenedor padre -->
+            <div class="absolute top-[45%] left-0 -translate-y-1/2 -translate-x-[35%] w-[650px] h-[650px] lg:w-[900px] lg:h-[900px] z-0 flex items-center justify-center">
+                <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
+                    <!-- SVG ajustado matemáticamente para tener la punta superior totalmente horizontal (plana) y los bordes redondeados. -->
                     <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
-                        <polygon points="200,100 150,186.6 50,186.6 0,100 50,13.4 150,13.4" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="8" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
+                        <polygon points="55,22 145,22 190,100 145,178 55,178 10,100" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="10" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
                     </svg>
                 </div>
             </div>
 
-            <!-- Texto colosal adaptativo, enlazado sutilmente. Detecta cortes para dos lineas. -->
-            <div class="absolute top-1/2 left-[5%] lg:left-[8%] -translate-y-1/2 z-0 w-[50vw] lg:w-[40vw] flex items-center justify-start overflow-visible pointer-events-none">
-                <h2 id="giant-bg-text" class="text-white/90 font-clash font-extrabold text-[3.5rem] md:text-[5.5rem] lg:text-[7.5rem] leading-[0.9] tracking-tight drop-shadow-2xl anim-text">
+            <!-- Texto colosal adaptativo que vive de forma orgánica y no se desborda -->
+            <div class="absolute top-[45%] left-6 lg:left-16 -translate-y-1/2 z-0 w-[45vw] lg:w-[35vw] flex items-center justify-start overflow-hidden">
+                <h2 id="giant-bg-text" class="text-white/95 font-clash font-bold text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] leading-[0.9] tracking-tight break-words drop-shadow-2xl anim-text">
                     Estrategia
                 </h2>
             </div>
         </div>
 
-        <!-- CAPA FRONTAL: Imagen Principal ÚNICA y Textos -->
+        <!-- CAPA FRONTAL: Carrusel de Imagen y Textos -->
         <div class="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center relative z-10 px-6 lg:px-8 mt-12 lg:mt-0">
             
-            <!-- Lado Izquierdo: Imagen con Animación 360 grados tipo ruleta sobre su eje -->
-            <div class="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-12 mb-12 lg:mb-0">
-                <div id="active-service-container" class="w-[90%] md:w-[450px] aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative bg-white/5 backdrop-blur-sm z-20 transition-transform duration-1000 ease-in-out origin-center">
-                    <img id="active-service-image" src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop" alt="Servicio" class="w-full h-full object-cover anim-text transition-opacity duration-500">
+            <!-- Lado Izquierdo: Ruleta de Imágenes (Nítidas) -->
+            <div class="w-full lg:w-[45%] h-[300px] md:h-[450px] relative flex justify-center lg:justify-end mb-12 lg:mb-0">
+                <!-- Contenedor central de la ruleta desde donde orbitan las imágenes -->
+                <div id="image-wheel-hub" class="absolute top-1/2 left-[30%] lg:left-[10%] w-0 h-0 transition-transform duration-1000 ease-in-out z-20 origin-center">
+                    <!-- El JavaScript inyecta aquí las imágenes dinámicamente -->
                 </div>
             </div>
 
@@ -506,23 +334,16 @@
                     <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
                 </div>
                 
-                <!-- Menú de Botones y Swipe Indicator (ORDEN MODIFICADO) -->
-                <div class="mt-12 pt-6 border-t border-white/10 relative w-full z-30">
-                    <div class="overflow-x-auto no-scrollbar w-full" id="service-menu-wrapper">
-                        <!-- El orden modificado según tu solicitud (Estrategia, Formación, Diseño, Transformación...) -->
-                        <div class="flex gap-4 pb-4 pr-12 w-max" id="service-menu">
-                            <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
-                            <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
-                        </div>
-                    </div>
-                    <!-- Swipe / Scroll Indicator Visual con iconito -->
-                    <div class="absolute right-0 top-6 bottom-0 w-16 bg-gradient-to-l from-[#070314] to-transparent pointer-events-none flex items-center justify-end">
-                        <i data-lucide="chevron-right" class="w-6 h-6 text-amber-500 animate-pulse"></i>
+                <!-- Menú de Botones -->
+                <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
+                    <div class="flex gap-4 pb-4 w-max" id="service-menu">
+                        <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Procesos" data-en="Processes">Procesos</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Transformación" data-en="Transformation">Transformación</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Compensación" data-en="Compensation">Compensación</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
                     </div>
                 </div>
             </div>
@@ -530,16 +351,15 @@
     </section>
 
     <!-- SECCIÓN AUTORIDAD -->
-    <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
+   <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
         <div class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-br from-violet-600/10 to-transparent rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-        <div class="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-gradient-to-tl from-amber-600/10 to-transparent rounded-full blur-[80px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-gradient-to-tl from-violet-600/10 to-transparent rounded-full blur-[80px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch mb-16 md:mb-20">
                 <div class="flex flex-col w-full h-full justify-between pb-5">
-                    
-                    <div class="inline-flex items-center px-6 py-2 rounded-full border border-violet-500/30 bg-violet-950/30 w-max mb-6 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
-                        <span class="text-[10px] md:text-xs font-bold tracking-widest text-white/90 i18n i18n-fade" data-es="¿POR QUÉ NEXXA?" data-en="WHY NEXXA?">¿POR QUÉ NEXXA?</span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 w-max">
+                        <span class="text-[10px] md:text-xs uppercase tracking-wider text-violet-300 font-bold i18n i18n-fade" data-es="¿Por qué Nexxa?" data-en="Why Nexxa?">¿Por qué Nexxa?</span>
                     </div>
 
                     <div class="relative w-full max-w-[440px] mx-auto lg:max-w-none lg:mx-0 mt-12 lg:mt-0 mb-10 md:mb-12">
@@ -550,11 +370,18 @@
                                     <div class="absolute inset-0 bg-violet-900/10 transition-colors duration-500 z-20 pointer-events-none"></div>
                                     <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" alt="Consultoría Johana Nexxa" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 relative z-10">
                                 </div>
+                                <div class="absolute -bottom-5 -left-5 md:-bottom-7 md:-left-7 w-12 h-12 md:w-16 md:h-16 z-30 pointer-events-none animate-twinkle">
+                                    <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M60 10 C60 45, 45 60, 10 60 C45 60, 60 75, 60 110 C60 75, 75 60, 110 60 C75 60, 60 45, 60 10 Z" fill="#3b82f6"/>
+                                        <path d="M30 75 C30 90, 20 95, 5 95 C20 95, 30 100, 30 115 C30 100, 40 95, 55 95 C40 95, 30 90, 30 75 Z" fill="#60a5fa"/>
+                                        <path d="M85 75 C85 95, 75 102, 52 102 C75 102, 85 109, 85 129 C85 109, 95 102, 118 102 C95 102, 85 95, 85 75 Z" fill="#3b82f6"/>
+                                    </svg>
+                                </div>
                             </div>
                             
                             <div class="space-y-3 md:space-y-4 w-full h-full flex flex-col">
                                 <div class="h-[164px] md:h-[202px] w-full overflow-hidden shadow-lg relative bg-transparent z-10 flex-shrink-0">
-                                    <div class="absolute inset-0 bg-amber-900/10 transition-colors duration-500 z-20 pointer-events-none"></div>
+                                    <div class="absolute inset-0 bg-violet-900/10 transition-colors duration-500 z-20 pointer-events-none"></div>
                                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop" alt="Taller LSP Nexxa" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700 relative z-10">
                                 </div>
                                 <div class="relative h-[164px] md:h-[202px] w-full z-10 flex-shrink-0 mt-auto">
@@ -579,9 +406,9 @@
                 <div class="flex flex-col justify-between h-full pt-1 pb-5">
                     <div class="flex flex-col gap-5">
                         <h2 class="font-clash text-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] i18n i18n-fade"
-                            data-es="No somos teóricos,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400'>socio estratégico.</span>"
-                            data-en="We are not theorists,<br>we are your <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400'>strategic partner.</span>">
-                            No somos teóricos,<br>somos tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-500 to-amber-400">socio estratégico.</span>
+                            data-es="No somos teóricos,<br>somos tu <span class='text-violet-400'>socio estratégico.</span>"
+                            data-en="We are not theorists,<br>we are your <span class='text-violet-400'>strategic partner.</span>">
+                            No somos teóricos,<br>somos tu <span class='text-violet-400'>socio estratégico.</span>
                         </h2>
                         <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed i18n i18n-fade"
                            data-es="El mercado está lleno de consultoras que entregan reportes y se van. Nosotros nos involucramos directamente en la ejecución para asegurarnos de que el cambio se implemente y perdure."
@@ -593,7 +420,7 @@
                     <div class="mt-8 pt-6 lg:pt-8 border-t border-white/10">
                         <h4 class="text-white text-xl md:text-2xl font-bold font-clash tracking-wide">Johana</h4>
                         <p class="text-violet-400 text-[10px] md:text-xs font-bold mb-4 uppercase tracking-widest i18n i18n-fade" data-es="Fundadora & Consultora Principal" data-en="Founder & Lead Consultant">Fundadora & Consultora Principal</p>
-                        <p class="text-slate-300 text-sm md:text-base leading-relaxed italic border-l-2 border-amber-500 pl-4 py-1 i18n i18n-fade" 
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed italic border-l-2 border-violet-500 pl-4 py-1 i18n i18n-fade" 
                            data-es="&quot;Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil.&quot;" 
                            data-en="&quot;My purpose is to guide organizational transformation with a deeply human, strategic, and agile approach.&quot;">
                             "Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil."
@@ -606,28 +433,28 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-6 md:mt-10 items-start">
-                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="award" class="w-5 h-5 text-violet-300"></i>
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Enfoque Boutique" data-en="Boutique Approach">Enfoque Boutique</h4>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
-                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
-                        <p class="i18n i18n-fade" data-es="Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece." data-en="Close, confidential, and tailored attention. Your company receives the focus it deserves.">Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece.</p>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece." data-en="Close, confidential, and tailored attention. Your company receives the focus it deserves.">Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece.</p>
                     </div>
                 </details>
                 
-                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-violet-500/30 rounded-2xl transition-all duration-300 shadow-lg">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="shield-check" class="w-5 h-5 text-violet-300"></i>
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-violet-400"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Rigor Técnico" data-en="Technical Rigor">Rigor Técnico</h4>
                         </div>
@@ -635,30 +462,31 @@
                             <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
-                        <p class="i18n i18n-fade" data-es="Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional." data-en="Experience transforming operational processes and aligning strategies at a national and international level.">Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional.</p>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional." data-en="Experience transformando operational processes and aligning strategies at a national and international level.">Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional.</p>
                     </div>
                 </details>
 
-                <details class="group bg-gradient-to-r from-amber-900/10 via-violet-900/20 to-cyan-900/10 border border-white/10 hover:border-violet-500/50 rounded-2xl transition-all duration-300 shadow-lg p-2">
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
                     <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500/20 via-violet-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="lightbulb" class="w-5 h-5 text-violet-300"></i>
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400"></i>
                             </div>
                             <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Innovación Práctica" data-en="Practical Innovation">Innovación Práctica</h4>
                         </div>
-                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
-                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
                         </div>
                     </summary>
-                    <div class="px-5 pb-5 pt-0 text-slate-400 text-sm">
-                        <p class="i18n i18n-fade" data-es="Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados." data-en="We combine hard technical consulting with experiential disruptive methodologies to achieve results.">Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados.</p>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados." data-en="We combine hard technical consulting with experiential disruptive methodologies to achieve results.">Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados.</p>
                     </div>
                 </details>
             </div>
         </div>
     </section>
+
 
     <!-- CONTACTO -->
     <section id="contacto" class="relative min-h-screen flex flex-col justify-center py-20 z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
@@ -869,7 +697,7 @@
             },
             {
                 id: 5,
-                short_es: "Formación LSP", short_en: "LSP Training",
+                short_es: "Formación", short_en: "Training",
                 title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®, facilitamos conversaciones profundas que resuelven problemas complejos y fortalecen el liderazgo.",
@@ -908,74 +736,124 @@
         const angleStep = 60; 
         let currentIndex = 0;
         let currentHubRotation = 0;
-        let currentImageRotation = 0;
 
         const hexRotator = document.getElementById('shape-rotator');
         const giantBgText = document.getElementById('giant-bg-text');
-        const activeImage = document.getElementById('active-service-image');
-        const activeImageContainer = document.getElementById('active-service-container');
+        
+        // --- NUEVA LÓGICA DE RULETA DE IMÁGENES ---
+        const imgWheelHub = document.getElementById('image-wheel-hub');
+        let imgRadius = 250; // Distancia desde el centro de giro
 
         function initWheel() {
-            // Se elimina la generación de miniaturas
+            if(!imgWheelHub) return;
+            imgWheelHub.innerHTML = '';
+            imgRadius = window.innerWidth > 1024 ? 300 : 200;
+
+            servicesData.forEach((data, i) => {
+                const item = document.createElement('div');
+                // Inicialmente todas con opacidad 0
+                item.className = 'orbit-item absolute rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 ease-in-out origin-center';
+                
+                // Tamaño de la imagen
+                item.style.width = window.innerWidth > 1024 ? '420px' : '300px';
+                item.style.height = window.innerWidth > 1024 ? '315px' : '225px';
+
+                // Posicionamiento en el círculo
+                const thetaRad = (i * angleStep) * (Math.PI / 180);
+                const x = imgRadius * Math.cos(thetaRad);
+                const y = imgRadius * Math.sin(thetaRad);
+
+                item.style.left = `${x}px`;
+                item.style.top = `${y}px`;
+                
+                // Estado inicial
+                item.style.transform = `translate(-50%, -50%) rotate(0deg) scale(${i === 0 ? 1 : 0.6})`;
+                item.style.opacity = i === 0 ? 1 : 0;
+                item.style.pointerEvents = i === 0 ? 'auto' : 'none';
+
+                const img = document.createElement('img');
+                img.src = data.imageSrc;
+                img.alt = data.short_es;
+                img.className = 'w-full h-full object-cover';
+                
+                item.appendChild(img);
+                imgWheelHub.appendChild(item);
+            });
         }
 
         function updateContent(targetIndex, skipRotation = false) {
-    if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
+            if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
 
-    let diff = targetIndex - currentIndex;
-    if (diff > totalItems / 2) diff -= totalItems;
-    else if (diff < -totalItems / 2) diff += totalItems;
+            let diff = targetIndex - currentIndex;
+            if (diff > totalItems / 2) diff -= totalItems;
+            else if (diff < -totalItems / 2) diff += totalItems;
 
-    if(!skipRotation) {
-        currentHubRotation -= diff * angleStep; 
-        currentIndex = targetIndex;
-    }
+            if(!skipRotation) {
+                currentHubRotation -= diff * angleStep; 
+                currentIndex = targetIndex;
+            }
 
-    // 1. Rota el hexágono
-    if (hexRotator) {
-        hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
-    }
+            const data = servicesData[currentIndex];
 
-    // 2. Rota el contenedor de la imagen con el mismo ángulo que el hexágono
-    // Esto crea el efecto de ruleta orbital
-    if (activeImageContainer) {
-        activeImageContainer.style.transform = `rotate(${-currentHubRotation}deg)`;
-    }
-    
-    rootVars.style.setProperty('--current-blob-color', servicesData[currentIndex].color);
+            // 1. Rota el hexágono
+            if (hexRotator) {
+                hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
+            }
 
-    // ... el resto de tu lógica de fade-in/out se mantiene igual ...
-    animatableElements.forEach(el => {
-        el.classList.remove('fade-in');
-        el.classList.add('fade-out');
-    });
+            // 2. Rota el hub principal de imágenes (La Ruleta)
+            if (imgWheelHub) {
+                imgWheelHub.style.transform = `rotate(${currentHubRotation}deg)`;
+                
+                // 3. Contrarresta la rotación de cada imagen y ajusta opacidad/escala
+                const orbitItems = imgWheelHub.querySelectorAll('.orbit-item');
+                orbitItems.forEach((item, i) => {
+                    const isTarget = (i === currentIndex);
+                    // Aplica rotación inversa para que la foto siempre quede derecha
+                    item.style.transform = `translate(-50%, -50%) rotate(${-currentHubRotation}deg) scale(${isTarget ? 1 : 0.6})`;
+                    item.style.opacity = isTarget ? 1 : 0;
+                    item.style.pointerEvents = isTarget ? 'auto' : 'none';
+                    item.style.zIndex = isTarget ? 30 : 0;
+                });
+            }
+            
+            rootVars.style.setProperty('--current-blob-color', data.color);
 
-    setTimeout(() => {
-        const data = servicesData[currentIndex];
-        serviceTitleElem.innerHTML = data[`title_${currentLang}`];
-        serviceDescElem.innerHTML = data[`desc_${currentLang}`];
-        solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
-        if (activeImage) activeImage.src = data.imageSrc;
-        
-        // ... (mantén tu lógica de innerHTML de listas aquí) ...
+            animatableElements.forEach(el => {
+                el.classList.remove('fade-in');
+                el.classList.add('fade-out');
+            });
 
-        animatableElements.forEach(el => {
-            el.classList.remove('fade-out');
-            setTimeout(() => el.classList.add('fade-in'), 50);
-        });
-    }, 350);
+            setTimeout(() => {
+                serviceTitleElem.innerHTML = data[`title_${currentLang}`];
+                serviceDescElem.innerHTML = data[`desc_${currentLang}`];
+                solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
+                
+                if (giantBgText) giantBgText.innerHTML = data[`short_${currentLang}`];
+                
+                serviceSolutionsListElem.innerHTML = '';
+                data[`solutions_${currentLang}`].forEach(solution => {
+                    const li = document.createElement('li');
+                    li.className = 'solution-list-item';
+                    li.textContent = solution;
+                    serviceSolutionsListElem.appendChild(li);
+                });
 
-    menuButtons.forEach((btn, i) => {
-        const btnId = parseInt(btn.getAttribute('data-id'));
-        if (btnId === currentIndex) {
-            btn.classList.add('active');
-            const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
-            menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        } else {
-            btn.classList.remove('active');
+                animatableElements.forEach(el => {
+                    el.classList.remove('fade-out');
+                    setTimeout(() => el.classList.add('fade-in'), 50);
+                });
+            }, 350);
+
+            menuButtons.forEach((btn, i) => {
+                if (i === currentIndex) {
+                    btn.classList.add('active');
+                    const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
+                    menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
         }
-    });
-}
 
         menuButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -1088,33 +966,38 @@
         }
 
         function setupAnnotations() {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#proceso",
-                    start: "top top",
-                    end: "bottom bottom", 
-                    scrub: 1,
-                    pin: true 
-                }
-            });
-
-            const texts = gsap.utils.toArray('.anno-text');
-            
-            texts.forEach((text, i) => {
-                const line = text.querySelector('.draw-line');
-                
-                if (line) {
-                    tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
-                      .fromTo(line, { strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, "<")
-                      .to(text, { opacity: 1, duration: 2 }, "+=1")
-                      .to(text, { opacity: 0, duration: 1 }, "+=0.5");
-                } else {
-                    tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
-                      .to(text, { opacity: 1, duration: 2 }, "+=1")
-                      .to(text, { opacity: 0, duration: 1 }, "+=0.5");
-                }
-            });
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#proceso",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1, // Ajusta este número (1 a 3) para que sea más lento o rápido
+            pin: true 
         }
+    });
+
+    const texts = gsap.utils.toArray('.anno-text');
+    const steps = gsap.utils.toArray('.process-step');
+
+    texts.forEach((text, i) => {
+        const line = steps[i] ? steps[i].querySelector('.draw-line') : null;
+
+        // 1. Aparece el punto (grupo SVG)
+        tl.to(steps[i], { opacity: 1, duration: 0.5 }, i === 0 ? 0 : "+=0.5")
+          
+        // 2. Se dibuja la línea
+          .to(line, { strokeDashoffset: 0, duration: 0.8 }, "<")
+          
+        // 3. Aparece el texto
+          .to(text, { opacity: 1, y: 0, duration: 0.5 }, "<+=0.3")
+          
+        // 4. Mantenemos visible un rato
+          .to({}, { duration: 1 }) 
+          
+        // 5. Desaparece todo para el siguiente paso
+          .to([steps[i], text], { opacity: 0, duration: 0.5 });
+    });
+}
 
         // INICIALIZACIÓN
         let initialized = false;
