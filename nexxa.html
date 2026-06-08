@@ -1163,68 +1163,51 @@
             }, 300); 
         }
 
-                // =====================================================================
-        // GSAP: VIDEO NARRATIVO Y ANOTACIONES (REEMPLAZA DESDE AQUÍ)
-        // =====================================================================
-        
+        // --- MOTOR INTERACTIVO DEL VIDEO NARRATIVO ---
+        const narrativeVideo = document.getElementById('nexxa-narrative-video');
+    
         function setupVideoScrubbing() {
-            const video = document.getElementById('nexxa-narrative-video');
-            if (!video) return;
-        
-            video.pause();
-            video.currentTime = 0;
-        
-            ScrollTrigger.create({
-                trigger: "#narrative-wrapper",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 0.5,
-                onUpdate: self => {
-                    if (video.duration) {
-                        video.currentTime = self.progress * video.duration;
+            if (!narrativeVideo) return;
+            narrativeVideo.pause();
+            narrativeVideo.currentTime = 0;
+    
+            gsap.fromTo(narrativeVideo, 
+                { currentTime: 0 },
+                {
+                    currentTime: narrativeVideo.duration || 5, 
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "#narrative-wrapper",
+                        start: "top top", 
+                        end: "bottom bottom", 
+                        scrub: 0.1
                     }
                 }
-            });
+            );
         }
-        
+    
+        // --- ANOTACIONES ---
         function setupAnnotations() {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: "#proceso",
                     start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1
-                    // Se eliminó pin: true para evitar conflictos con el fondo
+                    end: "bottom bottom", 
+                    scrub: 1,
+                    pin: true // Esto mantiene el texto visible mientras el video corre
                 }
             });
-        
+    
             const texts = gsap.utils.toArray('.anno-text');
             
             texts.forEach((text, i) => {
-                const line = text.querySelector('.draw-line');
                 tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
-                  .fromTo(line, { strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, "<")
                   .to(text, { opacity: 1, duration: 2 }, "+=1")
                   .to(text, { opacity: 0, duration: 1 }, "+=0.5");
             });
         }
-        
-        function setupWheelAnimation() {
-            gsap.fromTo("#wheel-hub", 
-                { scale: 0.8, opacity: 0 }, 
-                { 
-                    scale: 1, opacity: 1, 
-                    duration: 1.5, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: "#soluciones",
-                        start: "top 75%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        }
-        
+    
+        // --- INICIALIZACIÓN ---
         let initialized = false;
         function initGSAP() {
             if (initialized) return;
@@ -1232,21 +1215,16 @@
             
             setupVideoScrubbing();
             setupAnnotations();
-            setupWheelAnimation();
-            
-            initWheel();
-            wheelHub.style.transform = `translate(-50%, -50%) rotate(0deg)`;
-            updateContent(0, true);
+            setupWheelAnimation(); // Asegúrate de conservar esta función que ya tenías
         }
-        
-        const video = document.getElementById('nexxa-narrative-video');
-        if (video && video.readyState >= 1) {
+    
+        if (narrativeVideo && narrativeVideo.readyState >= 2) {
             initGSAP();
-        } else if (video) {
-            video.addEventListener('loadedmetadata', initGSAP, { once: true });
-            video.load(); 
+        } else if (narrativeVideo) {
+            narrativeVideo.addEventListener('loadeddata', initGSAP);
+            narrativeVideo.load();
         } else {
-            initGSAP(); 
+            initGSAP();
         }
     </script>
 </body>
