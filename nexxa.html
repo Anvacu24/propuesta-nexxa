@@ -101,46 +101,7 @@
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
 	
-	    /* --- NUEVAS CLASES PARA EL VIDEO INTERACTIVO (GSAP + SUTILES) --- */
-        .glass-card-subtle {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 1.5rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-        }
-        .glass-card-subtle:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2);
-        }
-
-        /* Clases base invisibles para que GSAP haga la magia */
-        .gsap-fade-up { opacity: 0; transform: translateY(40px); }
-        .gsap-fade-left { opacity: 0; transform: translateX(-40px); }
-        .gsap-fade-right { opacity: 0; transform: translateX(40px); }
-
-
-        /* Form Inputs Premium */
-        .glass-input {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            transition: all 0.3s ease;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            outline: none;
-        }
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(139, 92, 246, 0.5);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
-        }
-        .glass-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+	
 
     </style>
 </head>
@@ -236,14 +197,12 @@
         </div>
     </main>
 
-     <div id="narrative-wrapper" class="relative w-full">
-        
+    <div id="narrative-wrapper" class="relative w-full">
         <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
             <div class="sticky top-0 w-full h-screen overflow-hidden">
                 <video id="nexxa-narrative-video" muted playsinline preload="auto" class="w-full h-full object-cover">
                     <source src="videosolucion.mp4" type="video/mp4">
                 </video>
-                
                 <div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#070314] to-transparent z-10"></div>
                 <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#070314] to-transparent z-10"></div>
                 <div class="absolute inset-0 bg-[#070314]/30 z-10"></div>
@@ -251,62 +210,64 @@
         </div>
 
         <div class="relative z-10 w-full">
-
             <section id="diagnostico" class="min-h-[70vh] flex flex-col justify-center py-20 px-6 lg:px-8 bg-transparent">
-    <div class="max-w-4xl mx-auto w-full">
-        <!-- Contenedor con efecto glass para legibilidad sobre el video -->
-        <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
-            <div class="diag-title">
-                <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
-                    data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
-                    data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
-                    El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
-                </h2>
-                <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
-                   data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
-                   data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
-                   El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="max-w-4xl mx-auto w-full">
+                    <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
+                        <div class="diag-title">
+                            <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
+                                data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
+                                data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
+                                El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
+                            </h2>
+                            <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
+                               data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
+                               data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
+                               El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
-<section id="proceso" class="relative h-[400vh] bg-transparent">
-    <!-- Contenedor que "pincha" el video mientras scrolles -->
+            <section id="proceso" class="relative h-[400vh] bg-transparent">
     <div class="sticky top-0 w-full h-screen overflow-hidden">
-        
-        <!-- Contenedor de Textos (Capa superior sobre el video) -->
-        <div id="text-container" class="relative w-full h-full">
+        <div id="text-container" class="relative w-full h-full flex items-center justify-center">
             
-            <!-- Texto 1 -->
-            <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
+            <div class="process-step absolute top-[20%] left-[10%] opacity-0 w-80">
+                <svg class="absolute -top-16 left-0 w-20 h-20"><path class="draw-line" d="M0,80 Q40,0 80,0" /></svg>
+                <div class="anno-text">
+                    <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
+                    <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
+                </div>
             </div>
 
-            <!-- Texto 2 -->
-            <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
+            <div class="process-step absolute top-[40%] right-[10%] opacity-0 w-80">
+                <svg class="absolute -top-16 left-0 w-20 h-20"><path class="draw-line" d="M0,80 Q40,0 80,0" /></svg>
+                <div class="anno-text">
+                    <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
+                    <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
+                </div>
             </div>
 
-            <!-- Texto 3 -->
-            <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
+            <div class="process-step absolute bottom-[30%] left-[15%] opacity-0 w-80">
+                <svg class="absolute -top-16 left-0 w-20 h-20"><path class="draw-line" d="M0,80 Q40,0 80,0" /></svg>
+                <div class="anno-text">
+                    <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
+                    <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
+                </div>
             </div>
 
-            <!-- Texto 4 -->
-            <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80">
-                <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
-                <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
+            <div class="process-step absolute bottom-[15%] right-[15%] opacity-0 w-80">
+                <svg class="absolute -top-16 left-0 w-20 h-20"><path class="draw-line" d="M0,80 Q40,0 80,0" /></svg>
+                <div class="anno-text">
+                    <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
+                    <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
+                </div>
             </div>
 
         </div>
     </div>
-</section>
-        </div>
+</section>        </div>
     </div>
 
     <!-- ==========================================
