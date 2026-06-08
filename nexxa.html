@@ -282,6 +282,12 @@
             opacity: 0.5;
             cursor: pointer;
         }
+        #active-service-container {
+            /* Mantenemos tus propiedades actuales */
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: 50% var(--wheel-radius); /* <--- ESTO ES LA CLAVE */
+            will-change: transform;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
@@ -457,7 +463,7 @@
         <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
             <!-- Hexágono Base con parte superior perfectamente plana y tamaño ampliado -->
-            <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[40%] lg:-translate-x-[35%] w-[400px] h-[400px] lg:w-[1200px] lg:h-[1200px] z-0 flex items-center justify-center">
+            <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-[40%] lg:-translate-x-[35%] w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] z-0 flex items-center justify-center">
                 <div id="shape-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
                     <!-- Geometría perfecta para mantener forma girando de a 60 grados -->
                     <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
@@ -914,79 +920,62 @@
         }
 
         function updateContent(targetIndex, skipRotation = false) {
-            if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
+    if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
 
-            let diff = targetIndex - currentIndex;
-            if (diff > totalItems / 2) diff -= totalItems;
-            else if (diff < -totalItems / 2) diff += totalItems;
+    let diff = targetIndex - currentIndex;
+    if (diff > totalItems / 2) diff -= totalItems;
+    else if (diff < -totalItems / 2) diff += totalItems;
 
-            if(!skipRotation) {
-                currentHubRotation -= diff * angleStep; 
-                currentImageRotation += 360; // Gira 360 grados exactos como ruleta
-                currentIndex = targetIndex;
-            }
+    if(!skipRotation) {
+        currentHubRotation -= diff * angleStep; 
+        currentIndex = targetIndex;
+    }
 
-            const data = servicesData[currentIndex];
+    // 1. Rota el hexágono
+    if (hexRotator) {
+        hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
+    }
 
-            // 1. Rota el hexágono
-            if (hexRotator) {
-                hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
-            }
+    // 2. Rota el contenedor de la imagen con el mismo ángulo que el hexágono
+    // Esto crea el efecto de ruleta orbital
+    if (activeImageContainer) {
+        activeImageContainer.style.transform = `rotate(${-currentHubRotation}deg)`;
+    }
+    
+    rootVars.style.setProperty('--current-blob-color', servicesData[currentIndex].color);
 
-            // 2. Rota el contenedor de la imagen como ruleta
-            if (activeImageContainer && !skipRotation) {
-                activeImageContainer.style.transform = `rotate(${currentImageRotation}deg)`;
-            }
-            
-            rootVars.style.setProperty('--current-blob-color', data.color);
+    // ... el resto de tu lógica de fade-in/out se mantiene igual ...
+    animatableElements.forEach(el => {
+        el.classList.remove('fade-in');
+        el.classList.add('fade-out');
+    });
 
-            animatableElements.forEach(el => {
-                el.classList.remove('fade-in');
-                el.classList.add('fade-out');
-            });
+    setTimeout(() => {
+        const data = servicesData[currentIndex];
+        serviceTitleElem.innerHTML = data[`title_${currentLang}`];
+        serviceDescElem.innerHTML = data[`desc_${currentLang}`];
+        solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
+        if (activeImage) activeImage.src = data.imageSrc;
+        
+        // ... (mantén tu lógica de innerHTML de listas aquí) ...
 
-            setTimeout(() => {
-                serviceTitleElem.innerHTML = data[`title_${currentLang}`];
-                serviceDescElem.innerHTML = data[`desc_${currentLang}`];
-                solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
-                
-                // Actualizamos imagen principal
-                if (activeImage) activeImage.src = data.imageSrc;
-                
-                // Actualizamos el texto gigante y lo forzamos a dos líneas si tiene espacios
-                if (giantBgText) {
-                    let shortTxt = data[`short_${currentLang}`];
-                    if(shortTxt.includes(' ')) {
-                        shortTxt = shortTxt.replace(' ', '<br>');
-                    }
-                    giantBgText.innerHTML = shortTxt;
-                }
-                
-                serviceSolutionsListElem.innerHTML = '';
-                data[`solutions_${currentLang}`].forEach(solution => {
-                    const li = document.createElement('li');
-                    li.className = 'solution-list-item';
-                    li.textContent = solution;
-                    serviceSolutionsListElem.appendChild(li);
-                });
+        animatableElements.forEach(el => {
+            el.classList.remove('fade-out');
+            setTimeout(() => el.classList.add('fade-in'), 50);
+        });
+    }, 350);
 
-                animatableElements.forEach(el => {
-                    el.classList.remove('fade-out');
-                    setTimeout(() => el.classList.add('fade-in'), 50);
-                });
-            }, 350);
-
-            menuButtons.forEach((btn, i) => {
-                const btnId = parseInt(btn.getAttribute('data-id'));
-                if (btnId === currentIndex) {
-                    btn.classList.add('active');
-                    const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
-                    menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+    menuButtons.forEach((btn, i) => {
+        const btnId = parseInt(btn.getAttribute('data-id'));
+        if (btnId === currentIndex) {
+            btn.classList.add('active');
+            const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
+            menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        } else {
+            btn.classList.remove('active');
         }
+    });
+}
 
         menuButtons.forEach(button => {
             button.addEventListener('click', () => {
