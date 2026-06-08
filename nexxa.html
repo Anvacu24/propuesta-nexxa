@@ -370,6 +370,13 @@
 		    opacity: 0.5; /* Hace la flechita del dropdown un poco más visible */
 		    cursor: pointer;
 		}
+		@keyframes spin {
+		    from { transform: rotate(0deg); }
+		    to { transform: rotate(360deg); }
+		}
+		.animate-spin-slow {
+		    animation: spin 20s linear infinite;
+		}
     </style>
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
@@ -541,26 +548,16 @@
     <section id="soluciones" class="relative min-h-screen flex flex-col lg:flex-row items-center justify-center pt-20 pb-20 bg-[#070314]">
         <div class="absolute top-0 left-0 w-full h-[250px] bg-gradient-to-b from-[#0a071d] to-[#070314] pointer-events-none z-0"></div>
 
-        <div class="w-full lg:w-[50%] h-[50vh] lg:h-full relative overflow-visible z-10 flex-shrink-0">
-            <div class="wheel-hub max-lg:-translate-y-1/4" id="wheel-hub">
-                <svg class="blob-shape" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="w-full lg:w-[50%] h-full flex flex-col justify-center px-6 lg:pl-20 lg:pr-24 z-20 py-10 lg:py-0">
-            <div class="flex flex-col max-w-2xl relative z-30">
-                <div class="mb-4">
-                    <span class="text-sm uppercase tracking-widest font-bold text-amber-500 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
-                </div>
-                <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
-                <div class="space-y-6">
-                    <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
-                    <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
-                    <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0"></ul>
-                </div>
-            </div>
+       <div class="w-full lg:w-[40%] h-[50vh] lg:h-full relative z-10 flex items-center justify-center">
+	    <div id="wheel-hub" class="w-full h-full flex items-center justify-center animate-spin-slow">
+	        <svg class="blob-shape" style="width: 100%; max-width: 500px; height: auto;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+	            <polygon points="100,180 176,125 147,35 53,35 24,125" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="20" stroke-linejoin="round" />
+	        </svg>
+	    </div>
+	</div>
+	
+	<div class="w-full lg:w-[60%] h-full flex flex-col justify-center px-6 lg:pl-12 z-20 py-10 lg:py-0">
+	    </div>
             
             <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
                 <div class="flex gap-4 pb-4 w-max" id="service-menu">
@@ -962,8 +959,9 @@
         let currentHubRotation = 0;
 
         function initWheel() {
-            const radiusStr = getComputedStyle(document.documentElement).getPropertyValue('--wheel-radius').trim();
-            const radius = parseInt(radiusStr, 10);
+		    // Ya no renderizamos items orbitales, solo dejamos el polígono que ya está en el HTML.
+		    // wheelHub.appendChild(item); <--- ESTO YA NO ES NECESARIO
+		}
 
             servicesData.forEach((data, i) => {
                 const item = document.createElement('div');
