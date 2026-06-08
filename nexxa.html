@@ -297,10 +297,11 @@
             </div>
 
             <!-- Texto colosal adaptativo que vive de forma orgánica y no se desborda -->
-            <div class="absolute top-20 left-6 lg:left-16 z-0 w-[80vw] flex items-center justify-start overflow-hidden">
-                <h2 id="giant-bg-text" class="text-white/10 font-clash font-bold text-4xl md:text-5xl lg:text-6xl leading-[0.9] tracking-tight break-words anim-text">
+            <div class="absolute top-0 left-0 z-0 w-full h-full flex items-center justify-center overflow-hidden pointer-events-none">
+                <h2 id="giant-bg-text" class="text-white/20 font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-center">
                     Estrategia
                 </h2>
+            </div>
             </div>
         </div>
 
@@ -629,8 +630,8 @@
         const servicesData = [
             {
                 id: 0,
-                short_es: "Estrategia<br><span class='text-3xl lg:text-5xl'>y planeación</span>",
-                short_en: "Strategy<br><span class='text-3xl lg:text-5xl'>& planning</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Estrategia</span><br><span class='text-5xl lg:text-7xl'>y planeación</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Strategy</span><br><span class='text-5xl lg:text-7xl'>& planning</span>",
                 title_es: "Estrategia de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Negocios</span>",
                 title_en: "Business <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Strategy</span>",
                 desc_es: "Diseñamos la hoja de ruta que tu empresa necesita para crecer de forma sostenida. Combinamos visión e innovación para crear estrategias accionables que preparan a tu organización para los desafíos del mañana.",
@@ -643,8 +644,8 @@
             },
             {
                 id: 1,
-                short_es: "Optimización<br><span class='text-3xl lg:text-5xl'>y gestión</span>",
-                short_en: "Optimization<br><span class='text-3xl lg:text-5xl'>& management</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Optimización</span><br><span class='text-5xl lg:text-7xl'>y gestión</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Optimization</span><br><span class='text-5xl lg:text-7xl'>& management</span>",
                 title_es: "Gestión de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Procesos</span>",
                 title_en: "Process <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Management</span>",
                 desc_es: "Transformamos la complejidad en agilidad. Optimizamos tus operaciones eliminando cuellos de botella para que tu equipo trabaje de forma más inteligente.",
@@ -657,8 +658,8 @@
             },
             {
                 id: 2,
-                short_es: "Eficiencia y<br><span class='text-3xl lg:text-5xl'>transformación</span>",
-                short_en: "Efficiency and<br><span class='text-3xl lg:text-5xl'>transformation</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Eficiencia y</span><br><span class='text-5xl lg:text-7xl'>transformación</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Efficiency and</span><br><span class='text-5xl lg:text-7xl'>transformation</span>",
                 title_es: "Eficiencia y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformación</span>",
                 title_en: "Efficiency and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformation</span>",
                 desc_es: "Aseguramos que el cambio suceda y perdure. Guiamos a tu organización hacia una cultura ágil y orientada a resultados.",
@@ -671,8 +672,8 @@
             },
             {
                 id: 3,
-                short_es: "Diseño<br><span class='text-3xl lg:text-5xl'>organizacional</span>",
-                short_en: "Org.<br><span class='text-3xl lg:text-5xl'>Design</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Diseño</span><br><span class='text-5xl lg:text-7xl'>organizacional</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Org.</span><br><span class='text-5xl lg:text-7xl'>Design</span>",
                 title_es: "Diseño <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Organizacional</span>",
                 title_en: "Organizational <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Design</span>",
                 desc_es: "Construimos la arquitectura ideal para tu talento. Alineamos tu estructura organizacional con tu estrategia de crecimiento.",
@@ -685,8 +686,8 @@
             },
             {
                 id: 4,
-                short_es: "Compensación y<br><span class='text-3xl lg:text-5xl'>beneficios</span>",
-                short_en: "Compensation<br><span class='text-3xl lg:text-5xl'>& benefits</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Compensación y</span><br><span class='text-5xl lg:text-7xl'>beneficios</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Compensation</span><br><span class='text-5xl lg:text-7xl'>& benefits</span>",
                 title_es: "Compensación y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Valoración</span>",
                 title_en: "Compensation and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Evaluation</span>",
                 desc_es: "Atrae y retén a los mejores. Diseñamos modelos de compensación y beneficios estratégicos, justos y altamente competitivos.",
@@ -699,8 +700,8 @@
             },
             {
                 id: 5,
-                short_es: "Formación<br><span class='text-3xl lg:text-5xl'>LEGO®</span>",
-                short_en: "Training<br><span class='text-3xl lg:text-5xl'>LEGO®</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Formación</span><br><span class='text-5xl lg:text-7xl'>LEGO®</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Training</span><br><span class='text-5xl lg:text-7xl'>LEGO®</span>",
                 title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
                 desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®.",
@@ -713,8 +714,8 @@
             },
             {
                 id: 6,
-                short_es: "Asesoría<br><span class='text-3xl lg:text-5xl'>premium</span>",
-                short_en: "Premium<br><span class='text-3xl lg:text-5xl'>consulting</span>",
+                short_es: "<span class='text-xl lg:text-3xl'>Asesoría</span><br><span class='text-5xl lg:text-7xl'>premium</span>",
+                short_en: "<span class='text-xl lg:text-3xl'>Premium</span><br><span class='text-5xl lg:text-7xl'>consulting</span>",
                 title_es: "Asesorías de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Alto Nivel</span>",
                 title_en: "High Level <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Consulting</span>",
                 desc_es: "Acceso directo a consultoría de alto nivel. Soluciones ejecutivas estandarizadas y ágiles.",
