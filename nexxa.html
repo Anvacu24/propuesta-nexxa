@@ -1164,68 +1164,60 @@
         }
 
         // --- MOTOR INTERACTIVO DEL VIDEO NARRATIVO ---
-        const narrativeVideo = document.getElementById('nexxa-narrative-video');
-    
-        function setupVideoScrubbing() {
-            if (!narrativeVideo) return;
-            narrativeVideo.pause();
-            narrativeVideo.currentTime = 0;
-    
-            gsap.fromTo(narrativeVideo, 
-                { currentTime: 0 },
-                {
-                    currentTime: narrativeVideo.duration || 5, 
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: "#narrative-wrapper",
-                        start: "top top", 
-                        end: "bottom bottom", 
-                        scrub: 0.1
-                    }
-                }
-            );
-        }
-    
-        // --- ANOTACIONES ---
-        function setupAnnotations() {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#proceso",
+            const narrativeVideo = document.getElementById('nexxa-narrative-video');
+        
+            function setupVideoScrubbing() {
+                if (!narrativeVideo) return;
+                
+                // Usamos ScrollTrigger para controlar el tiempo del video
+                ScrollTrigger.create({
+                    trigger: "#narrative-wrapper",
                     start: "top top",
-                    end: "bottom bottom", 
-                    scrub: 1,
-                    pin: true // Esto mantiene el texto visible mientras el video corre
-                }
-            });
-    
-            const texts = gsap.utils.toArray('.anno-text');
-            
-            texts.forEach((text, i) => {
-                tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
-                  .to(text, { opacity: 1, duration: 2 }, "+=1")
-                  .to(text, { opacity: 0, duration: 1 }, "+=0.5");
-            });
-        }
-    
-        // --- INICIALIZACIÓN ---
-        let initialized = false;
-        function initGSAP() {
-            if (initialized) return;
-            initialized = true;
-            
-            setupVideoScrubbing();
-            setupAnnotations();
-            setupWheelAnimation(); // Asegúrate de conservar esta función que ya tenías
-        }
-    
-        if (narrativeVideo && narrativeVideo.readyState >= 2) {
-            initGSAP();
-        } else if (narrativeVideo) {
-            narrativeVideo.addEventListener('loadeddata', initGSAP);
-            narrativeVideo.load();
-        } else {
-            initGSAP();
-        }
+                    end: "bottom bottom",
+                    scrub: 0.1,
+                    onUpdate: self => {
+                        if (narrativeVideo.duration) {
+                            narrativeVideo.currentTime = self.progress * narrativeVideo.duration;
+                        }
+                    }
+                });
+            }
+        
+            // --- ANOTACIONES ---
+            function setupAnnotations() {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#proceso",
+                        start: "top top",
+                        end: "bottom bottom", 
+                        scrub: 1,
+                        pin: true 
+                    }
+                });
+        
+                const texts = gsap.utils.toArray('.anno-text');
+                
+                texts.forEach((text, i) => {
+                    tl.to(text, { opacity: 1, duration: 1 }, i === 0 ? 0 : "+=0.5")
+                      .to(text, { opacity: 1, duration: 2 }, "+=1")
+                      .to(text, { opacity: 0, duration: 1 }, "+=0.5");
+                });
+            }
+        
+            // --- INICIALIZACIÓN SEGURA ---
+            function initGSAP() {
+                setupVideoScrubbing();
+                setupAnnotations();
+                setupWheelAnimation();
+            }
+        
+            // Esperamos a que los datos del video estén listos para inicializar
+            if (narrativeVideo.readyState >= 1) {
+                initGSAP();
+            } else {
+                narrativeVideo.addEventListener('loadedmetadata', initGSAP, { once: true });
+                narrativeVideo.load();
+            }
     </script>
 </body>
 </html>
