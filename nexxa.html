@@ -27,7 +27,8 @@
             --current-blob-color: var(--color-0);
         }
 
-        html, body { overflow-x: hidden; scroll-padding-top: 80px; }
+        html { scroll-padding-top: 80px; }
+		body { overflow-x: clip; }
         body { font-family: 'Inter', sans-serif; background-color: var(--color-bg-dark); color: #F8FAFC; }
 
         h1, h2, h3, .font-clash { font-family: 'Clash Display', sans-serif; }
@@ -101,33 +102,8 @@
         .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
         .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
 	
-/* --- NUEVA ESTRUCTURA SEGURA --- */
-#video-section-wrapper {
-    position: relative;
-    width: 100%;
-}
+	
 
-.video-sticky-bg {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1; 
-    overflow: hidden;
-}
-
-#diagnostico, #proceso {
-    position: relative;
-    z-index: 10; /* Los textos SIEMPRE arriba */
-    background: transparent !important;
-}
-
-#soluciones {
-    position: relative;
-    z-index: 20; /* El hexágono debe estar por encima de todo */
-    background-color: #070314 !important;
-}
     </style>
 </head>
 <body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
@@ -222,10 +198,10 @@
         </div>
     </main>
 
- <div id="narrative-wrapper" class="relative w-full">
+   <div id="narrative-wrapper" class="relative w-full">
         
         <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
-            <div id="video-sticky-container" class="w-full h-screen overflow-hidden relative">
+            <div class="sticky top-0 w-full h-screen overflow-hidden">
                 <video id="nexxa-narrative-video" muted playsinline preload="auto" class="w-full h-full object-cover">
                     <source src="videosolucion.mp4" type="video/mp4">
                 </video>
@@ -302,21 +278,21 @@
         
         <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
         <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-    <div class="absolute button-0 -left-64 w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] z-0 flex items-center justify-center pointer-events-none rotate-90">
-        <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
-                    <!-- SVG ajustado matemáticamente para tener la punta superior totalmente horizontal (plana) y los bordes redondeados. -->
-                    <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
-                        <polygon points="55,22 145,22 190,100 145,178 55,178 10,100" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="10" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
-                    </svg>
-                </div>
-            </div>
+   <div class="absolute -top-[15%] -left-64 w-[600px] h-[600px] lg:w-[1000px] lg:h-[1000px] z-0 flex items-center justify-center pointer-events-none">
+	    <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
+	        <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
+	            <polygon points="55,22 145,22 190,100 145,178 55,178 10,100" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="10" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
+	        </svg>
+	    </div>
+	</div>
 
             <!-- Texto colosal adaptativo que vive de forma orgánica y no se desborda -->
-            <div class="absolute top-0 left-0 z-0 w-[400px] h-full flex items-center justify-start pl-20 overflow-hidden pointer-events-none">
-                <h2 id="giant-bg-text" class="text-white font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-left">
-                    Estrategia
-                </h2>
-            </div>
+            <!-- Busca esta línea y realiza el cambio -->
+			<div class="absolute top-0 left-0 z-0 w-[600px] h-full flex items-center justify-start pl-20 overflow-hidden pointer-events-none">
+			    <h2 id="giant-bg-text" class="text-white font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-left">
+			        Estrategia
+			    </h2>
+			</div>
             </div>
         </div>
 
@@ -332,26 +308,7 @@
             </div>
 
             <!-- Lado Derecho: Textos y Menú -->
-            <div class="w-full lg:w-[55%] flex flex-col justify-center pl-0 lg:pl-12 pr-4 md:pr-6">
-    
-    <div class="max-w-xl"> 
-        
-        <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max shadow-[0_0_15px_rgba(245,158,11,0.15)]">
-            <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade">SERVICIOS QUE TRANSFORMAN</span>
-        </div>
-        
-        <h2 id="service-title" class="font-clash text-4xl lg:text-[3rem] font-bold text-white mb-6 leading-[1.1] anim-text drop-shadow-lg">Cargando...</h2>
-        
-        <div class="space-y-6">
-            <p id="service-desc" class="text-slate-300 text-base md:text-lg font-light leading-relaxed anim-text">Cargando...</p>
-            <div class="font-semibold text-lg text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
-            <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-base font-light list-none pl-0"></ul>
-        </div>
-    </div> <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
-        <div class="flex gap-4 pb-4 w-max" id="service-menu">
-            </div>
-    </div>
-</div>
+            <div class="w-full lg:w-[55%] flex flex-col justify-center pl-0 lg:pl-12">
                 
                 <!-- Etiqueta Pastilla Ámbar -->
                 <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max shadow-[0_0_15px_rgba(245,158,11,0.15)]">
@@ -404,11 +361,10 @@
                                 </div>
                                 <div class="absolute -bottom-5 -left-5 md:-bottom-7 md:-left-7 w-12 h-12 md:w-16 md:h-16 z-30 pointer-events-none animate-twinkle">
                                     <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M60 10 C60 45, 45 60, 10 60 C45 60, 60 75, 60 110 C60 75, 75 60, 110 60 C75 60, 60 45, 60 10 Z" fill="#3b82f6"/>
-                                        <path d="M30 75 C30 90, 20 95, 5 95 C20 95, 30 100, 30 115 C30 100, 40 95, 55 95 C40 95, 30 90, 30 75 Z" fill="#60a5fa"/>
-                                        <path d="M85 75 C85 95, 75 102, 52 102 C75 102, 85 109, 85 129 C85 109, 95 102, 118 102 C95 102, 85 95, 85 75 Z" fill="#3b82f6"/>
-                                    </svg>
-                                </div>
+    <path d="M60 10 C60 45, 45 60, 10 60 C45 60, 60 75, 60 110 C60 75, 75 60, 110 60 C75 60, 60 45, 60 10 Z" fill="#F59E0B"/>
+    <path d="M30 75 C30 90, 20 95, 5 95 C20 95, 30 100, 30 115 C30 100, 40 95, 55 95 C40 95, 30 90, 30 75 Z" fill="#FBBF24"/>
+    <path d="M85 75 C85 95, 75 102, 52 102 C75 102, 85 109, 85 129 C85 109, 95 102, 118 102 C95 102, 85 95, 85 75 Z" fill="#F59E0B"/>
+</svg>                                </div>
                             </div>
                             
                             <div class="space-y-3 md:space-y-4 w-full h-full flex flex-col">
@@ -438,10 +394,10 @@
                 <div class="flex flex-col justify-between h-full pt-1 pb-5">
                     <div class="flex flex-col gap-5">
                         <h2 class="font-clash text-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] i18n i18n-fade"
-                            data-es="No somos teóricos,<br>somos tu <span class='text-violet-400'>socio estratégico.</span>"
-                            data-en="We are not theorists,<br>we are your <span class='text-violet-400'>strategic partner.</span>">
-                            No somos teóricos,<br>somos tu <span class='text-violet-400'>socio estratégico.</span>
-                        </h2>
+    data-es="No somos teóricos,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>socio estratégico.</span>"
+    data-en="We are not theorists,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>strategic partner.</span>">
+    No somos teóricos,<br>somos tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow">socio estratégico.</span>
+</h2>
                         <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed i18n i18n-fade"
                            data-es="El mercado está lleno de consultoras que entregan reportes y se van. Nosotros nos involucramos directamente en la ejecución para asegurarnos de que el cambio se implemente y perdure."
                            data-en="The market is full of consultants who deliver reports and leave. We actively engage in the execution to ensure that change is implemented and lasts.">
@@ -452,7 +408,7 @@
                     <div class="mt-8 pt-6 lg:pt-8 border-t border-white/10">
                         <h4 class="text-white text-xl md:text-2xl font-bold font-clash tracking-wide">Johana</h4>
                         <p class="text-violet-400 text-[10px] md:text-xs font-bold mb-4 uppercase tracking-widest i18n i18n-fade" data-es="Fundadora & Consultora Principal" data-en="Founder & Lead Consultant">Fundadora & Consultora Principal</p>
-                        <p class="text-slate-300 text-sm md:text-base leading-relaxed italic border-l-2 border-violet-500 pl-4 py-1 i18n i18n-fade" 
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed italic border-l-2 border-amber-500 pl-4 py-1 i18n i18n-fade" 
                            data-es="&quot;Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil.&quot;" 
                            data-en="&quot;My purpose is to guide organizational transformation with a deeply human, strategic, and agile approach.&quot;">
                             "Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil."
@@ -655,113 +611,121 @@
         <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
     </a>
 
+<!-- TU SCRIPT COMPLETO INTEGRADO Y CORREGIDO -->
     <script>
-        lucide.createIcons();
-        gsap.registerPlugin(ScrollTrigger);
+        // Salvaguarda: Verificar si lucide y gsap están disponibles antes de ejecutarlos
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
 
         let currentLang = 'es';
 
+        // --- DATA ORIGINAL NEXXA (Soluciones/Hexágono) ---
         const servicesData = [
-    {
-        id: 0,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planeación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>ESTRATEGIA</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planning and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>STRATEGY</div>",
-        title_es: "Estrategia de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Negocios</span>",
-        title_en: "Business <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Strategy</span>",
-        desc_es: "Diseñamos la hoja de ruta que tu empresa necesita para crecer de forma sostenida. Combinamos visión e innovación para crear estrategias accionables que preparan a tu organización para los desafíos del mañana.",
-        desc_en: "We design the roadmap your company needs for sustained growth. We combine vision and innovation to create actionable strategies that prepare your organization for tomorrow's challenges.",
-        solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
-        solutions_es: ["Diagnóstico estratégico integral", "Definición de visión, propósito y objetivos", "Planeación estratégica corporativa", "Mapas estratégicos y Balanced Scorecard", "OKR corporativos", "Acompañamiento a la ejecución"],
-        solutions_en: ["Comprehensive strategic diagnosis", "Definition of vision, purpose, and objectives", "Corporate strategic planning", "Strategic maps and Balanced Scorecard", "Corporate OKRs", "Execution accompaniment"],
-        color: "var(--color-0)",
-        imageSrc: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 1,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFICIENCIA</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFFICIENCY</div>",
-        title_es: "Eficiencia y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformación</span>",
-        title_en: "Efficiency and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformation</span>",
-        desc_es: "Aseguramos que el cambio suceda y perdure. Guiamos a tu organización hacia una cultura ágil y orientada a resultados.",
-        desc_en: "We ensure change happens and lasts. We guide your organization toward an agile, results-oriented culture.",
-        solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
-        solutions_es: ["Diagnóstico de eficiencia organizacional", "Análisis de estructura y cargas laborales", "Redefinición de roles y responsabilidades"],
-        solutions_en: ["Organizational efficiency diagnosis", "Analysis of structure and workloads", "Redefinition of roles and responsibilities"],
-        color: "var(--color-2)",
-        imageSrc: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 2,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Organización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DISEÑO</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Org. and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DESIGN</div>",
-        title_es: "Diseño <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Organizacional</span>",
-        title_en: "Organizational <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Design</span>",
-        desc_es: "Construimos la arquitectura ideal para tu talento. Alineamos tu estructura organizacional con tu estrategia de crecimiento.",
-        desc_en: "We build the ideal architecture for your talent. We align your organizational structure with your growth strategy.",
-        solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
-        solutions_es: ["Diseño y rediseño organizacional", "Modelos de gobierno corporativo", "Definición de niveles jerárquicos y spans"],
-        solutions_en: ["Organizational design and redesign", "Corporate governance models", "Definition of hierarchical levels and spans"],
-        color: "var(--color-3)",
-        imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 3,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Formación</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Training</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
-        title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
-        title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
-        desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®.",
-        desc_en: "We unlock your team's hidden potential. Through the powerful LEGO® Serious Play® methodology.",
-        solutionsTitle_es: "Tipos de Talleres:", solutionsTitle_en: "Workshop Types:",
-        solutions_es: ["Alineación estratégica y visión compartida", "Liderazgo y autoliderazgo", "Cultura organizacional y valores"],
-        solutions_en: ["Strategic alignment and shared vision", "Leadership and self-leadership", "Organizational culture and values"],
-        color: "var(--color-5)",
-        imageSrc: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 4,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>GESTIÓN</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimization and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>MANAGEMENT</div>",
-        title_es: "Gestión de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Procesos</span>",
-        title_en: "Process <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Management</span>",
-        desc_es: "Transformamos la complejidad en agilidad. Optimizamos tus operaciones eliminando cuellos de botella para que tu equipo trabaje de forma más inteligente.",
-        desc_en: "We transform complexity into agility. We optimize your operations by eliminating bottlenecks so your team works smarter.",
-        solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
-        solutions_es: ["Levantamiento y documentación de procesos", "Rediseño y estandarización (AS IS / TO BE)", "Optimización de tiempos, costos y recursos"],
-        solutions_en: ["Process mapping and documentation", "Redesign and standardization (AS IS / TO BE)", "Optimization of time, costs, and resources"],
-        color: "var(--color-1)",
-        imageSrc: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 5,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFICIOS</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFITS</div>",
-        title_es: "Compensación y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Valoración</span>",
-        title_en: "Compensation and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Evaluation</span>",
-        desc_es: "Atrae y retén a los mejores. Diseñamos modelos de compensación y beneficios estratégicos, justos y altamente competitivos.",
-        desc_en: "Attract and retain the best. We design strategic, fair, and highly competitive compensation and benefits models.",
-        solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
-        solutions_es: ["Valoración y clasificación de cargos", "Estructuras salariales y equidad interna", "Modelos de compensación variable"],
-        solutions_en: ["Job evaluation and classification", "Salary structures and internal equity", "Variable compensation models"],
-        color: "var(--color-4)",
-        imageSrc: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop"
-    },
-    {
-        id: 6,
-        short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Asesoría</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
-        short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Consulting</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
-        title_es: "Asesorías de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Alto Nivel</span>",
-        title_en: "High Level <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Consulting</span>",
-        desc_es: "Acceso directo a consultoría de alto nivel. Soluciones ejecutivas estandarizadas y ágiles.",
-        desc_en: "Direct access to high-level consulting. Standardized and agile executive solutions.",
-        solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
-        solutions_es: ["Diagnósticos express", "Workshops estratégicos", "Programas de formación ejecutiva"],
-        solutions_en: ["Express diagnostics", "Strategic workshops", "Executive training programs"],
-        color: "var(--color-6)",
-        imageSrc: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop"
-    }
-];
+            {
+                id: 0,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planeación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>ESTRATEGIA</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planning and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>STRATEGY</div>",
+                title_es: "Estrategia de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Negocios</span>",
+                title_en: "Business <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Strategy</span>",
+                desc_es: "Diseñamos la hoja de ruta que tu empresa necesita para crecer de forma sostenida. Combinamos visión e innovación para crear estrategias accionables que preparan a tu organización para los desafíos del mañana.",
+                desc_en: "We design the roadmap your company needs for sustained growth. We combine vision and innovation to create actionable strategies that prepare your organization for tomorrow's challenges.",
+                solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
+                solutions_es: ["Diagnóstico estratégico integral", "Definición de visión, propósito y objetivos", "Planeación estratégica corporativa", "Mapas estratégicos y Balanced Scorecard", "OKR corporativos", "Acompañamiento a la ejecución"],
+                solutions_en: ["Comprehensive strategic diagnosis", "Definition of vision, purpose, and objectives", "Corporate strategic planning", "Strategic maps and Balanced Scorecard", "Corporate OKRs", "Execution accompaniment"],
+                color: "var(--color-0)",
+                imageSrc: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 1,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFICIENCIA</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFFICIENCY</div>",
+                title_es: "Eficiencia y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformación</span>",
+                title_en: "Efficiency and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformation</span>",
+                desc_es: "Aseguramos que el cambio suceda y perdure. Guiamos a tu organización hacia una cultura ágil y orientada a resultados.",
+                desc_en: "We ensure change happens and lasts. We guide your organization toward an agile, results-oriented culture.",
+                solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
+                solutions_es: ["Diagnóstico de eficiencia organizacional", "Análisis de estructura y cargas laborales", "Redefinición de roles y responsabilidades"],
+                solutions_en: ["Organizational efficiency diagnosis", "Analysis of structure and workloads", "Redefinition of roles and responsibilities"],
+                color: "var(--color-2)",
+                imageSrc: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 2,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Organización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DISEÑO</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Org. and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DESIGN</div>",
+                title_es: "Diseño <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Organizacional</span>",
+                title_en: "Organizational <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Design</span>",
+                desc_es: "Construimos la arquitectura ideal para tu talento. Alineamos tu estructura organizacional con tu estrategia de crecimiento.",
+                desc_en: "We build the ideal architecture for your talent. We align your organizational structure with your growth strategy.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Diseño y rediseño organizacional", "Modelos de gobierno corporativo", "Definición de niveles jerárquicos y spans"],
+                solutions_en: ["Organizational design and redesign", "Corporate governance models", "Definition of hierarchical levels and spans"],
+                color: "var(--color-3)",
+                imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 3,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Formación</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Training</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
+                title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
+                title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
+                desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®.",
+                desc_en: "We unlock your team's hidden potential. Through the powerful LEGO® Serious Play® methodology.",
+                solutionsTitle_es: "Tipos de Talleres:", solutionsTitle_en: "Workshop Types:",
+                solutions_es: ["Alineación estratégica y visión compartida", "Liderazgo y autoliderazgo", "Cultura organizacional y valores"],
+                solutions_en: ["Strategic alignment and shared vision", "Leadership and self-leadership", "Organizational culture and values"],
+                color: "var(--color-5)",
+                imageSrc: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 4,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>GESTIÓN</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimization and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>MANAGEMENT</div>",
+                title_es: "Gestión de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Procesos</span>",
+                title_en: "Process <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Management</span>",
+                desc_es: "Transformamos la complejidad en agilidad. Optimizamos tus operaciones eliminando cuellos de botella para que tu equipo trabaje de forma más inteligente.",
+                desc_en: "We transform complexity into agility. We optimize your operations by eliminating bottlenecks so your team works smarter.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Levantamiento y documentación de procesos", "Rediseño y estandarización (AS IS / TO BE)", "Optimización de tiempos, costos y recursos"],
+                solutions_en: ["Process mapping and documentation", "Redesign and standardization (AS IS / TO BE)", "Optimization of time, costs, and resources"],
+                color: "var(--color-1)",
+                imageSrc: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 5,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFICIOS</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFITS</div>",
+                title_es: "Compensación y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Valoración</span>",
+                title_en: "Compensation and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Evaluation</span>",
+                desc_es: "Atrae y retén a los mejores. Diseñamos modelos de compensación y beneficios estratégicos, justos y altamente competitivos.",
+                desc_en: "Attract and retain the best. We design strategic, fair, and highly competitive compensation and benefits models.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Valoración y clasificación de cargos", "Estructuras salariales y equidad interna", "Modelos de compensación variable"],
+                solutions_en: ["Job evaluation and classification", "Salary structures and internal equity", "Variable compensation models"],
+                color: "var(--color-4)",
+                imageSrc: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 6,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Asesoría</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Consulting</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
+                title_es: "Asesorías de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Alto Nivel</span>",
+                title_en: "High Level <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Consulting</span>",
+                desc_es: "Acceso directo a consultoría de alto nivel. Soluciones ejecutivas estandarizadas y ágiles.",
+                desc_en: "Direct access to high-level consulting. Standardized and agile executive solutions.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Diagnósticos express", "Workshops estratégicos", "Programas de formación ejecutiva"],
+                solutions_en: ["Express diagnostics", "Strategic workshops", "Executive training programs"],
+                color: "var(--color-6)",
+                imageSrc: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop"
+            }
+        ];
 
+        // --- LÓGICA HEXÁGONO Y MENÚS ---
         const rootVars = document.documentElement;
         const serviceTitleElem = document.getElementById('service-title');
         const serviceDescElem = document.getElementById('service-desc');
@@ -779,25 +743,23 @@
         const hexRotator = document.getElementById('hex-rotator');
         const giantBgText = document.getElementById('giant-bg-text');
         
-        // --- NUEVA LÓGICA DE RULETA DE IMÁGENES ---
         const imgWheelHub = document.getElementById('image-wheel-hub');
-        let imgRadius = 250; // Distancia desde el centro de giro
+        let imgRadius = 250; 
 
         function initWheel() {
             if(!imgWheelHub) return;
             imgWheelHub.innerHTML = '';
-            imgRadius = window.innerWidth > 1024 ? 300 : 200;
+            
+            let isMobile = window.innerWidth < 768;
+            imgRadius = isMobile ? 120 : (window.innerWidth > 1024 ? 300 : 200);
 
             servicesData.forEach((data, i) => {
                 const item = document.createElement('div');
-                // Inicialmente todas con opacidad 0
                 item.className = 'orbit-item absolute rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 ease-in-out origin-center';
                 
-                // Tamaño de la imagen
-                item.style.width = window.innerWidth > 1024 ? '420px' : '300px';
-                item.style.height = window.innerWidth > 1024 ? '315px' : '225px';
+                item.style.width = window.innerWidth > 1024 ? '420px' : (isMobile ? '240px' : '300px');
+                item.style.height = window.innerWidth > 1024 ? '315px' : (isMobile ? '180px' : '225px');
 
-                // Posicionamiento en el círculo
                 const thetaRad = (i * angleStep) * (Math.PI / 180);
                 const x = imgRadius * Math.cos(thetaRad);
                 const y = imgRadius * Math.sin(thetaRad);
@@ -805,8 +767,8 @@
                 item.style.left = `${x}px`;
                 item.style.top = `${y}px`;
                 
-                // Estado inicial
-                item.style.transform = `translate(-50%, -50%) rotate(0deg) scale(${i === 0 ? 1 : 0.6})`;
+                item.style.transform = `translate(-50%, -50%) rotate(0deg) scale(${i === 0 ? 1 : 0.5})`;
+                // SOLUCIÓN 1: Opacidad vuelve a ser 0 para los ítems inactivos (se ocultan las miniaturas)
                 item.style.opacity = i === 0 ? 1 : 0;
                 item.style.pointerEvents = i === 0 ? 'auto' : 'none';
 
@@ -834,21 +796,18 @@
 
             const data = servicesData[currentIndex];
 
-            // 1. Rota el hexágono
             if (hexRotator) {
                 hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
             }
 
-            // 2. Rota el hub principal de imágenes (La Ruleta)
             if (imgWheelHub) {
                 imgWheelHub.style.transform = `rotate(${currentHubRotation}deg)`;
                 
-                // 3. Contrarresta la rotación de cada imagen y ajusta opacidad/escala
                 const orbitItems = imgWheelHub.querySelectorAll('.orbit-item');
                 orbitItems.forEach((item, i) => {
                     const isTarget = (i === currentIndex);
-                    // Aplica rotación inversa para que la foto siempre quede derecha
-                    item.style.transform = `translate(-50%, -50%) rotate(${-currentHubRotation}deg) scale(${isTarget ? 1 : 0.6})`;
+                    item.style.transform = `translate(-50%, -50%) rotate(${-currentHubRotation}deg) scale(${isTarget ? 1 : 0.5})`;
+                    // SOLUCIÓN 1: Opacidad vuelve a ser 0 para los ítems inactivos
                     item.style.opacity = isTarget ? 1 : 0;
                     item.style.pointerEvents = isTarget ? 'auto' : 'none';
                     item.style.zIndex = isTarget ? 30 : 0;
@@ -863,19 +822,20 @@
             });
 
             setTimeout(() => {
-                serviceTitleElem.innerHTML = data[`title_${currentLang}`];
-                serviceDescElem.innerHTML = data[`desc_${currentLang}`];
-                solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
-                
+                if (serviceTitleElem) serviceTitleElem.innerHTML = data[`title_${currentLang}`];
+                if (serviceDescElem) serviceDescElem.innerHTML = data[`desc_${currentLang}`];
+                if (solutionsHeadingElem) solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
                 if (giantBgText) giantBgText.innerHTML = data[`short_${currentLang}`];
                 
-                serviceSolutionsListElem.innerHTML = '';
-                data[`solutions_${currentLang}`].forEach(solution => {
-                    const li = document.createElement('li');
-                    li.className = 'solution-list-item';
-                    li.textContent = solution;
-                    serviceSolutionsListElem.appendChild(li);
-                });
+                if (serviceSolutionsListElem) {
+                    serviceSolutionsListElem.innerHTML = '';
+                    data[`solutions_${currentLang}`].forEach(solution => {
+                        const li = document.createElement('li');
+                        li.className = 'solution-list-item';
+                        li.textContent = solution;
+                        serviceSolutionsListElem.appendChild(li);
+                    });
+                }
 
                 animatableElements.forEach(el => {
                     el.classList.remove('fade-out');
@@ -886,8 +846,10 @@
             menuButtons.forEach((btn, i) => {
                 if (i === currentIndex) {
                     btn.classList.add('active');
-                    const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
-                    menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    if (menuContainer) {
+                        const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
+                        menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    }
                 } else {
                     btn.classList.remove('active');
                 }
@@ -909,13 +871,25 @@
             }, 250);
         });
 
-        // =====================================================================
-        // UTILIDADES GENERALES
-        // =====================================================================
+        // Soporte táctil
+        let touchStartX = 0;
+        const solWrapper = document.getElementById('soluciones');
+        if(solWrapper) {
+            solWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+            solWrapper.addEventListener('touchend', e => {
+                let touchEndX = e.changedTouches[0].clientX;
+                if (touchStartX - touchEndX > 50) updateContent((currentIndex + 1) % totalItems);
+                else if (touchEndX - touchStartX > 50) updateContent((currentIndex - 1 + totalItems) % totalItems);
+            }, {passive: true});
+        }
+
+        // --- FUNCIONES GENERALES Y SCROLL ---
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
+            if (navbar) {
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
             
             const scroll = window.pageYOffset;
             const parallax = document.getElementById('parallax');
@@ -926,30 +900,32 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
+            if (menu) menu.classList.toggle('translate-x-full');
         }
 
         const sections = document.querySelectorAll('main, section');
         const navLinks = document.querySelectorAll('.nav-link');
         const observerOptions = { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinks.forEach(link => {
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('text-violet-400', 'font-semibold', 'scale-105');
-                            link.classList.remove('text-slate-300');
-                        } else {
-                            link.classList.remove('text-violet-400', 'font-semibold', 'scale-105');
-                            link.classList.add('text-slate-300');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
-        sections.forEach(section => observer.observe(section));
+        if (sections.length > 0 && navLinks.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-violet-400', 'font-semibold', 'scale-105');
+                                link.classList.remove('text-slate-300');
+                            } else {
+                                link.classList.remove('text-violet-400', 'font-semibold', 'scale-105');
+                                link.classList.add('text-slate-300');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => observer.observe(section));
+        }
 
         function switchLanguage(lang) {
             currentLang = lang; 
@@ -967,12 +943,12 @@
                 const btnEs = document.getElementById('lang-es'); const btnEn = document.getElementById('lang-en');
                 const btnEsMob = document.getElementById('lang-es-mob'); const btnEnMob = document.getElementById('lang-en-mob');
                 
-                if (lang === 'es') {
+                if (lang === 'es' && btnEs && btnEn) {
                     btnEs.className = "px-3 py-1 rounded-full text-xs font-semibold text-white bg-violet-500/80 transition-all";
                     btnEn.className = "px-3 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition-all";
                     if(btnEsMob) btnEsMob.className = "px-2 py-1 rounded-full text-[10px] font-bold text-white bg-violet-500/80";
                     if(btnEnMob) btnEnMob.className = "px-2 py-1 rounded-full text-[10px] font-medium text-slate-400";
-                } else {
+                } else if (btnEs && btnEn) {
                     btnEn.className = "px-3 py-1 rounded-full text-xs font-semibold text-white bg-violet-500/80 transition-all";
                     btnEs.className = "px-3 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition-all";
                     if(btnEnMob) btnEnMob.className = "px-2 py-1 rounded-full text-[10px] font-bold text-white bg-violet-500/80";
@@ -982,7 +958,12 @@
                 updateContent(currentIndex, true);
             }, 300); 
         }
-       function initVideoNarrative() {
+
+        // =====================================================================
+        // GSAP LÓGICA DE VIDEO (Totalmente reforzada contra errores matemáticos)
+        // =====================================================================
+        
+             function initVideoNarrative() {
             const video = document.getElementById('nexxa-narrative-video');
             // Buscamos ambos IDs (el del código original y el nuevo que enviaste) para no fallar
             const wrapper = document.getElementById('narrative-wrapper') || document.getElementById('video-section-wrapper');
@@ -1091,6 +1072,5 @@
             initGSAP();
         }
     </script>
-       
 </body>
 </html>
