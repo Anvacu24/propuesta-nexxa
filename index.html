@@ -1,554 +1,1156 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propuesta Estratégica Premium - Nexxa</title>
-    <!-- Librerías Externas -->
+    <title>Nexxa Consulting | Transformación Estratégica</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
-        /* =========================================
-         BLINDAJE DE SEGURIDAD (FALLBACKS)
-         Garantiza la estructura si Tailwind se bloquea
-         =========================================
-        */
-        .hidden { display: none !important; }
-        .fixed { position: fixed !important; }
-        .absolute { position: absolute !important; }
-        .relative { position: relative !important; }
-        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
-        .bottom-0 { bottom: 0 !important; }
-        .left-0 { left: 0 !important; }
-        .right-0 { right: 0 !important; }
-        .top-0 { top: 0 !important; }
-        .flex { display: flex !important; }
-        .flex-col { flex-direction: column !important; }
-        .items-center { align-items: center !important; }
-        .justify-center { justify-content: center !important; }
-        .justify-between { justify-content: space-between !important; }
-        .w-full { width: 100% !important; }
-        .h-full { height: 100% !important; }
-        .h-screen { height: 100vh !important; }
-        .w-screen { width: 100vw !important; }
-        .z-40 { z-index: 40 !important; }
-        .z-50 { z-index: 50 !important; }
-        .bg-black\/80 { background-color: rgba(0, 0, 0, 0.8) !important; }
+        :root {
+            --color-bg-dark: #070314;
+            --color-primary: #8B5CF6;
+            --color-accent: #F59E0B;
+            
+            --color-0: #6D28D9;
+            --color-1: #D97706;
+            --color-2: #1E3A8A;
+            --color-3: #9F1239;
+            --color-4: #115E59;
+            --color-5: #B45309;
+            --color-6: #4C1D95;
+            --current-blob-color: var(--color-0);
+
+            /* --- Variables Nueva Galería Asimétrica --- */
+            --radius-small: 15px;
+            --radius-large: 110px;
+            --color-gallery-violet-main: #5A4FCF;
+            --color-gallery-violet-light: #746BE0;
+        }
+
+        html { scroll-padding-top: 80px; }
+        body { overflow-x: clip; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--color-bg-dark); color: #F8FAFC; }
+
+        h1, h2, h3, .font-clash { font-family: 'Clash Display', sans-serif; }
+        .font-signature { font-family: 'Dancing Script', cursive; }
+
+        .glass-header { background: rgba(7, 3, 20, 0.4); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .glass-header.scrolled { background: rgba(7, 3, 20, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+
+        .parallax-bg { position: absolute; top: -5%; left: -5%; right: -5%; bottom: -5%; background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'); background-size: cover; background-position: center; z-index: -2; filter: brightness(0.6) contrast(1.2); }
+        .gradient-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(7,3,20,0.2) 0%, rgba(7,3,20,0.8) 40%, rgba(7,3,20,1) 100%); z-index: -1; }
+
+        @keyframes flowGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .text-gradient-flow { background-size: 200% auto; animation: flowGradient 5s ease infinite; }
+
+        .btn-fluid { position: relative; background: linear-gradient(90deg, #8B5CF6, #F59E0B, #8B5CF6); background-size: 200% auto; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-fluid:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); }
+
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); filter: blur(10px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        .animate-fade-up { opacity: 0; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-100 { animation-delay: 0.1s; } .delay-300 { animation-delay: 0.3s; } .delay-500 { animation-delay: 0.5s; } .delay-700 { animation-delay: 0.7s; }
+
+        .btn-liquid-glow { position: relative; background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(245, 158, 11, 0.8)); border: 1px solid rgba(255, 255, 255, 0.2); overflow: hidden; transition: all 0.4s ease; }
+        .btn-liquid-glow::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%); opacity: 0; transform: scale(0.5); transition: all 0.6s ease; }
+        .btn-liquid-glow:hover::before { opacity: 1; transform: scale(1); }
+        .btn-liquid-glow:hover { box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 0 40px rgba(245, 158, 11, 0.3); transform: translateY(-2px); }
+
+        .btn-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); transform: translateY(-2px); }
+
+        .glass-card-subtle { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); border-radius: 1.5rem; transition: all 0.4s ease; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
+        .glass-card-subtle:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(139, 92, 246, 0.3); transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.2); }
+
+        .glass-input { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; transition: all 0.3s ease; width: 100%; padding: 0.75rem 1rem; border-radius: 0.75rem; outline: none; }
+        .glass-input:focus { background: rgba(255, 255, 255, 0.06); border-color: rgba(139, 92, 246, 0.5); box-shadow: 0 0 15px rgba(139, 92, 246, 0.2); }
+        .glass-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+        details > summary::-webkit-details-marker { display: none; }
+
+        @keyframes pulse-dot { 0%, 100% { transform: scale(0.8); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } }
+        .pulse-circle { animation: pulse-dot 1.5s infinite; }
+        .draw-line { fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: round; stroke-dasharray: 200; stroke-dashoffset: 200; }
+
+        .lego-studs-violet { background-color: #6d28d9; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='v' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%238b5cf6'/%3E%3Cstop offset='30%25' stop-color='%236d28d9'/%3E%3Cstop offset='100%25' stop-color='%234c1d95'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23v)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%238b5cf6'%3ELEGO%3C/text%3E%3C/svg%3E"); background-size: 40px 40px; box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7); }
+        .lego-studs-blue { background-color: #1d4ed8; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='22' cy='22' r='11' fill='rgba(0,0,0,0.5)' /%3E%3ClinearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233b82f6'/%3E%3Cstop offset='30%25' stop-color='%231d4ed8'/%3E%3Cstop offset='100%25' stop-color='%231e3a8a'/%3E%3C/linearGradient%3E%3Ccircle cx='20' cy='20' r='11' fill='url(%23b)' /%3E%3Cpath d='M 12 15 A 11 11 0 0 1 25 10' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='1.5' stroke-linecap='round' /%3E%3Cpath d='M 15 30 A 11 11 0 0 0 28 25' fill='none' stroke='rgba(0,0,0,0.4)' stroke-width='1.5' stroke-linecap='round' /%3E%3Ctext x='20.5' y='22.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(0,0,0,0.5)'%3ELEGO%3C/text%3E%3Ctext x='19.5' y='21.5' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='rgba(255,255,255,0.3)'%3ELEGO%3C/text%3E%3Ctext x='20' y='22' font-family='Arial, sans-serif' font-style='italic' font-weight='900' font-size='7' text-anchor='middle' fill='%233b82f6'%3ELEGO%3C/text%3E%3C/svg%3E"); background-size: 40px 40px; box-shadow: inset 0 0 30px rgba(0,0,0,0.6), 15px 15px 35px rgba(0,0,0,0.7); }
+
+        @keyframes sealEntrance { 0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); opacity: 0; } 60% { transform: translate(-50%, -50%) scale(1.1) rotate(15deg); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; } }
+        .animate-seal-entrance { animation: sealEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        @keyframes textBeat { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); } 50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); } }
+        .animate-text-beat { animation: textBeat 3s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        @keyframes twinkleSparkle { 0%, 100% { opacity: 0.3; transform: scale(0.85) rotate(0deg); filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.3)); } 50% { opacity: 1; transform: scale(1.08) rotate(10deg); filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8)); } }
+        .animate-twinkle { animation: twinkleSparkle 3s ease-in-out infinite; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .i18n-fade { transition: opacity 0.3s ease-in-out; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070314; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        input[list]::-webkit-calendar-picker-indicator { opacity: 0.5; cursor: pointer; }
 
         /* =========================================
-         ESTILOS VISUALES Y ANIMACIONES
-         =========================================
-        */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0B1120;
-            background-image: 
-                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(2, 132, 199, 0.12) 0%, transparent 50%);
-            color: #F8FAFC;
-            overflow: hidden;
-            position: relative;
-        }
+           NUEVOS ESTILOS SECCIÓN SERVICIOS (HEXÁGONO)
+           ========================================= */
+        .service-menu-button { color: #94a3b8; font-size: 0.95rem; font-weight: 500; padding: 10px 20px; border-radius: 30px; background-color: transparent; transition: all 0.3s ease; white-space: nowrap; }
+        .service-menu-button:hover { color: #fff; background-color: rgba(255, 255, 255, 0.05); }
+        .service-menu-button.active { color: #fff; background-color: var(--current-blob-color); font-weight: 600; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 
-        /* Patrón de puntos sutiles (Grid dots) */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 28px 28px;
-            pointer-events: none;
-            z-index: -1;
-        }
+        .fade-out { opacity: 0 !important; transform: translateY(15px); transition: opacity 0.3s ease, transform 0.3s ease; }
+        .fade-in { opacity: 1 !important; transform: translateY(0); transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s; }
+        .anim-text { opacity: 1; transform: translateY(0); }
 
-        .slide {
-            display: none !important; /* Fuerza a ocultar por defecto */
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-            overflow-y: auto;
-        }
-        
-        .slide.active {
-            display: flex !important; /* Fuerza a mostrar solo el activo */
-            opacity: 1;
-        }
+        .solution-list-item { position: relative; padding-left: 28px; margin-bottom: 12px; }
+        .solution-list-item::before { content: "+"; position: absolute; left: 0; top: -2px; color: var(--current-blob-color); font-weight: 600; font-size: 1.3rem; transition: color 0.8s ease; }
 
-        .accent-color { color: #38BDF8; }
-        .accent-bg { background-color: #38BDF8; }
-        
-        /* Glassmorphism */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+        /* =========================================
+           NUEVOS ESTILOS GALERÍA ASIMÉTRICA AUTORIDAD
+           ========================================= */
+        .gallery-wrapper { width: 100%; height: 420px; position: relative; } /* Altura reducida para que sea más cuadrada */
+        @media (min-width: 1024px) { .gallery-wrapper { height: 480px; } } /* Altura reducida */
+        .gallery-container { display: flex; gap: 20px; height: 100%; width: 100%; }
+        .col-left, .col-right { display: flex; flex-direction: column; gap: 20px; height: 100%; }
+        .col-left { width: 55%; }
+        .col-right { width: 45%; }
+        .item { position: relative; width: 100%; }
+        .item-tl { height: 58%; } .item-bl { height: 42%; }
+        .item-tr { height: 64%; } .item-br { height: 36%; }
+        .gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 3; box-shadow: 0 8px 25px rgba(0,0,0,0.15); filter: grayscale(100%); transition: filter 0.4s ease-in-out; }
+        .gallery-wrapper:hover .gallery-img { filter: grayscale(0%); }
+        .img-tl, .shape-tl { border-radius: var(--radius-large) var(--radius-small) var(--radius-small) var(--radius-small); }
+        .img-tr { border-radius: var(--radius-small) var(--radius-large) var(--radius-small) var(--radius-small); }
+        .img-bl { border-radius: var(--radius-small) var(--radius-small) var(--radius-small) var(--radius-large); }
+        .img-br, .shape-br { border-radius: var(--radius-small) var(--radius-small) var(--radius-large) var(--radius-small); }
+        .bg-shape { position: absolute; width: 100%; height: 100%; background-color: var(--color-gallery-violet-main); z-index: 1; background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, var(--color-gallery-violet-light) 10px, var(--color-gallery-violet-light) 20px); }
+        .shape-tl { top: -20px; left: -20px; }
+        .shape-br { bottom: -20px; right: -20px; }
 
-        /* Flip Card CSS */
-        .flip-card {
-            perspective: 1000px;
-            height: 220px;
+        /* --- Sticker Central Amarillo --- */
+        .center-sticker {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; width: 120px; height: 120px; background-color: #FFBE0B;
+            border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex; justify-content: center; align-items: center;
         }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .flip-card-front {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-        .flip-card-back {
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            color: white;
-            transform: rotateY(180deg);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Animaciones de Entrada (Fade Up) */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-up { opacity: 0; transform: translateY(20px); }
-        .slide.active .fade-up { animation: fadeInUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-
-        /* Tiempos de retraso para el efecto escalonado */
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-        .delay-5 { animation-delay: 0.5s; }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        @media (min-width: 1024px) { .center-sticker { width: 145px; height: 145px; } }
+        .sticker-content { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #2B2D42; z-index: 2; }
+        .sticker-number { font-size: 48px; font-weight: 900; line-height: 0.9; letter-spacing: -2px; }
+        @media (min-width: 1024px) { .sticker-number { font-size: 60px; letter-spacing: -3px; } }
+        .sticker-label { font-size: 12px; font-weight: 800; margin-top: 4px; letter-spacing: 1px; }
+        @media (min-width: 1024px) { .sticker-label { font-size: 14px; } }
+        .rotating-text-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: spin 20s linear infinite; }
+        .rotating-text-svg { width: 100%; height: 100%; overflow: visible; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="h-screen w-screen flex flex-col relative pb-20 md:pb-0">
+<body class="antialiased selection:bg-violet-500/30 selection:text-violet-200">
 
-    <!-- Progress Bar -->
-    <div class="absolute top-0 left-0 h-1 accent-bg z-50 transition-all duration-300" id="progressBar" style="width: 0%;"></div>
-
-    <!-- Slides Container -->
-    <div id="slider" class="flex-1 w-full h-full relative z-10">
-
-        <!-- SLIDE 1: Portada -->
-        <section class="slide active flex-col justify-center items-center h-full w-full px-6 md:px-24 text-center">
-            <div class="mb-6 p-4 rounded-full bg-slate-800/50 inline-block border border-slate-700 animate-pulse fade-up delay-1">
-                <i data-lucide="blocks" class="w-12 h-12 accent-color"></i>
+    <nav class="fixed w-full z-50 glass-header" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 cursor-pointer">
+                    <span class="font-clash font-bold text-2xl tracking-widest text-white">NEXXA<span class="text-violet-500">.</span></span>
+                </div>
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#inicio" class="nav-link text-violet-400 font-semibold scale-105 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Inicio" data-en="Home">Inicio</a>
+                        <a href="#proceso" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Metodología" data-en="The Challenge">Metodología</a>
+                        <a href="#soluciones" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Servicios" data-en="Services">Servicios</a>
+                        <a href="#autoridad" class="nav-link text-slate-300 hover:text-violet-400 px-3 py-2 text-sm font-medium transition-all duration-300 i18n i18n-fade" data-es="Por qué Nexxa" data-en="Why Us">Por qué Nexxa</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
+                        <button id="lang-es" onclick="switchLanguage('es')" class="px-3 py-1 rounded-full text-xs font-semibold text-white bg-violet-500/80 transition-all">ES</button>
+                        <button id="lang-en" onclick="switchLanguage('en')" class="px-3 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition-all">EN</button>
+                    </div>
+                    <a href="#contacto" class="btn-liquid-glow text-white px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide flex items-center gap-2">
+                        <span class="i18n i18n-fade" data-es="Hablemos de tu Estrategia" data-en="Let's Talk Strategy">Hablemos de tu Estrategia</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <div class="flex items-center bg-white/5 rounded-full p-1 border border-white/10 z-[70]">
+                        <button id="lang-es-mob" onclick="switchLanguage('es')" class="px-2 py-1 rounded-full text-[10px] font-bold text-white bg-violet-500/80">ES</button>
+                        <button id="lang-en-mob" onclick="switchLanguage('en')" class="px-2 py-1 rounded-full text-[10px] font-medium text-slate-400">EN</button>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-1 relative z-[70]"><i data-lucide="menu" class="w-6 h-6"></i></button>
+                </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight fade-up delay-2">
-                El Futuro Digital de <br><span class="accent-color">Nexxa Consulting</span>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-[#070314]/95 backdrop-blur-lg z-[60] flex flex-col justify-center items-center translate-x-full transition-transform duration-300 ease-in-out">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-white p-2"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <div class="flex flex-col gap-8 text-center text-xl font-clash font-bold">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="text-white hover:text-violet-400 transition-colors i18n" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#proceso" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-violet-400 transition-colors i18n" data-es="Nuestro Proceso" data-en="Our Process">Nuestro Proceso</a>
+            <a href="#soluciones" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-violet-400 transition-colors i18n" data-es="Servicios" data-en="Services">Servicios</a>
+            <a href="#autoridad" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-violet-400 transition-colors i18n" data-es="Por qué Nexxa" data-en="Why Us">Por qué Nexxa</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="mt-4 px-8 py-3 rounded-full bg-violet-600 text-white text-lg transition-colors i18n" data-es="Hablemos" data-en="Let's Talk">Hablemos</a>
+        </div>
+    </div>
+
+    <main id="inicio" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
+        <div class="parallax-bg" id="parallax"></div>
+        <div class="gradient-overlay"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center flex flex-col items-center w-full py-10">
+            <div class="animate-fade-up delay-100 mb-6 hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span class="text-xs md:text-sm font-medium text-slate-300 tracking-wider uppercase i18n i18n-fade" data-es="Consultoría Boutique • 12 Años de Experiencia" data-en="Boutique Consulting • 12 Years of Experience">
+                      Consultoría Boutique • 12 Años de Experiencia
+                </span>
+            </div>
+
+            <h1 class="font-clash text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 leading-[1.1] animate-fade-up delay-300 max-w-5xl i18n i18n-fade"
+                data-es="Transformamos <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>estrategia</span> <br class='hidden md:block'>en resultados sostenibles."
+                data-en="We transform <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>strategy</span> <br class='hidden md:block'>into sustainable results.">
+                Transformamos <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow">estrategia</span> <br class="hidden md:block">en resultados sostenibles.
             </h1>
-            <p class="text-lg md:text-2xl text-slate-400 max-w-2xl mx-auto font-light mb-8 fade-up delay-3">
-                Estrategia, Diseño Visual y Venta Consultiva para llevar tus 12 años de experiencia al siguiente nivel.
+
+            <p class="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl font-light mb-10 animate-fade-up delay-500 leading-relaxed px-4 sm:px-0 i18n i18n-fade"
+               data-es="Alineamos a tu equipo directivo y destrabamos la innovación a través del juego estratégico. Pasamos del papel a la ejecución real."
+               data-en="We align your executive team and unlock innovation through strategic play. We move from paper to real-world execution.">
+                Alineamos a tu equipo directivo y destrabamos la innovación a través del juego estratégico. Pasamos del papel a la ejecución real.
             </p>
-        </section>
 
-        <!-- SLIDE 2: Contexto (Acordeones) -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <div class="max-w-4xl mx-auto w-full">
-                <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 fade-up delay-1">01. Empatía y Contexto</h2>
-                <h3 class="text-3xl md:text-4xl font-bold mb-6 fade-up delay-2">Entendiendo el reto de Nexxa</h3>
-                <p class="text-slate-400 mb-8 font-light fade-up delay-3">Para construir una solución efectiva, primero debemos entender el núcleo de tu negocio. Haz clic en cada punto para ver nuestro análisis:</p>
-                
-                <!-- Accordions -->
-                <div class="space-y-4 fade-up delay-4">
-                    <details class="group bg-slate-800/40 rounded-xl border border-slate-700 [&_summary::-webkit-details-marker]:hidden">
-                        <summary class="flex items-center justify-between p-5 cursor-pointer font-semibold text-lg hover:bg-slate-800/60 transition-colors rounded-xl">
-                            <div class="flex items-center"><i data-lucide="award" class="w-5 h-5 accent-color mr-3"></i> 12 Años de Trayectoria</div>
-                            <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400"></i></span>
-                        </summary>
-                        <div class="p-5 text-slate-300 font-light text-sm border-t border-slate-700 bg-slate-800/20 leading-relaxed">
-                            Sabemos que Nexxa no es una empresa emergente probando suerte. Llevan más de una década transformando organizaciones. <b>El impacto:</b> El sitio web no puede verse genérico ni barato; debe proyectar autoridad, estatus (consultoría boutique) y generar confianza inmediata a gerentes de alto nivel.
-                        </div>
-                    </details>
-
-                    <details class="group bg-slate-800/40 rounded-xl border border-slate-700 [&_summary::-webkit-details-marker]:hidden">
-                        <summary class="flex items-center justify-between p-5 cursor-pointer font-semibold text-lg hover:bg-slate-800/60 transition-colors rounded-xl">
-                            <div class="flex items-center"><i data-lucide="puzzle" class="w-5 h-5 accent-color mr-3"></i> Metodología LEGO® Serious Play®</div>
-                            <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400"></i></span>
-                        </summary>
-                        <div class="p-5 text-slate-300 font-light text-sm border-t border-slate-700 bg-slate-800/20 leading-relaxed">
-                            Esta es su ventaja competitiva. El reto principal es digitalizar una experiencia que es 100% física y lúdica. <b>El plan:</b> Usaremos el diseño visual para destacar imágenes de alta calidad de los talleres y aplicaremos Storytelling para explicar cómo los bloques de LEGO resuelven problemas corporativos complejos.
-                        </div>
-                    </details>
-
-                    <details class="group bg-slate-800/40 rounded-xl border border-slate-700 [&_summary::-webkit-details-marker]:hidden">
-                        <summary class="flex items-center justify-between p-5 cursor-pointer font-semibold text-lg hover:bg-slate-800/60 transition-colors rounded-xl">
-                            <div class="flex items-center"><i data-lucide="globe-2" class="w-5 h-5 accent-color mr-3"></i> Horizonte 2026-2030 (Internacionalización)</div>
-                            <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="w-5 h-5 text-slate-400"></i></span>
-                        </summary>
-                        <div class="p-5 text-slate-300 font-light text-sm border-t border-slate-700 bg-slate-800/20 leading-relaxed">
-                            Nexxa apunta a mercados internacionales. <b>El impacto:</b> La estructura técnica que construyamos hoy (la Landing Page) debe estar preparada para escalar. Configuraremos todo bajo estándares globales y dejaremos la arquitectura lista para la futura transición a un sitio bilingüe (ES/EN) y a la Academia Nexxa.
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 3: Diferenciador (Flip Cards) -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 text-center fade-up delay-1">02. El Diferenciador</h2>
-            <h3 class="text-3xl md:text-4xl font-bold mb-2 text-center fade-up delay-2">¿Por qué trabajar conmigo?</h3>
-            <p class="text-slate-400 mb-10 text-center font-light fade-up delay-3">Pasa el mouse (o toca) las tarjetas para descubrir mi enfoque.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto w-full fade-up delay-4">
-                <!-- Card 1 -->
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i data-lucide="pen-tool" class="w-10 h-10 accent-color mb-4"></i>
-                            <h4 class="text-xl font-bold">No hago "Páginas Web"</h4>
-                            <p class="text-xs text-slate-400 mt-2">Diseño Soluciones Visuales</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i data-lucide="check-circle" class="w-8 h-8 text-white mb-2 opacity-50"></i>
-                            <h4 class="font-bold mb-2">Diseño con Propósito</h4>
-                            <p class="text-sm font-light text-sky-100">Como diseñadora visual, aplico principios de contraste, jerarquía y estructura POP para resolver problemas de comunicación, no solo para que "se vea bonito".</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i data-lucide="users" class="w-10 h-10 accent-color mb-4"></i>
-                            <h4 class="text-xl font-bold">Mentalidad de Venta</h4>
-                            <p class="text-xs text-slate-400 mt-2">Enfoque Consultivo</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i data-lucide="message-square" class="w-8 h-8 text-white mb-2 opacity-50"></i>
-                            <h4 class="font-bold mb-2">Venta Consultiva</h4>
-                            <p class="text-sm font-light text-sky-100">Me apasiona integrar la psicología de ventas en el diseño. El objetivo es que los textos conecten con los retos reales de tus clientes, ofreciendo a Nexxa como la solución lógica y humana.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <i data-lucide="shield-check" class="w-10 h-10 accent-color mb-4"></i>
-                            <h4 class="text-xl font-bold">Acompañamiento 360°</h4>
-                            <p class="text-xs text-slate-400 mt-2">Educación Tecnológica</p>
-                        </div>
-                        <div class="flip-card-back">
-                            <i data-lucide="laptop" class="w-8 h-8 text-white mb-2 opacity-50"></i>
-                            <h4 class="font-bold mb-2">Tranquilidad Total</h4>
-                            <p class="text-sm font-light text-sky-100">Te acompañaré en cada paso técnico. El objetivo es que tú mantengas el control total y la propiedad de tus activos digitales, mientras yo te guío en el proceso.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 4: La Solución (Comparativa) -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <div class="max-w-6xl mx-auto w-full">
-                <div class="mb-10 text-center md:text-left">
-                    <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 fade-up delay-1">03. La Solución</h2>
-                    <h3 class="text-4xl md:text-5xl font-bold fade-up delay-2">Landing Básica vs. <span class="accent-color">Landing PRO</span></h3>
-                </div>
-                
-                <div class="flex flex-col lg:flex-row gap-8 w-full items-stretch">
-                    <!-- Basica -->
-                    <div class="flex-1 bg-slate-800/30 border border-slate-700/50 p-8 md:p-10 rounded-2xl opacity-70 fade-up delay-3 flex flex-col justify-center">
-                        <div class="flex items-center mb-8 border-b border-slate-700/50 pb-4">
-                            <i data-lucide="file-x" class="w-8 h-8 text-slate-500 mr-3"></i>
-                            <h4 class="text-2xl font-bold text-slate-400">Landing Básica</h4>
-                        </div>
-                        <ul class="space-y-6 text-lg text-slate-400 font-light">
-                            <li class="flex items-start">
-                                <span class="w-2 h-2 rounded-full bg-slate-600 mr-4 mt-2.5 flex-shrink-0"></span>
-                                <span>Plantilla genérica ("Se ve como todos").</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-2 h-2 rounded-full bg-slate-600 mr-4 mt-2.5 flex-shrink-0"></span>
-                                <span>Copiar y pegar el texto que tú envíes.</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="w-2 h-2 rounded-full bg-slate-600 mr-4 mt-2.5 flex-shrink-0"></span>
-                                <span>Un formulario escondido al final.</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Pro -->
-                    <div class="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-sky-500 p-8 md:p-10 rounded-2xl shadow-[0_0_30px_rgba(56,189,248,0.15)] relative fade-up delay-4 flex flex-col justify-center transform lg:scale-105 z-10">
-                        <div class="absolute -top-4 right-6 bg-sky-500 text-white text-sm font-bold px-5 py-1.5 rounded-full shadow-lg tracking-wide">MI Propuesta</div>
-                        <div class="flex items-center mb-8 border-b border-sky-500/30 pb-4">
-                            <i data-lucide="rocket" class="w-8 h-8 accent-color mr-3"></i>
-                            <h4 class="text-3xl font-bold text-white">Landing Page PRO</h4>
-                        </div>
-                        
-                        <div class="space-y-6 text-lg">
-                            <div class="flex items-start">
-                                <i data-lucide="zap" class="w-6 h-6 accent-color mr-4 mt-1 flex-shrink-0"></i>
-                                <div class="text-slate-300 font-light"><b class="text-white font-semibold">Impacto & Storytelling:</b> Diseño alineado a marca y redacción persuasiva que cuenta tu historia corporativa de 12 años.</div>
-                            </div>
-                            <div class="flex items-start">
-                                <i data-lucide="target" class="w-6 h-6 text-emerald-400 mr-4 mt-1 flex-shrink-0"></i>
-                                <div class="text-slate-300 font-light"><b class="text-white font-semibold">Ventaja de Conversión:</b> CTAs estratégicos y botón de WhatsApp para agendar asesorías directas.</div>
-                            </div>
-                            <div class="flex items-start">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-amber-400 mr-4 mt-1 flex-shrink-0"></i>
-                                <div class="text-slate-300 font-light"><b class="text-white font-semibold">Beneficio Técnico:</b> Optimización móvil impecable y arquitectura escalable hacia el futuro.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 5: Infraestructura -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 text-center fade-up delay-1">04. Infraestructura</h2>
-            <h3 class="text-3xl md:text-4xl font-bold mb-10 text-center fade-up delay-2">Recomendación Técnica</h3>
-            
-            <div class="glass-card rounded-2xl p-8 max-w-3xl mx-auto w-full border-t-4 border-t-sky-500 fade-up delay-3">
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="md:w-1/3 flex justify-center">
-                        <div class="bg-white p-6 rounded-xl inline-block shadow-lg">
-                            <!-- Logo Placeholder -->
-                            <div class="text-2xl font-black text-violet-700 tracking-tighter">HOSTINGER</div>
-                        </div>
-                    </div>
-                    <div class="md:w-2/3">
-                        <h4 class="text-xl font-bold mb-2">Plan Premium (El mejor MVP)</h4>
-                        <p class="text-slate-400 text-sm mb-4">Estuve evaluando el mercado y esta es la mejor inversión para iniciar. ¿Por qué?</p>
-                        <ul class="space-y-2 text-sm text-slate-300">
-                            <li class="flex items-center"><i data-lucide="gift" class="w-4 h-4 accent-color mr-2"></i> Dominio .com/.co GRATIS el primer año.</li>
-                            <li class="flex items-center"><i data-lucide="mail" class="w-4 h-4 accent-color mr-2"></i> Cuentas de correo corporativas incluidas.</li>
-                            <li class="flex items-center"><i data-lucide="lock" class="w-4 h-4 accent-color mr-2"></i> Certificado de seguridad (SSL) gratuito.</li>
-                        </ul>
-                        <div class="mt-6 p-3 bg-sky-900/30 rounded-lg border border-sky-500/30 text-xs text-sky-200">
-                            *Costo anual a cargo del cliente: ~$180,000 - $220,000 COP. Te guiaré por videollamada para que la compra quede a nombre tuyo.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 6: Cronograma -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 fade-up delay-1">05. Hoja de Ruta</h2>
-            <h3 class="text-3xl md:text-4xl font-bold mb-10 fade-up delay-2">Cronograma: 15 Días Hábiles</h3>
-            
-            <div class="max-w-3xl mx-auto w-full space-y-6 relative fade-up delay-3">
-                <!-- Line -->
-                <div class="absolute left-6 top-4 bottom-4 w-0.5 bg-slate-700"></div>
-                
-                <!-- Steps -->
-                <div class="relative pl-16">
-                    <div class="absolute left-3.5 -translate-x-1/2 w-6 h-6 rounded-full accent-bg flex items-center justify-center text-[#0B1120] font-bold text-xs shadow-[0_0_10px_rgba(56,189,248,0.5)]">1</div>
-                    <h4 class="text-lg font-bold text-white">Semana 1: Descubrimiento & Setup</h4>
-                    <p class="text-sm text-slate-400">Briefing consultivo (videollamada interactiva), compra de dominio, recolección de textos, manual de marca y fotos de talleres LEGO.</p>
-                </div>
-                <div class="relative pl-16">
-                    <div class="absolute left-3.5 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-800 border-2 border-sky-400 flex items-center justify-center text-sky-400 font-bold text-xs">2</div>
-                    <h4 class="text-lg font-bold text-white">Semana 2: Prototipado UX & Storytelling</h4>
-                    <p class="text-sm text-slate-400">Bocetación del diseño, aplicación de contrastes corporativos y redacción persuasiva. Revisión de avance contigo.</p>
-                </div>
-                <div class="relative pl-16">
-                    <div class="absolute left-3.5 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-800 border-2 border-sky-400 flex items-center justify-center text-sky-400 font-bold text-xs">3</div>
-                    <h4 class="text-lg font-bold text-white">Semana 3: Desarrollo, Testeo y Lanzamiento</h4>
-                    <p class="text-sm text-slate-400">Montaje en Hostinger, optimización SEO básica, pruebas en móviles, integración de WhatsApp y publicación en vivo.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 7: Inversión -->
-        <section class="slide flex-col justify-center h-full w-full px-6 md:px-24 py-12">
-            <div class="max-w-5xl mx-auto w-full">
-                <div class="mb-10 text-center">
-                    <h2 class="text-sm uppercase tracking-widest accent-color font-bold mb-2 fade-up delay-1">06. Transparencia</h2>
-                    <h3 class="text-3xl md:text-5xl font-bold fade-up delay-2">Inversión del Proyecto</h3>
-                </div>
-                
-                <div class="flex flex-col md:flex-row gap-6 lg:gap-8 w-full items-stretch justify-center fade-up delay-3">
-                    <!-- Market Value -->
-                    <div class="flex-1 bg-slate-800/40 border border-slate-700/50 p-8 rounded-2xl flex flex-col justify-center items-center text-center opacity-80">
-                        <h4 class="text-lg font-semibold text-slate-400 mb-4">Valor de Mercado</h4>
-                        <div class="text-4xl md:text-5xl font-bold text-slate-500 line-through decoration-slate-600/50 mb-4">$2.500.000+</div>
-                        <p class="text-sm text-slate-400 font-light max-w-xs">Tarifa promedio de agencias para un desarrollo de este nivel estratégico.</p>
-                    </div>
-
-                    <!-- Proposal -->
-                    <div class="flex-[1.5] bg-gradient-to-b from-sky-900/60 to-slate-800 border border-sky-400 p-8 md:p-10 rounded-2xl text-center shadow-[0_0_40px_rgba(56,189,248,0.15)] relative transform md:scale-105 z-10 flex flex-col justify-center">
-                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-xs md:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-lg">
-                            Tarifa Preferencial (Ref. Ángela B.)
-                        </div>
-                        <h4 class="text-xl font-light text-slate-300 mb-4 mt-2">Desarrollo Landing Page PRO</h4>
-                        <div class="text-5xl md:text-6xl font-extrabold text-white mb-3">$1.200.000 <span class="text-xl font-normal text-slate-400">COP</span></div>
-                        <p class="text-sky-300 text-sm font-medium mb-8">Forma de pago: 50% Anticipo / 50% Entrega Final</p>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left text-sm md:text-base text-slate-300 mx-auto w-full max-w-md border-t border-slate-700 pt-6">
-                            <div class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-sky-400 mr-3 flex-shrink-0"></i> Diseño Visual a medida</div>
-                            <div class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-sky-400 mr-3 flex-shrink-0"></i> Asesoría Hosting</div>
-                            <div class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-sky-400 mr-3 flex-shrink-0"></i> Storytelling Comercial</div>
-                            <div class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-sky-400 mr-3 flex-shrink-0"></i> Diseño Móvil (Responsive)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Navigation Controls -->
-    <div class="fixed md:absolute bottom-0 md:bottom-6 left-0 right-0 flex justify-between items-center px-6 md:px-24 bg-[#0B1120] md:bg-transparent pb-6 pt-4 md:p-0 border-t border-slate-800 md:border-0 z-40">
-        <!-- Presenter Brand -->
-        <div class="text-slate-500 font-semibold tracking-wider text-xs md:text-sm flex items-center hidden md:flex">
-            <!-- Icono Hexagon nativo -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            Diseño Estratégico & Venta Consultiva
-        </div>
-        
-        <!-- Controls -->
-        <div class="flex space-x-4 mx-auto md:mx-0 w-full md:w-auto justify-center">
-            <button id="prevBtn" class="p-3 md:p-4 rounded-full bg-slate-800 hover:bg-slate-700 text-white transition-colors border border-slate-700 disabled:opacity-30 disabled:cursor-not-allowed z-50 relative flex items-center justify-center">
-                <!-- Flecha Izquierda nativa -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 md:w-6 md:h-6"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            <span class="text-slate-500 self-center text-sm font-mono tracking-widest px-4 md:hidden" id="slideCounterMobile">1/7</span>
-            <button id="nextBtn" class="p-3 md:p-4 rounded-full bg-slate-800 hover:bg-sky-500 hover:border-sky-500 text-white transition-all border border-slate-700 shadow-[0_0_15px_rgba(56,189,248,0.3)] z-50 relative flex items-center justify-center">
-                <!-- Flecha Derecha nativa -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 md:w-6 md:h-6"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- Custom Modal (Call to Action Final) -->
-    <div id="customModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-opacity">
-        <div class="bg-slate-800 border border-sky-500 rounded-3xl p-8 max-w-md w-full text-center shadow-[0_0_50px_rgba(56,189,248,0.15)] relative overflow-hidden transform scale-105 transition-transform">
-            <!-- Efecto de luz superior -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-sky-500 shadow-[0_0_20px_rgba(56,189,248,1)]"></div>
-            
-            <div class="w-16 h-16 bg-sky-500/10 border border-sky-500/20 rounded-full flex items-center justify-center mx-auto mb-6 mt-2">
-                <i data-lucide="calendar-check" class="w-8 h-8 text-sky-400"></i>
-            </div>
-            
-            <h3 class="text-2xl font-bold text-white mb-3">¿Lista para dar el siguiente paso?</h3>
-            
-            <p class="text-slate-300 mb-8 font-light text-sm md:text-base leading-relaxed">
-                Si esta propuesta se alinea con la visión de <b class="text-white">Nexxa</b>, iniciemos el proceso. Agendemos un espacio para nuestro <b>Briefing Interactivo</b> y despejemos cualquier duda.
-            </p>
-            
-            <div class="flex flex-col gap-3">
-                <!-- Botón Principal -->
-                <a href="https://wa.link/rkrmhv" target="_blank" id="ctaBtn" class="bg-sky-500 hover:bg-sky-400 text-white font-bold py-3.5 px-6 rounded-xl w-full transition-all flex items-center justify-center shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 hover:-translate-y-0.5" onclick="lucide.createIcons();">
-                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
-                    ¡Sí, agendemos el espacio!
+            <div class="flex flex-col sm:flex-row gap-4 animate-fade-up delay-700 w-full sm:w-auto px-4 sm:px-0">
+                <a href="#contacto" class="btn-liquid-glow text-white px-6 md:px-8 py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold tracking-wide flex items-center justify-center gap-2 group">
+                    <span class="i18n i18n-fade" data-es="Agendar Diagnóstico Inicial" data-en="Schedule Initial Diagnosis">Agendar Diagnóstico Inicial</span>
+                    <i data-lucide="chevron-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
                 </a>
+                <a href="#soluciones" class="btn-glass text-white px-6 md:px-8 py-3.5 md:py-4 rounded-full text-sm md:text-base font-medium flex items-center justify-center gap-2 group">
+                    <i data-lucide="blocks" class="w-5 h-5 text-violet-400"></i>
+                    <span class="i18n i18n-fade" data-es="Explorar Soluciones" data-en="Explore Solutions">Explorar Soluciones</span>
+                </a>
+            </div>
+        </div>
+
+     <div class="hidden 2xl:flex scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-up z-10 cursor-pointer group" style="animation-delay: 1.2s;" onmouseenter="document.getElementById('proceso').scrollIntoView({behavior: 'smooth'})" onclick="document.getElementById('proceso').scrollIntoView({behavior: 'smooth'})">
+        <div class="flex flex-col items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <span class="text-[10px] sm:text-xs uppercase tracking-widest i18n i18n-fade group-hover:-translate-y-1 transition-transform" data-es="Descubrir" data-en="Discover">Descubrir</span>
+                <div class="w-px h-8 sm:h-12 bg-gradient-to-b from-violet-500 to-transparent group-hover:from-amber-400 transition-colors"></div>
+            </div>
+        </div>
+    </main>
+
+   <div id="narrative-wrapper" class="relative w-full">
+       
+        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+            <div class="sticky top-0 w-full h-screen overflow-hidden">
+                <video id="nexxa-narrative-video" muted playsinline preload="auto" class="w-full h-full object-cover">
+                    <source src="videosolucion.mp4" type="video/mp4">
+                </video>
                 
-                <!-- Botón Secundario para cerrar el modal -->
-                <button id="closeModal" class="bg-transparent hover:bg-slate-700/50 text-slate-400 font-medium py-3 px-6 rounded-xl w-full transition-colors text-sm">
-                    Revisar la propuesta nuevamente
-                </button>
+                <div class="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#070314] to-transparent z-10"></div>
+                <div class="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#070314] to-transparent z-10"></div>
+                <div class="absolute inset-0 bg-[#070314]/30 z-10"></div>
+            </div>
+        </div>
+
+        <div class="relative z-10 w-full">
+
+            <section id="diagnostico" class="min-h-[70vh] flex flex-col justify-center py-20 px-6 lg:px-8 bg-transparent">
+    <div class="max-w-4xl mx-auto w-full">
+        <!-- Contenedor con efecto glass para legibilidad sobre el video -->
+        <div class="glass-card-subtle p-10 md:p-16 border border-white/10 text-center relative z-20">
+            <div class="diag-title">
+                <h2 class="font-clash text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl i18n i18n-fade"
+                    data-es="El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>"
+                    data-en="Growth hurts when the structure doesn't support it. <span class='text-violet-400'>Sound familiar?</span>">
+                    El crecimiento duele cuando la estructura no acompaña. <span class='text-violet-400'>¿Te suena familiar?</span>
+                </h2>
+                <p class="text-slate-100 text-lg md:text-xl font-light drop-shadow-md i18n i18n-fade"
+                   data-es="El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz."
+                   data-en="Today's environment demands efficiency. At Nexxa, we don't just hand you a theoretical manual; we actively engage in the execution to solve root problems.">
+                   El entorno actual exige eficiencia. En Nexxa no te entregamos un manual teórico; nos involucramos directamente en la ejecución para solucionar los problemas de raíz.
+                </p>
             </div>
         </div>
     </div>
+</section>
+            
+<section id="proceso" class="relative h-[400vh] bg-transparent">
+    <!-- Contenedor que "pincha" el video mientras scrolles -->
+    <div class="sticky top-0 w-full h-screen overflow-hidden">
+        
+        <!-- Contenedor de Textos (Capa superior sobre el video) -->
+        <div id="text-container" class="relative w-full h-full">
+            
+            <!-- Texto 1 -->
+            <div class="anno-text absolute top-[20%] left-[10%] opacity-0 w-80 glass-card-subtle p-6">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Consultoría & Indagación</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Nos sumergimos en tu operación. Escuchamos activamente a tus líderes y diagnosticamos fricciones desde la empatía real.</p>
+            </div>
 
+            <!-- Texto 2 -->
+            <div class="anno-text absolute top-[40%] right-[10%] opacity-0 w-80 glass-card-subtle p-6">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Modelado de Estrategia</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Co-diseñamos mapas de ruta. Usamos modelado físico y visual para que toda la mesa directiva comparta y valide la misma visión.</p>
+            </div>
+
+            <!-- Texto 3 -->
+            <div class="anno-text absolute bottom-[30%] left-[15%] opacity-0 w-80 glass-card-subtle p-6">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Implementación Activa</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Pasamos del papel a la ejecución táctica. Reestructuramos procesos pesados y redefinimos roles con rigor técnico.</p>
+            </div>
+
+            <!-- Texto 4 -->
+            <div class="anno-text absolute bottom-[15%] right-[15%] opacity-0 w-80 glass-card-subtle p-6">
+                <h3 class="text-white text-2xl font-clash font-bold mb-2">Resultado & Sostenibilidad</h3>
+                <p class="text-white/90 text-sm font-light leading-relaxed">Medimos impactos, empoderamos al talento mediante la transferencia de conocimiento y aseguramos que el cambio sea sostenible.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECCIÓN SERVICIOS (HEXÁGONO ADAPTADO)
+         ========================================== -->
+    <section id="soluciones" class="relative min-h-screen flex items-center justify-center py-20 bg-[#070314] overflow-hidden">
+        
+        <!-- CAPA DE FONDO: Hexágono gigante y Texto Colosal -->
+        <div class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <!-- HEXÁGONO: 
+                 Móvil (sm): oculto. 
+                 Tablet (md) / Laptop (lg): desplazado muy a la izq para no chocar con el texto. 
+                 Desktop (xl+): posición original. -->
+           <div class="hidden md:flex absolute -top-[15%] md:-left-[450px] lg:-left-[450px] xl:-left-[450px] 2xl:-left-64 w-[800px] h-[800px] xl:w-[1000px] xl:h-[1000px] z-0 items-center justify-center pointer-events-none transition-all duration-700">
+                <div id="hex-rotator" class="w-full h-full transition-transform duration-1000 ease-in-out origin-center">
+                    <svg viewBox="0 0 200 200" class="w-full h-full overflow-visible" style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));">
+                        <polygon points="55,22 145,22 190,100 145,178 55,178 10,100" fill="var(--current-blob-color)" stroke="var(--current-blob-color)" stroke-width="10" stroke-linejoin="round" class="transition-colors duration-700 ease-in-out" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Texto colosal adaptativo: 
+                 Móvil/Tablet/Laptop (< 1280px): Oculto.
+                 Desktop (1280px+): Visible en la posición original. -->
+             <div class="hidden 2xl:flex absolute top-0 left-0 z-0 w-[500px] 2xl:w-[600px] h-full items-center justify-start pl-12 2xl:pl-20 overflow-hidden pointer-events-none">
+                <h2 id="giant-bg-text" class="text-white font-clash font-bold leading-[0.9] tracking-tight break-words anim-text text-left opacity-80">
+                    Estrategia
+                </h2>
+            </div>
+        </div>
+
+        <!-- CAPA FRONTAL: Carrusel y Textos -->
+        <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10 px-6 lg:px-8">
+            
+            <!-- Lado Izquierdo: Ruleta de Imágenes -->
+            <div class="hidden md:flex w-full md:w-[40%] xl:w-[45%] h-[400px] lg:h-[450px] relative justify-center md:justify-end mb-12 md:mb-0 pointer-events-none">
+                <!-- Contenedor central de la ruleta. Se desplaza armónicamente con el hexágono -->
+                <div id="image-wheel-hub" class="absolute top-1/2 md:-left-[15%] lg:-left-[10%] xl:-left-[5%] w-0 h-0 transition-transform duration-1000 ease-in-out z-20 origin-center pointer-events-auto">
+                    <!-- El JavaScript inyecta aquí las imágenes dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Lado Derecho: Textos y Menú -->
+            <div class="w-full md:w-[60%] xl:w-[55%] flex flex-col justify-center pl-0 md:pl-8 lg:pl-12 py-8 md:py-0 relative z-30 pointer-events-auto">
+                
+                <!-- Etiqueta Pastilla Ámbar -->
+                <div class="mb-6 inline-flex items-center px-6 py-2 rounded-full border border-amber-600 bg-transparent w-max shadow-[0_0_15px_rgba(245,158,11,0.15)] mx-auto md:mx-0">
+                    <span class="text-[10px] md:text-xs font-bold tracking-widest text-amber-400 i18n i18n-fade" data-es="SERVICIOS QUE TRANSFORMAN" data-en="TRANSFORMING SERVICES">SERVICIOS QUE TRANSFORMAN</span>
+                </div>
+                
+                <h2 id="service-title" class="font-clash text-4xl lg:text-[3.5rem] font-bold text-white mb-8 leading-[1.1] anim-text drop-shadow-lg text-center md:text-left">Cargando...</h2>
+                
+                <div class="space-y-6 text-center md:text-left">
+                    <p id="service-desc" class="text-slate-300 text-base md:text-[1.1rem] font-light leading-[1.6] anim-text">Cargando...</p>
+                    <div class="font-semibold text-[1.1rem] text-white mb-2 anim-text transition-colors duration-500" id="solutions-heading">Soluciones incluidas:</div>
+                    <ul id="service-solutions" class="space-y-3 anim-text text-slate-300 text-[1.05rem] font-light list-none pl-0 text-left mx-auto md:mx-0 table"></ul>
+                </div>
+                
+                <!-- Menú de Botones -->
+                <div class="mt-12 pt-6 border-t border-white/10 overflow-x-auto no-scrollbar w-full relative z-30" id="service-menu-wrapper">
+                    <div class="flex gap-4 pb-4 w-max" id="service-menu">
+                        <button class="service-menu-button active i18n i18n-fade" data-id="0" data-es="Estrategia" data-en="Strategy">Estrategia</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="1" data-es="Transformación" data-en="Transformation">Transformación</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="2" data-es="Diseño Org." data-en="Org. Design">Diseño Org.</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="3" data-es="Formación LSP" data-en="LSP Training">Formación LSP</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="4" data-es="Procesos" data-en="Processes">Procesos</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="5" data-es="Compensación" data-en="Compensation">Compensación</button>
+                        <button class="service-menu-button i18n i18n-fade" data-id="6" data-es="Asesorías" data-en="Consulting">Asesorías</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN AUTORIDAD -->
+   <section id="autoridad" class="relative min-h-screen flex flex-col justify-center pt-12 pb-24 md:pt-14 md:pb-28 z-10 bg-[#080415] overflow-hidden">
+        <div class="absolute top-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-br from-violet-600/10 to-transparent rounded-full blur-[80px] -translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-gradient-to-tl from-violet-600/10 to-transparent rounded-full blur-[80px] translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch mb-16 md:mb-20">
+                <div class="flex flex-col w-full h-full justify-between pb-5">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 w-max">
+                        <span class="text-[10px] md:text-xs uppercase tracking-wider text-violet-300 font-bold i18n i18n-fade" data-es="¿Por qué Nexxa?" data-en="Why Nexxa?">¿Por qué Nexxa?</span>
+                    </div>
+
+                    <!-- AQUÍ EMPIEZA EL REEMPLAZO DE LA GALERÍA -->
+                    <!-- Contenedor general de las imágenes. Oculto en móviles (hidden md:block) -->
+                    <div class="relative w-full max-w-[500px] lg:max-w-[550px] xl:max-w-[600px] mx-auto lg:mx-0 mt-12 lg:mt-0 mb-10 md:mb-12 hidden md:block">
+                        <div class="gallery-wrapper">
+                            <div class="gallery-container">
+                                <!-- COLUMNA IZQUIERDA -->
+                                <div class="col-left">
+                                    <div class="item item-tl">
+                                        <div class="bg-shape shape-tl"></div>
+                                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1470&auto=format&fit=crop" alt="Equipo colaborando" class="gallery-img img-tl">
+                                    </div>
+                                    <div class="item item-bl">
+                                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=988&auto=format&fit=crop" alt="Mujer trabajando" class="gallery-img img-bl">
+                                        
+                                        <!-- SVG Estrellas mantenido -->
+                                        <div class="absolute -bottom-5 -left-5 md:-bottom-7 md:-left-7 w-12 h-12 md:w-16 md:h-16 z-30 pointer-events-none animate-twinkle">
+                                            <svg viewBox="0 0 120 120" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M60 10 C60 45, 45 60, 10 60 C45 60, 60 75, 60 110 C60 75, 75 60, 110 60 C75 60, 60 45, 60 10 Z" fill="#F59E0B"/>
+                                                <path d="M30 75 C30 90, 20 95, 5 95 C20 95, 30 100, 30 115 C30 100, 40 95, 55 95 C40 95, 30 90, 30 75 Z" fill="#FBBF24"/>
+                                                <path d="M85 75 C85 95, 75 102, 52 102 C75 102, 85 109, 85 129 C85 109, 95 102, 118 102 C95 102, 85 95, 85 75 Z" fill="#F59E0B"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- COLUMNA DERECHA -->
+                                <div class="col-right">
+                                    <div class="item item-tr">
+                                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=987&auto=format&fit=crop" alt="Ejecutivo" class="gallery-img img-tr">
+                                    </div>
+                                    <div class="item item-br">
+                                        <div class="bg-shape shape-br"></div>
+                                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop" alt="Reunión de equipo" class="gallery-img img-br">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sello Amarillo "12 Años" -->
+                            <div class="center-sticker">
+                                <div class="rotating-text-wrapper">
+                                    <svg class="rotating-text-svg" viewBox="0 0 100 100">
+                                        <path id="textCircle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" />
+                                        <circle cx="50" cy="50" r="32" fill="none" stroke="#ffffff" stroke-width="1.5" />
+                                        <text font-size="8.5" font-weight="800" fill="#ffffff" letter-spacing="3.5">
+                                            <textPath href="#textCircle" startOffset="0%" dy="-1.5" textLength="232.5" lengthAdjust="spacing">
+                                                DE EXPERIENCIA &#160;&#160;&#160;&#160;&#160;•&#160;&#160;&#160;&#160;&#160; DE EXPERIENCIA &#160;&#160;&#160;&#160;&#160;•&#160;&#160;&#160;&#160;&#160;
+                                            </textPath>
+                                        </text>
+                                    </svg>
+                                </div>
+                                <div class="sticker-content">
+                                    <span class="sticker-number">12</span>
+                                    <span class="sticker-label">AÑOS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN DEL REEMPLAZO -->
+                </div>
+
+                <div class="flex flex-col justify-between h-full pt-1 pb-5">
+                    <div class="flex flex-col gap-5 mt-4 md:mt-10 lg:mt-16">
+                        <h2 class="font-clash text-4xl lg:text-[3.25rem] xl:text-[3.5rem] font-bold text-white leading-[1.1] i18n i18n-fade"
+    data-es="No somos teóricos,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>socio estratégico.</span>"
+    data-en="We are not theorists,<br>somos tu <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow'>strategic partner.</span>">
+    No somos teóricos,<br>somos tu <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-amber-400 to-violet-400 text-gradient-flow">socio estratégico.</span>
+</h2>
+                        <p class="text-slate-400 text-base md:text-lg font-light leading-relaxed i18n i18n-fade"
+                           data-es="El mercado está lleno de consultoras que entregan reportes y se van. Nosotros nos involucramos directamente en la ejecución para asegurarnos de que el cambio se implemente y perdure."
+                           data-en="The market is full of consultants who deliver reports and leave. We actively engage in the execution to ensure that change is implemented and lasts.">
+                            El mercado está lleno de consultoras que entregan reportes y se van. Nosotros nos involucramos directamente en la ejecución para asegurarnos de que el cambio se implemente y perdure.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 pt-6 lg:pt-8 border-t border-white/10 hidden md:block">
+                        <h4 class="text-white text-xl md:text-2xl font-bold font-clash tracking-wide">Johana</h4>
+                        <p class="text-violet-400 text-[10px] md:text-xs font-bold mb-4 uppercase tracking-widest i18n i18n-fade" data-es="Fundadora & Consultora Principal" data-en="Founder & Lead Consultant">Fundadora & Consultora Principal</p>
+                        <p class="text-slate-300 text-sm md:text-base leading-relaxed italic border-l-2 border-amber-500 pl-4 py-1 i18n i18n-fade" 
+                           data-es="&quot;Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil.&quot;" 
+                           data-en="&quot;My purpose is to guide organizational transformation with a deeply human, strategic, and agile approach.&quot;">
+                            "Mi propósito es acompañar la transformación de las organizaciones con un enfoque profundamente humano, estratégico y ágil."
+                        </p>
+                        <div class="mt-3 lg:mt-4">
+                            <span class="font-signature text-3xl md:text-4xl text-white/50 select-none">Johana.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-6 md:mt-10 items-start">
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                    <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
+                            </div>
+                            <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Enfoque Boutique" data-en="Boutique Approach">Enfoque Boutique</h4>
+                        </div>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece." data-en="Close, confidential, and tailored attention. Your company receives the focus it deserves.">Atención cercana, confidencial y a la medida. Tu empresa recibe el enfoque que merece.</p>
+                    </div>
+                </details>
+                
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-violet-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                    <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-violet-400"></i>
+                            </div>
+                            <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Rigor Técnico" data-en="Technical Rigor">Rigor Técnico</h4>
+                        </div>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-violet-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-violet-400"></i>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional." data-en="Experience transformando operational processes and aligning strategies at a national and international level.">Experiencia transformando procesos operativos y alineando estrategias a nivel nacional e internacional.</p>
+                    </div>
+                </details>
+
+                <details class="group bg-[#0D0A1C] border border-white/5 hover:border-amber-500/30 rounded-2xl transition-all duration-300 shadow-lg">
+                    <summary class="flex items-center justify-between p-4 cursor-pointer list-none select-none">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="lightbulb" class="w-5 h-5 text-amber-400"></i>
+                            </div>
+                            <h4 class="text-sm lg:text-base font-bold text-white whitespace-nowrap i18n i18n-fade" data-es="Innovación Práctica" data-en="Practical Innovation">Innovación Práctica</h4>
+                        </div>
+                        <div class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center transition-transform duration-300 group-open:rotate-180 group-open:bg-amber-500/20">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-open:text-amber-400"></i>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 pt-0">
+                        <p class="text-xs lg:text-sm text-slate-400 leading-relaxed i18n i18n-fade" data-es="Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados." data-en="We combine hard technical consulting with experiential disruptive methodologies to achieve results.">Combinamos consultoría dura técnica con metodologías disruptivas experienciales para lograr resultados.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="relative min-h-screen flex flex-col justify-center py-20 z-20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center z-[-2] opacity-40 mix-blend-screen pointer-events-none" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'); transform: rotate(180deg); filter: contrast(1.2);"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#080415] via-[#070314]/80 to-transparent z-[-1] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+            <div class="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-5">
+                    
+                    <div class="lg:col-span-2 p-10 md:p-12 bg-gradient-to-br from-violet-900/30 to-transparent border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between">
+                        <div>
+                            <h2 class="font-clash text-4xl font-bold text-white mb-6 leading-tight i18n i18n-fade"
+                                data-es="Hagamos crecer tu organización <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-400 to-amber-400 text-gradient-flow'>JUNTOS.</span>"
+                                data-en="Let's grow your organization <span class='text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-400 to-amber-400 text-gradient-flow'>TOGETHER.</span>">
+                                Hagamos crecer tu organización <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-violet-400 to-amber-400 text-gradient-flow">JUNTOS.</span>
+                            </h2>
+                            <p class="text-slate-300 text-base font-light mb-10 i18n i18n-fade"
+                               data-es="La transformación comienza con una conversación. Déjanos tus datos y un especialista se pondrá en contacto contigo."
+                               data-en="Transformation begins with a conversation. Leave us your details and a specialist will contact you.">
+                                La transformación comienza con una conversación. Déjanos tus datos y un especialista se pondrá en contacto contigo.
+                            </p>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4 text-slate-300">
+                                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0"><i data-lucide="map-pin" class="w-5 h-5 text-violet-400"></i></div>
+                                <span class="font-medium">Bogotá, Colombia</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-300">
+                                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-5 h-5 text-amber-500"></i></div>
+                                <span class="font-medium">+57 300 1902742</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3 p-10 md:p-12">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="Nombre y Apellido" data-en="Full Name">Nombre y Apellido</label>
+                                    <input type="text" class="glass-input" placeholder="Ej. Juan Pérez">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="Teléfono / WhatsApp *" data-en="Phone / WhatsApp *">Teléfono / WhatsApp *</label>
+                                    <input type="tel" class="glass-input" placeholder="+57 300 000 0000" required>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="Correo Corporativo" data-en="Corporate Email">Correo Corporativo</label>
+                                    <input type="email" class="glass-input" placeholder="juan@empresa.com">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="País" data-en="Country">País</label>
+                                    <input list="countries" class="glass-input" placeholder="Selecciona o escribe tu país...">
+                                    <datalist id="countries">
+                                        <option value="Colombia">
+                                        <option value="Argentina">
+                                        <option value="México">
+                                        <option value="España">
+                                        <option value="USA">
+                                        <option value="Costa Rica">
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="Empresa" data-en="Company">Empresa</label>
+                                    <input type="text" class="glass-input" placeholder="Nombre de la empresa">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-medium text-slate-300 i18n i18n-fade" data-es="¿En qué podemos ayudarte?" data-en="How can we help you?">¿En qué podemos ayudarte?</label>
+                                    <input list="services" class="glass-input" placeholder="Escribe el servicio o selecciónalo...">
+                                    <datalist id="services">
+                                        <option value="Estrategia y Procesos">
+                                        <option value="Talleres LEGO® Serious Play®">
+                                        <option value="Diseño Organizacional / Talento">
+                                    </datalist>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 mt-4">
+                                <input type="checkbox" id="policy" class="mt-1 bg-white/10 border-white/20 rounded text-violet-500 focus:ring-violet-500" required>
+                                <label for="policy" class="text-xs text-slate-400 leading-relaxed i18n i18n-fade"
+                                       data-es="He leído y acepto la Política de tratamiento de mis datos de acuerdo al Decreto 1377."
+                                       data-en="I have read and accept the Data Processing Policy.">
+                                    He leído y acepto la Política de tratamiento de mis datos de acuerdo al Decreto 1377.
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn-fluid w-full text-white py-4 rounded-xl text-base font-bold tracking-wide mt-6 flex items-center justify-center gap-2">
+                                <span class="hidden sm:inline i18n i18n-fade" data-es="Enviar consulta y recibir ayuda" data-en="Send inquiry and receive help">Enviar consulta y recibir ayuda</span>
+                                <span class="sm:hidden i18n i18n-fade" data-es="Enviar" data-en="Send">Enviar</span>
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/40 backdrop-blur-sm border-t border-white/5 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                <div class="flex items-center gap-2">
+                    <span class="font-clash font-bold text-xl text-white">NEXXA<span class="text-violet-500">.</span></span>
+                    <span class="text-sm text-slate-500 ml-4">© 2026 Nexxa Consulting SAS.</span>
+                </div>
+                <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                    <div class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-violet-500"></i> Bogotá, Colombia</div>
+                    <div class="flex items-center gap-1.5"><i data-lucide="phone" class="w-4 h-4 text-amber-500"></i> +57 300 1902742</div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-colors text-slate-400 shadow-sm" title="LinkedIn">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-pink-500/20 hover:text-pink-400 transition-colors text-slate-400 shadow-sm" title="Instagram (nexxa.group)">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-slate-500/20 hover:text-white transition-colors text-slate-400 shadow-sm" title="TikTok">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/573001902742" target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:scale-110 hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] transition-all duration-300" aria-label="Escríbenos por WhatsApp">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+    </a>
+
+<!-- SCRIPT COMPLETO INTEGRADO Y CORREGIDO -->
     <script>
-        // Inicializar Iconos
-        lucide.createIcons();
+        // Salvaguarda: Verificar si lucide y gsap están disponibles antes de ejecutarlos
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
 
-        // Lógica del Slider
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const progressBar = document.getElementById('progressBar');
-        const slideCounterMobile = document.getElementById('slideCounterMobile');
-        const customModal = document.getElementById('customModal');
-        const closeModal = document.getElementById('closeModal');
-        let currentSlide = 0;
+        let currentLang = 'es';
 
-        // Iconos SVG nativos para reemplazar por JS
-        const iconRight = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 md:w-6 md:h-6"><path d="m9 18 6-6-6-6"/></svg>`;
-        const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 md:w-6 md:h-6"><path d="M20 6 9 17l-5-5"/></svg>`;
+        // --- DATA ORIGINAL NEXXA (Soluciones/Hexágono) ---
+        const servicesData = [
+            {
+                id: 0,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planeación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>ESTRATEGIA</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Planning and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>STRATEGY</div>",
+                title_es: "Estrategia de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Negocios</span>",
+                title_en: "Business <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Strategy</span>",
+                desc_es: "Diseñamos la hoja de ruta que tu empresa necesita para crecer de forma sostenida. Combinamos visión e innovación para crear estrategias accionables que preparan a tu organización para los desafíos del mañana.",
+                desc_en: "We design the roadmap your company needs for sustained growth. We combine vision and innovation to create actionable strategies that prepare your organization for tomorrow's challenges.",
+                solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
+                solutions_es: ["Diagnóstico estratégico integral", "Definición de visión, propósito y objetivos", "Planeación estratégica corporativa", "Mapas estratégicos y Balanced Scorecard", "OKR corporativos", "Acompañamiento a la ejecución"],
+                solutions_en: ["Comprehensive strategic diagnosis", "Definition of vision, purpose, and objectives", "Corporate strategic planning", "Strategic maps and Balanced Scorecard", "Corporate OKRs", "Execution accompaniment"],
+                color: "var(--color-0)",
+                imageSrc: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 1,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFICIENCIA</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Transformation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>EFFICIENCY</div>",
+                title_es: "Eficiencia y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformación</span>",
+                title_en: "Efficiency and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Transformation</span>",
+                desc_es: "Aseguramos que el cambio suceda y perdure. Guiamos a tu organización hacia una cultura ágil y orientada a resultados.",
+                desc_en: "We ensure change happens and lasts. We guide your organization toward an agile, results-oriented culture.",
+                solutionsTitle_es: "Soluciones incluidas:", solutionsTitle_en: "Included solutions:",
+                solutions_es: ["Diagnóstico de eficiencia organizacional", "Análisis de estructura y cargas laborales", "Redefinición de roles y responsabilidades"],
+                solutions_en: ["Organizational efficiency diagnosis", "Analysis of structure and workloads", "Redefinition of roles and responsibilities"],
+                color: "var(--color-2)",
+                imageSrc: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 2,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Organización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DISEÑO</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Org. and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>DESIGN</div>",
+                title_es: "Diseño <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Organizacional</span>",
+                title_en: "Organizational <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Design</span>",
+                desc_es: "Construimos la arquitectura ideal para tu talento. Alineamos tu estructura organizacional con tu estrategia de crecimiento.",
+                desc_en: "We build the ideal architecture for your talent. We align your organizational structure with your growth strategy.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Diseño y rediseño organizacional", "Modelos de gobierno corporativo", "Definición de niveles jerárquicos y spans"],
+                solutions_en: ["Organizational design and redesign", "Corporate governance models", "Definition of hierarchical levels and spans"],
+                color: "var(--color-3)",
+                imageSrc: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 3,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Formación</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Training</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>LEGO® PLAY</div>",
+                title_es: "Formación con <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
+                title_en: "Training with <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>LEGO® Play</span>",
+                desc_es: "Desbloqueamos el potencial oculto de tu equipo. A través de la poderosa metodología LEGO® Serious Play®.",
+                desc_en: "We unlock your team's hidden potential. Through the powerful LEGO® Serious Play® methodology.",
+                solutionsTitle_es: "Tipos de Talleres:", solutionsTitle_en: "Workshop Types:",
+                solutions_es: ["Alineación estratégica y visión compartida", "Liderazgo y autoliderazgo", "Cultura organizacional y valores"],
+                solutions_en: ["Strategic alignment and shared vision", "Leadership and self-leadership", "Organizational culture and values"],
+                color: "var(--color-5)",
+                imageSrc: "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 4,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimización y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>GESTIÓN</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Optimization and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>MANAGEMENT</div>",
+                title_es: "Gestión de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Procesos</span>",
+                title_en: "Process <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Management</span>",
+                desc_es: "Transformamos la complejidad en agilidad. Optimizamos tus operaciones eliminando cuellos de botella para que tu equipo trabaje de forma más inteligente.",
+                desc_en: "We transform complexity into agility. We optimize your operations by eliminating bottlenecks so your team works smarter.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Levantamiento y documentación de procesos", "Rediseño y estandarización (AS IS / TO BE)", "Optimización de tiempos, costos y recursos"],
+                solutions_en: ["Process mapping and documentation", "Redesign and standardization (AS IS / TO BE)", "Optimization of time, costs, and resources"],
+                color: "var(--color-1)",
+                imageSrc: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 5,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensación y</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFICIOS</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Compensation and</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>BENEFITS</div>",
+                title_es: "Compensación y <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Valoración</span>",
+                title_en: "Compensation and <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Evaluation</span>",
+                desc_es: "Atrae y retén a los mejores. Diseñamos modelos de compensación y beneficios estratégicos, justos y altamente competitivos.",
+                desc_en: "Attract and retain the best. We design strategic, fair, and highly competitive compensation and benefits models.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Valoración y clasificación de cargos", "Estructuras salariales y equidad interna", "Modelos de compensación variable"],
+                solutions_en: ["Job evaluation and classification", "Salary structures and internal equity", "Variable compensation models"],
+                color: "var(--color-4)",
+                imageSrc: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop"
+            },
+            {
+                id: 6,
+                short_es: "<div class='text-xl lg:text-3xl font-light opacity-60'>Asesoría</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
+                short_en: "<div class='text-xl lg:text-3xl font-light opacity-60'>Consulting</div><div class='text-5xl lg:text-6xl font-bold uppercase leading-none'>PREMIUM</div>",
+                title_es: "Asesorías de <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Alto Nivel</span>",
+                title_en: "High Level <span class='text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-amber-400 text-gradient-flow'>Consulting</span>",
+                desc_es: "Acceso directo a consultoría de alto nivel. Soluciones ejecutivas estandarizadas y ágiles.",
+                desc_en: "Direct access to high-level consulting. Standardized and agile executive solutions.",
+                solutionsTitle_es: "Servicios incluidos:", solutionsTitle_en: "Included services:",
+                solutions_es: ["Diagnósticos express", "Workshops estratégicos", "Programas de formación ejecutiva"],
+                solutions_en: ["Express diagnostics", "Strategic workshops", "Executive training programs"],
+                color: "var(--color-6)",
+                imageSrc: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop"
+            }
+        ];
 
-        function updateSlider() {
-            slides.forEach((slide, index) => {
-                if (index === currentSlide) {
-                    slide.classList.add('active');
+        // --- LÓGICA HEXÁGONO Y MENÚS ---
+        const rootVars = document.documentElement;
+        const serviceTitleElem = document.getElementById('service-title');
+        const serviceDescElem = document.getElementById('service-desc');
+        const solutionsHeadingElem = document.getElementById('solutions-heading');
+        const serviceSolutionsListElem = document.getElementById('service-solutions');
+        const animatableElements = document.querySelectorAll('.anim-text');
+        const menuButtons = document.querySelectorAll('.service-menu-button');
+        const menuContainer = document.getElementById('service-menu-wrapper');
+
+        const totalItems = servicesData.length;
+        const angleStep = 60; 
+        let currentIndex = 0;
+        let currentHubRotation = 0;
+
+        const hexRotator = document.getElementById('hex-rotator');
+        const giantBgText = document.getElementById('giant-bg-text');
+        
+        const imgWheelHub = document.getElementById('image-wheel-hub');
+        let imgRadius = 250; 
+
+        function initWheel() {
+            if(!imgWheelHub) return;
+            imgWheelHub.innerHTML = '';
+            
+            let width = window.innerWidth;
+            let isMobile = width < 768;
+            
+            // Adjusted radius for better orbiting space across devices
+            if (width >= 1536) imgRadius = 300;
+            else if (width >= 1280) imgRadius = 260;
+            else if (width >= 1024) imgRadius = 220;
+            else if (width >= 768) imgRadius = 180;
+            else imgRadius = 120;
+
+            servicesData.forEach((data, i) => {
+                const item = document.createElement('div');
+                item.className = 'orbit-item absolute rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 ease-in-out origin-center';
+                
+                // Adjusted image card dimensions dynamically
+                let cardW, cardH;
+                if (width >= 1536) { cardW = 420; cardH = 315; }
+                else if (width >= 1280) { cardW = 380; cardH = 285; }
+                else if (width >= 1024) { cardW = 320; cardH = 240; }
+                else if (width >= 768) { cardW = 260; cardH = 195; }
+                else { cardW = 240; cardH = 180; }
+                
+                item.style.width = cardW + 'px';
+                item.style.height = cardH + 'px';
+
+                const thetaRad = (i * angleStep) * (Math.PI / 180);
+                const x = imgRadius * Math.cos(thetaRad);
+                const y = imgRadius * Math.sin(thetaRad);
+
+                item.style.left = `${x}px`;
+                item.style.top = `${y}px`;
+                
+                item.style.transform = `translate(-50%, -50%) rotate(0deg) scale(${i === 0 ? 1 : 0.5})`;
+                // SOLUCIÓN 1: Opacidad vuelve a ser 0 para los ítems inactivos (se ocultan las miniaturas)
+                item.style.opacity = i === 0 ? 1 : 0;
+                item.style.pointerEvents = i === 0 ? 'auto' : 'none';
+
+                const img = document.createElement('img');
+                img.src = data.imageSrc;
+                img.alt = data.short_es;
+                img.className = 'w-full h-full object-cover';
+                
+                item.appendChild(img);
+                imgWheelHub.appendChild(item);
+            });
+        }
+
+        function updateContent(targetIndex, skipRotation = false) {
+            if (targetIndex === currentIndex && !skipRotation && document.readyState === "complete") return;
+
+            let diff = targetIndex - currentIndex;
+            if (diff > totalItems / 2) diff -= totalItems;
+            else if (diff < -totalItems / 2) diff += totalItems;
+
+            if(!skipRotation) {
+                currentHubRotation -= diff * angleStep; 
+                currentIndex = targetIndex;
+            }
+
+            const data = servicesData[currentIndex];
+
+            if (hexRotator) {
+                hexRotator.style.transform = `rotate(${currentHubRotation}deg)`;
+            }
+
+            if (imgWheelHub) {
+                imgWheelHub.style.transform = `rotate(${currentHubRotation}deg)`;
+                
+                const orbitItems = imgWheelHub.querySelectorAll('.orbit-item');
+                orbitItems.forEach((item, i) => {
+                    const isTarget = (i === currentIndex);
+                    item.style.transform = `translate(-50%, -50%) rotate(${-currentHubRotation}deg) scale(${isTarget ? 1 : 0.5})`;
+                    // SOLUCIÓN 1: Opacidad vuelve a ser 0 para los ítems inactivos
+                    item.style.opacity = isTarget ? 1 : 0;
+                    item.style.pointerEvents = isTarget ? 'auto' : 'none';
+                    item.style.zIndex = isTarget ? 30 : 0;
+                });
+            }
+            
+            rootVars.style.setProperty('--current-blob-color', data.color);
+
+            animatableElements.forEach(el => {
+                el.classList.remove('fade-in');
+                el.classList.add('fade-out');
+            });
+
+            setTimeout(() => {
+                if (serviceTitleElem) serviceTitleElem.innerHTML = data[`title_${currentLang}`];
+                if (serviceDescElem) serviceDescElem.innerHTML = data[`desc_${currentLang}`];
+                if (solutionsHeadingElem) solutionsHeadingElem.textContent = data[`solutionsTitle_${currentLang}`];
+                if (giantBgText) giantBgText.innerHTML = data[`short_${currentLang}`];
+                
+                if (serviceSolutionsListElem) {
+                    serviceSolutionsListElem.innerHTML = '';
+                    data[`solutions_${currentLang}`].forEach(solution => {
+                        const li = document.createElement('li');
+                        li.className = 'solution-list-item';
+                        li.textContent = solution;
+                        serviceSolutionsListElem.appendChild(li);
+                    });
+                }
+
+                animatableElements.forEach(el => {
+                    el.classList.remove('fade-out');
+                    setTimeout(() => el.classList.add('fade-in'), 50);
+                });
+            }, 350);
+
+            menuButtons.forEach((btn, i) => {
+                if (i === currentIndex) {
+                    btn.classList.add('active');
+                    if (menuContainer) {
+                        const scrollLeft = btn.offsetLeft - (menuContainer.offsetWidth / 2) + (btn.offsetWidth / 2);
+                        menuContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    }
                 } else {
-                    slide.classList.remove('active');
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        menuButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = parseInt(button.getAttribute('data-id'));
+                updateContent(id);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(() => {
+                initWheel();
+                updateContent(currentIndex, true); 
+            }, 250);
+        });
+
+        // Soporte táctil
+        let touchStartX = 0;
+        const solWrapper = document.getElementById('soluciones');
+        if(solWrapper) {
+            solWrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+            solWrapper.addEventListener('touchend', e => {
+                let touchEndX = e.changedTouches[0].clientX;
+                if (touchStartX - touchEndX > 50) updateContent((currentIndex + 1) % totalItems);
+                else if (touchEndX - touchStartX > 50) updateContent((currentIndex - 1 + totalItems) % totalItems);
+            }, {passive: true});
+        }
+
+        // --- FUNCIONES GENERALES Y SCROLL ---
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
+            
+            const scroll = window.pageYOffset;
+            const parallax = document.getElementById('parallax');
+            if (parallax && scroll < window.innerHeight) {
+                parallax.style.transform = `translateY(${scroll * 0.4}px)`;
+            }
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('translate-x-full');
+        }
+
+        const sections = document.querySelectorAll('main, section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const observerOptions = { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 };
+
+        if (sections.length > 0 && navLinks.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-violet-400', 'font-semibold', 'scale-105');
+                                link.classList.remove('text-slate-300');
+                            } else {
+                                link.classList.remove('text-violet-400', 'font-semibold', 'scale-105');
+                                link.classList.add('text-slate-300');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => observer.observe(section));
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang; 
+            const elements = document.querySelectorAll('.i18n');
+            elements.forEach(el => el.style.opacity = '0');
+            
+            setTimeout(() => {
+                elements.forEach(el => {
+                    if(el.hasAttribute(`data-${lang}`)) {
+                        el.innerHTML = el.getAttribute(`data-${lang}`);
+                    }
+                    el.style.opacity = '1'; 
+                });
+                
+                const btnEs = document.getElementById('lang-es'); const btnEn = document.getElementById('lang-en');
+                const btnEsMob = document.getElementById('lang-es-mob'); const btnEnMob = document.getElementById('lang-en-mob');
+                
+                if (lang === 'es' && btnEs && btnEn) {
+                    btnEs.className = "px-3 py-1 rounded-full text-xs font-semibold text-white bg-violet-500/80 transition-all";
+                    btnEn.className = "px-3 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition-all";
+                    if(btnEsMob) btnEsMob.className = "px-2 py-1 rounded-full text-[10px] font-bold text-white bg-violet-500/80";
+                    if(btnEnMob) btnEnMob.className = "px-2 py-1 rounded-full text-[10px] font-medium text-slate-400";
+                } else if (btnEs && btnEn) {
+                    btnEn.className = "px-3 py-1 rounded-full text-xs font-semibold text-white bg-violet-500/80 transition-all";
+                    btnEs.className = "px-3 py-1 rounded-full text-xs font-medium text-slate-400 hover:text-white transition-all";
+                    if(btnEnMob) btnEnMob.className = "px-2 py-1 rounded-full text-[10px] font-bold text-white bg-violet-500/80";
+                    if(btnEsMob) btnEsMob.className = "px-2 py-1 rounded-full text-[10px] font-medium text-slate-400";
+                }
+
+                updateContent(currentIndex, true);
+            }, 300); 
+        }
+
+        // =====================================================================
+        // GSAP LÓGICA DE VIDEO (Totalmente reforzada contra errores matemáticos)
+        // =====================================================================
+        
+             function initVideoNarrative() {
+            const video = document.getElementById('nexxa-narrative-video');
+            // Buscamos ambos IDs (el del código original y el nuevo que enviaste) para no fallar
+            const wrapper = document.getElementById('narrative-wrapper') || document.getElementById('video-section-wrapper');
+            const proceso = document.getElementById('proceso');
+            const texts = document.querySelectorAll('.anno-text, .process-step');
+
+            if (!video || !wrapper) return;
+
+            video.pause();
+
+            // Limpiamos cualquier animación previa que haya quedado colgada
+            ScrollTrigger.getAll().forEach(t => t.kill());
+
+            // 1. PIN (Anclaje absoluto por GSAP) - ¡ESTO SOLUCIONA LA PANTALLA NEGRA!
+            // Anclamos directamente el div padre del video para que no se suba.
+            const videoContainer = video.parentElement;
+
+            ScrollTrigger.create({
+                trigger: wrapper,
+                start: "top top",
+                end: "bottom bottom",
+                pin: videoContainer,
+                pinSpacing: false 
+            });
+
+            // 2. SCRUBBING DEL VIDEO (Movimiento atado al scroll)
+            ScrollTrigger.create({
+                trigger: wrapper,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.1, // Suaviza el movimiento
+                onUpdate: (self) => {
+                    if (video.duration && !isNaN(video.duration)) {
+                        // Multiplica el porcentaje del scroll por la duración TOTAL del video
+                        video.currentTime = self.progress * video.duration;
+                    }
                 }
             });
 
-            // Actualizar Barra de Progreso
-            const progress = ((currentSlide) / (slides.length - 1)) * 100;
-            progressBar.style.width = `${progress}%`;
-            slideCounterMobile.innerText = `${currentSlide + 1}/${slides.length}`;
+            // 3. APARICIÓN DE LOS TEXTOS EN PROCESO
+            if (proceso && texts.length > 0) {
+                ScrollTrigger.create({
+                    trigger: proceso,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: true,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        const slice = 1 / texts.length;
 
-            // Estados de Botones
-            prevBtn.disabled = currentSlide === 0;
-            
-            if(currentSlide === slides.length - 1) {
-                nextBtn.innerHTML = iconCheck;
-                nextBtn.classList.add('bg-emerald-500', 'hover:bg-emerald-400', 'border-emerald-500');
-                nextBtn.classList.remove('hover:bg-sky-500', 'hover:border-sky-500');
-            } else {
-                nextBtn.innerHTML = iconRight;
-                nextBtn.classList.remove('bg-emerald-500', 'hover:bg-emerald-400', 'border-emerald-500');
-                nextBtn.classList.add('hover:bg-sky-500', 'hover:border-sky-500');
+                        texts.forEach((text, index) => {
+                            const start = index * slice;
+                            const end = start + slice;
+
+                            if (progress >= start && progress <= end) {
+                                let localProgress = (progress - start) / slice;
+                                let opacity = 0;
+                                let translateY = 0;
+
+                                if (localProgress < 0.2) {
+                                    opacity = localProgress / 0.2;
+                                    translateY = 20 - (opacity * 20);
+                                } else if (localProgress > 0.8) {
+                                    opacity = (1 - localProgress) / 0.2;
+                                    translateY = -20 + (opacity * 20);
+                                } else {
+                                    opacity = 1;
+                                    translateY = 0;
+                                }
+
+                                text.style.opacity = opacity;
+                                text.style.transform = `translateY(${translateY}px)`;
+                                text.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none';
+                            } else {
+                                text.style.opacity = 0;
+                                text.style.transform = `translateY(20px)`;
+                                text.style.pointerEvents = 'none';
+                            }
+                        });
+                    }
+                });
             }
         }
 
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlider();
-            }
-        });
-
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                updateSlider();
-            } else {
-                customModal.classList.remove('hidden');
-            }
-        });
-
-        closeModal.addEventListener('click', () => {
-            customModal.classList.add('hidden');
-        });
-
-        // Navegación por Teclado
-        document.addEventListener('keydown', (e) => {
-            if (!customModal.classList.contains('hidden')) return;
+        // INICIALIZACIÓN CONJUNTA (Ruleta + Video)
+        let initialized = false;
+        function initGSAP() {
+            if (initialized) return;
+            initialized = true;
             
-            if (e.key === 'ArrowRight') {
-                if (currentSlide < slides.length - 1) { currentSlide++; updateSlider(); }
-            } else if (e.key === 'ArrowLeft') {
-                if (currentSlide > 0) { currentSlide--; updateSlider(); }
-            }
-        });
+            initWheel(); // Inicia la ruleta
+            updateContent(0, true); // Inicia los textos de la ruleta
+            initVideoNarrative(); // Inicia el video con GSAP
+        }
 
-        // Inicio
-        updateSlider();
+        const narrativeVideo = document.getElementById('nexxa-narrative-video');
+        if (narrativeVideo) {
+            // Aseguramos que el video sepa cuánto dura antes de arrancar GSAP
+            if (narrativeVideo.readyState >= 1) {
+                initGSAP();
+            } else {
+                narrativeVideo.addEventListener('loadedmetadata', initGSAP);
+                narrativeVideo.load();
+            }
+        } else {
+            initGSAP();
+        }
     </script>
 </body>
 </html>
